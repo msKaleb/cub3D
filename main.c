@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 18:25:36 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:05:05 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,19 @@ int	main(int argc, char *argv[])
 {
 	t_mlx	m;
 	int		fd;
+	t_data	data;
+	char	**map;
 
 	if (argc < 2)
 		return (err_arg_number());
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (err_file(argv[1]));
+	/* parser */
+	// map = parser(argv[1], &data);	
+	// for (int i = 0; map[i]; i++)
+	// 	printf("%s", map[i]);
+	/*  */
 	init_mlx(&m);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);

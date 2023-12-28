@@ -22,24 +22,24 @@ void	flood_fill(char **tab, t_point size, t_point begin)
 	fill(tab, size, begin, tab[begin.y][begin.x]);
 }
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
-char** make_area(char** zone, t_point size)
-{
-	char** new;
+// char** make_area(char** zone, t_point size)
+// {
+// 	char** new;
 
-	new = malloc(sizeof(char*) * size.y);
-	for (int i = 0; i < size.y; ++i)
-	{
-		new[i] = malloc(size.x + 1);
-		for (int j = 0; j < size.x; ++j)
-			new[i][j] = zone[i][j];
-		new[i][size.x] = '\0';
-	}
+// 	new = malloc(sizeof(char*) * size.y);
+// 	for (int i = 0; i < size.y; ++i)
+// 	{
+// 		new[i] = malloc(size.x + 1);
+// 		for (int j = 0; j < size.x; ++j)
+// 			new[i][j] = zone[i][j];
+// 		new[i][size.x] = '\0';
+// 	}
 
-	return new;
-}
+// 	return new;
+// }
 
 // int main(void)
 // {

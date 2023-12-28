@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 18:36:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:56:45 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,23 @@ typedef struct s_mlx
 	int			endian;
 }				t_mlx;
 
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
 /**
 * @brief obtain data in general (main structure)
 */
 typedef struct s_data
 {
-	int	num_rows;
-	int	num_cols;
-	int	num_person;
+	int		num_rows;
+	int		num_cols;
+	int		num_person;
+	t_point	pt_person;
 }	t_data;
+
 
 /* Functions prototipes */
 int		err_arg_number(void);
@@ -98,5 +106,17 @@ int		err_mlx(void);
 int		key_hook(int key_code, t_mlx *m);
 int		close_mlx(t_mlx *m);
 void	init_mlx(t_mlx *m);
+
+/**
+ * @brief parser
+  */
+
+char	**parser(char *map_name, t_data *data);
+
+/**
+ * @brief flood_fill
+  */
+
+void	flood_fill(char **tab, t_point size, t_point begin);
 
 #endif /* _FT_CUB3D_H */

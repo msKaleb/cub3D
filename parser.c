@@ -6,35 +6,36 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/28 18:42:11 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 19:00:40 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft_cub3d.h"
+#include "ft_cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include "colors.h"
 
-#include "libft/libft.h"//for test
+// #include "libft/libft.h"//for test
 
 
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
+// typedef struct	s_point
+// {
+// 	int			x;
+// 	int			y;
+// }				t_point;
 
-void	flood_fill(char **tab, t_point size, t_point begin);
+// // void	flood_fill(char **tab, t_point size, t_point begin);
 
-/**
-* @brief obtain data in general (main structure)
-*/
-typedef struct s_data
-{
-	int		num_rows;
-	int		num_cols;
-	int		num_person;
-	t_point	pt_person;
-}	t_data;
+// /**
+// * @brief obtain data in general (main structure)
+// */
+// typedef struct s_data
+// {
+// 	int		num_rows;
+// 	int		num_cols;
+// 	int		num_person;
+// 	t_point	pt_person;
+// }	t_data;
 
 
 int	check_file_format(char *str)
@@ -120,7 +121,7 @@ void	replace_spaces(char **str)
 	}
 }
 
-void	parser(char *map_name, t_data *data)
+char	**parser(char *map_name, t_data *data)
 {
 	char	**tab;
 	int		i;
@@ -143,11 +144,12 @@ void	parser(char *map_name, t_data *data)
 		exit(-3);//error file open failed
 	}
 	str = get_next_line(fd);
+	printf("%s\ncheck result of replace spaces!!%s\n", BLUE, RESET);
 	while (++i < data->num_rows)
 	{
 		tab[i] = ft_strdup(str);
 		replace_spaces(&tab[i]);
-		printf("%d: %s", i, tab[i]);
+		printf("%s", tab[i]);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -160,37 +162,35 @@ void	parser(char *map_name, t_data *data)
 	printf("\ncheck result of flood fill!!\n");
 
 	flood_fill(tab, size, data->pt_person);
-	//DELETE
-	for (int i = 0; tab[i]; i++)
-		printf("%s", tab[i]);
+	return (tab);
 }
 
 
 
-int	main(int ac, char **av)
-{
-	t_data	data;
-	int		fd;
+// int	main(int ac, char **av)
+// {
+// 	t_data	data;
+// 	int		fd;
 
-	ft_bzero(&data, 1 * sizeof(t_data));
-	fd = 0;
-	if (ac != 2)
-	{
-		printf("bad argument\n");
-		return (-1);//error bad argument
-	}
-	//check format;
-	if (check_file_format(av[1]) == -1)
-		return (-2);//error incorrect file format 
+// 	ft_bzero(&data, 1 * sizeof(t_data));
+// 	fd = 0;
+// 	if (ac != 2)
+// 	{
+// 		printf("bad argument\n");
+// 		return (-1);//error bad argument
+// 	}
+// 	//check format;
+// 	if (check_file_format(av[1]) == -1)
+// 		return (-2);//error incorrect file format 
 
-	//check file
-	// fd = open(av[1], O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	printf("ajajajaaaaaaaa\n");
-	// 	return (-3);//error file open failed
-	// }
-	parser(av[1], &data);
-	printf("after parser\n");
-	return (0);
-}
+// 	//check file
+// 	// fd = open(av[1], O_RDONLY);
+// 	// if (fd < 0)
+// 	// {
+// 	// 	printf("ajajajaaaaaaaa\n");
+// 	// 	return (-3);//error file open failed
+// 	// }
+// 	parser(av[1], &data);
+// 	printf("after parser\n");
+// 	return (0);
+// }
