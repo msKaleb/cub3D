@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 18:13:42 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 18:36:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@
 # endif
 
 /* Some needed values */
-// # define DEFAULT_COLOR 	0xBADA55	// Badass color
-// # define TRUE_ISO 		0.523599	// 30º angle
-// # define ISO 			0.46373398	// 26.57º angle
-# define DEFAULT_X 		1024.0		// float type for trig operations
-# define DEFAULT_Y 		768.0		// float type for trig operations
+# define DEFAULT_X 		640
+# define DEFAULT_Y 		480
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/28 17:11:28 by nimai            ###   ########.fr        #
+#    Updated: 2023/12/28 18:22:45 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OS		=	$(shell uname -s)
 
 NAME	=	cub3D
 
-MAIN	=	parser.c#main.c \
+MAIN	=	main.c \
 
 SRC		=	errors.c \
 			mlx_utils.c \
