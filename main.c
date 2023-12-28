@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 12:28:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:43:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	
+	printf("Hola %d %s\n", argc, argv[1]);
+
+	return(0);
 }
