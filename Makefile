@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/28 16:48:14 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/28 17:11:28 by nimai            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OS		=	$(shell uname -s)
 
 NAME	=	cub3D
 
-MAIN	=	main.c \
+MAIN	=	parser.c#main.c \
 
 SRC		=	errors.c \
 			mlx_utils.c \
@@ -48,7 +48,7 @@ OBJ_MB	=	$(MAIN_B:.c=.o)
 
 CC		=	gcc
 
-LIBFT	=	LibFT/libft.a
+LIBFT	=	libft/libft.a
 
 # Define flags according to OS
 ifeq ($(OS), Linux)
