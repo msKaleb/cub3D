@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/28 17:08:34 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 18:10:07 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_data
 {
 	int	num_rows;
+	int	num_cols;
 	int	num_person;
 }	t_data;
 
@@ -38,44 +39,91 @@ int	check_file_format(char *str)
 	return (0);
 }
 
-int	count_rows(char *map_name)
+void	count_cols(t_data **data, char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		// printf("LINE: %d where am i?? line[i]: %c\n", __LINE__, line[i]);
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+		{
+			// printf("LINE: %d where am i??\n", __LINE__);
+			(*data)->num_person++;
+		}
+		else if (line[i] && line[i] != '0' && line[i] != '1' && line[i] != 32 && line[i] != 10)
+		{
+			printf("LINE: %d where am i?? line[i]: %d\n", __LINE__, line[i]);
+			exit(-1);//map invalid (wrong letter)
+		}
+	}
+	if ((*data)->num_person > 1)
+	{
+		printf("LINE: %d where am i?? line[i]: %d\n", __LINE__, line[i]);
+		exit(-1);//map invalid (more than 1 person);
+	}
+	if (i > (*data)->num_cols)
+		(*data)->num_cols = i;
+}
+
+void	check_map(t_data **data, char *map_name)
 {
 	char	*line;
-	int		ret;
 	int		fd;
 
-
-	//check file
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("ajajajaaaaaaaa\n");
-		return (-3);//error file open failed
+		// exit (err_file(map_name));//to compile with errors.c
+		exit (-3);//error file open failed
 	}
-	ret = 0;
+	// printf("LINE: %d where am i??\n", __LINE__);
+	// printf("Map name?? %s\n", map_name);
+	// (*data)->num_rows = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		//
+		//also it's neccessary check if there are NO, SU, WE, EA, C, and F before map
+		//
+		count_cols(data, line);
+		(*data)->num_rows++;
 		free(line);
-		ret++;
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (ret);
+}
+
+void	replace_spaces(char **str)
+{
+	int	i;
+
+	i = 0;
+	while ((*str)[i])
+	{
+		if ((*str)[i] == 32)
+			(*str)[i] = '0';
+		i++;
+	}
 }
 
 void	parser(char *map_name, t_data *data)
 {
 	char	**tab;
 	int		i;
+	char 	*str;
+	int		fd = 0;
 
 	i = -1;
-	data->num_rows = count_rows(map_name);
+	check_map(&data, map_name);
+	//DELETE
+	printf("check! check_map\n");
+	printf("data->row: %d\ndata->cols: %d\ndata->person: %d\n", data->num_rows, data->num_cols, data->num_person);
+	// data->num_rows = count_rows(map_name);
 	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
 	if (!tab)
 		exit(0);//memory allocation error
-	char *str;
-	int	fd = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
@@ -85,7 +133,9 @@ void	parser(char *map_name, t_data *data)
 	str = get_next_line(fd);
 	while (++i < data->num_rows)
 	{
-		printf("%d: %s", i, str);
+		tab[i] = ft_strdup(str);
+		replace_spaces(&tab[i]);
+		printf("%d: %s", i, tab[i]);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -98,6 +148,7 @@ int	main(int ac, char **av)
 	t_data	data;
 	int		fd;
 
+	ft_bzero(&data, 1 * sizeof(t_data));
 	fd = 0;
 	if (ac != 2)
 	{
