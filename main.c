@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 19:05:05 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 20:10:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-char	**test_map(void)
+/* char	**test_map(void)
 {
 	char	**map = (char *[]){
 		"1111111111",
@@ -24,7 +24,7 @@ char	**test_map(void)
 		"1111111111",
 	};
 	return (map);
-}
+} */
 
 int	main(int argc, char *argv[])
 {
@@ -32,7 +32,9 @@ int	main(int argc, char *argv[])
 	int		fd;
 	t_data	data;
 	char	**map;
-
+	(void)map;
+	(void)data;
+	
 	if (argc < 2)
 		return (err_arg_number());
 	fd = open(argv[1], O_RDONLY);

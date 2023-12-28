@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/28 18:54:56 by nimai            ###   ########.fr        #
+#    Updated: 2023/12/28 20:07:23 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,13 +90,13 @@ endif
 all:		$(NAME)
 
 pre-build:
-			make bonus -sC LibFT/
+			make bonus -sC libft/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			make -sC $(MLXDIR)
 
 pre-build-bonus:
-			make bonus -sC LibFT/
+			make bonus -sC libft/
 			$(ECHO) $(BLUE) "$$HEADER" $(NONE)
 			$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
 			make -sC $(MLXDIR)
