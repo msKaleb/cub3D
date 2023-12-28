@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 13:53:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:47:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 // # define DEFAULT_COLOR 	0xBADA55	// Badass color
 // # define TRUE_ISO 		0.523599	// 30º angle
 // # define ISO 			0.46373398	// 26.57º angle
-// # define DEFAULT_X 		1024.0		// float type for trig operations
-// # define DEFAULT_Y 		768.0		// float type for trig operations
+# define DEFAULT_X 		1024.0		// float type for trig operations
+# define DEFAULT_Y 		768.0		// float type for trig operations
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -71,5 +71,25 @@
 # define ON_EXPOSE		12
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
+
+/* minilibx structure */
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	void		*addr;
+	int			bpp;
+	int			sl;
+	int			endian;
+}				t_mlx;
+
+/* Functions prototipes */
+int		err_arg_number(void);
+int		err_file(char *file);
+int		err_mlx(void);
+int		key_hook(int key_code, t_mlx *m);
+int		close_mlx(t_mlx *m);
+void	init_mlx(t_mlx *m);
 
 #endif /* _FT_CUB3D_H */

@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/28 12:22:03 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/28 16:48:14 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ NAME	=	cub3D
 
 MAIN	=	main.c \
 
-SRC		=	
+SRC		=	errors.c \
+			mlx_utils.c \
 			
 MAIN_B	=	main_bonus.c
 
