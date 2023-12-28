@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 16:47:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:13:42 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,16 @@ typedef struct s_mlx
 	int			sl;
 	int			endian;
 }				t_mlx;
+
+/**
+* @brief obtain data in general (main structure)
+*/
+typedef struct s_data
+{
+	int	num_rows;
+	int	num_cols;
+	int	num_person;
+}	t_data;
 
 /* Functions prototipes */
 int		err_arg_number(void);

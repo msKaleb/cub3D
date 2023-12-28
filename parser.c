@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/28 18:10:07 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 18:11:24 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ void	check_map(t_data **data, char *map_name)
 		// exit (err_file(map_name));//to compile with errors.c
 		exit (-3);//error file open failed
 	}
-	// printf("LINE: %d where am i??\n", __LINE__);
-	// printf("Map name?? %s\n", map_name);
-	// (*data)->num_rows = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
