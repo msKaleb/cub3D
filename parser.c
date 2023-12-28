@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/28 18:11:24 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/28 18:42:11 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,26 @@
 
 #include "libft/libft.h"//for test
 
+
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+void	flood_fill(char **tab, t_point size, t_point begin);
+
 /**
 * @brief obtain data in general (main structure)
 */
 typedef struct s_data
 {
-	int	num_rows;
-	int	num_cols;
-	int	num_person;
+	int		num_rows;
+	int		num_cols;
+	int		num_person;
+	t_point	pt_person;
 }	t_data;
+
 
 int	check_file_format(char *str)
 {
@@ -51,6 +62,8 @@ void	count_cols(t_data **data, char *line)
 		{
 			// printf("LINE: %d where am i??\n", __LINE__);
 			(*data)->num_person++;
+			(*data)->pt_person.x = i;
+			(*data)->pt_person.y = (*data)->num_rows;
 		}
 		else if (line[i] && line[i] != '0' && line[i] != '1' && line[i] != 32 && line[i] != 10)
 		{
@@ -101,6 +114,8 @@ void	replace_spaces(char **str)
 	{
 		if ((*str)[i] == 32)
 			(*str)[i] = '0';
+		if ((*str)[i] == 'N' || (*str)[i] == 'S' || (*str)[i] == 'W' || (*str)[i] == 'E')
+			(*str)[i] = '0';
 		i++;
 	}
 }
@@ -136,6 +151,18 @@ void	parser(char *map_name, t_data *data)
 		free(str);
 		str = get_next_line(fd);
 	}
+
+	t_point	size;
+
+	size.x = data->num_cols;
+	size.y = data->num_rows;
+
+	printf("\ncheck result of flood fill!!\n");
+
+	flood_fill(tab, size, data->pt_person);
+	//DELETE
+	for (int i = 0; tab[i]; i++)
+		printf("%s", tab[i]);
 }
 
 

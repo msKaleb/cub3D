@@ -41,32 +41,32 @@ char** make_area(char** zone, t_point size)
 	return new;
 }
 
-int main(void)
-{
-	t_point size = {1200, 5};
-/* 	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	}; */
-	char *zone[] = {
-		"11100",
-		"101000000000",
-		"101111111111",
-		"10001",
-		"11111",
-	};
+// int main(void)
+// {
+// 	t_point size = {1200, 5};
+// /* 	char *zone[] = {
+// 		"11111111",
+// 		"10001001",
+// 		"10010001",
+// 		"10110001",
+// 		"11100001",
+// 	}; */
+// 	char *zone[] = {
+// 		"11100",
+// 		"101000000000",
+// 		"101111111111",
+// 		"10001",
+// 		"11111",
+// 	};
 
-	char**  area = make_area(zone, size);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	printf("\n");
+// 	char**  area = make_area(zone, size);
+// 	for (int i = 0; i < size.y; ++i)
+// 		printf("%s\n", area[i]);
+// 	printf("\n");
 
-	t_point begin = {3, 3};
-	flood_fill(area, size, begin);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	return (0);
-}
+// 	t_point begin = {3, 3};
+// 	flood_fill(area, size, begin);
+// 	for (int i = 0; i < size.y; ++i)
+// 		printf("%s\n", area[i]);
+// 	return (0);
+// }
