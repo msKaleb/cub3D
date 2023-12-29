@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 12:55:26 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 13:22:07 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,35 @@ void	replace_spaces(char **str)
 	}
 }
 
+int	is_overflow(char **map, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	//the first line, the last line check
+	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 1], 'F'))
+	{
+		printf("the first or last\n");
+		return (-1);
+	}
+	//check each line the first letter and the last
+	while (map[i] && i < data->num_rows)
+	{
+		if (map[i][0] == 'F')
+		{
+			printf("the first letter: %c\n", map[i][0]);
+			return (-1);
+		}
+		if (map[i][ft_strlen(map[i]) - 1] == 'F' || map[i][data->num_cols - 1] == 'F')
+		{
+			printf("the last letter: %c\n", map[i][ft_strlen(map[i])]);
+			return (-1);
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	**parser(char *map_name, t_data *data)
 {
 	char	**tab;
@@ -249,6 +278,12 @@ char	**parser(char *map_name, t_data *data)
 	printf("\ncheck result of flood fill!!\n");
 
 	flood_fill(tab, size, data->pt_person);
+	if (is_overflow(tab, data) == -1)
+	{
+		//free memory
+		printf("map is invalid!\n");
+		return (NULL);//error
+	}
 	return (tab);
 }
 
@@ -281,7 +316,9 @@ int	main(int ac, char **argv)
 	printf("after parser\n");
 		/* parser */
 	char	**map;
-	map = parser(argv[1], &data);	
+	map = parser(argv[1], &data);
+	if (!map)
+		return(1);//
 	for (int i = 0; map[i]; i++)
 		printf("%s", map[i]);
 	/*  */
