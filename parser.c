@@ -6,39 +6,39 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 17:41:49 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 17:49:24 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "ft_cub3d.h"
+#include "ft_cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include "colors.h"
 
-#include "libft/libft.h"//for test
+// #include "libft/libft.h"//for test
 
-# define GREEN			"\033[32m"				/* Green */
-# define RESET			"\033[0m"
+// # define GREEN			"\033[32m"				/* Green */
+// # define RESET			"\033[0m"
 
 
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
+// typedef struct	s_point
+// {
+// 	int			x;
+// 	int			y;
+// }				t_point;
 
-void	flood_fill(char **tab, t_point size, t_point begin);
+// void	flood_fill(char **tab, t_point size, t_point begin);
 
 /**
 * @brief obtain data in general (main structure)
 */
-typedef struct s_data
-{
-	int		num_rows;
-	int		num_cols;
-	int		num_person;
-	t_point	pt_person;
-}	t_data;
+// typedef struct s_data
+// {
+// 	int		num_rows;
+// 	int		num_cols;
+// 	int		num_person;
+// 	t_point	pt_person;
+// }	t_data;
 
 /**
  *	@note 231229 not use
@@ -294,38 +294,29 @@ char	**parser(char *map_name, t_data *data)
 
 
 
-int	main(int ac, char **argv)
-{
-	t_data	data;
-	int		fd;
+// int	main(int ac, char **argv)
+// {
+// 	t_data	data;
+// 	int		fd;
 
-	ft_bzero(&data, 1 * sizeof(t_data));
-	fd = 0;
-	if (ac != 2)
-	{
-		printf("bad argument\n");
-		return (-1);//error bad argument
-	}
-	//check format;
-	if (check_file_format(argv[1]) == -1)
-		return (-2);//error incorrect file format 
-
-	//check file
-	// fd = open(av[1], O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	printf("ajajajaaaaaaaa\n");
-	// 	return (-3);//error file open failed
-	// }
-	// parser(argv[1], &data);
-	printf("after parser\n");
-		/* parser */
-	char	**map;
-	map = parser(argv[1], &data);
-	if (!map)
-		return(1);//
-	for (int i = 0; map[i]; i++)
-		printf("%s", map[i]);
-	/*  */
-	return (0);
-}
+// 	ft_bzero(&data, 1 * sizeof(t_data));
+// 	fd = 0;
+// 	if (ac != 2)
+// 	{
+// 		printf("bad argument\n");
+// 		return (-1);//error bad argument
+// 	}
+// 	//check format;
+// 	if (check_file_format(argv[1]) == -1)
+// 		return (-2);//error incorrect file format 
+// 		/* parser */
+// 	char	**map;
+// 	map = parser(argv[1], &data);
+// 	if (!map)
+// 		return(1);//
+// 	printf("output after parser\n");
+// 	for (int i = 0; map[i]; i++)
+// 		printf("%s", map[i]);
+// 	/*  */
+// 	return (0);
+// }
