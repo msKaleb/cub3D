@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/29 14:56:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:00:39 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ int	main(int argc, char *argv[])
 		
 	}
 	// testing....
-	
+
 	init_mlx(&m);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop(m.mlx);
+	// free_2dimension(map);
 	close(fd);
 	return(0);
 }

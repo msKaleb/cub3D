@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 17:49:24 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 18:02:27 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ char	**parser(char *map_name, t_data *data)
 	
 	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
 	if (!tab)
-		exit(0);//memory allocation error
+		return (NULL);//memory allocation error
 
 
 	// If you want to fill with 0 the map, these lines//
@@ -243,6 +243,8 @@ char	**parser(char *map_name, t_data *data)
 	while (++i < data->num_rows)
 	{
 		tab[i] = ft_strdup(str);
+		if (!tab[i])
+			return (free_2dimension(tab), NULL);
 		replace_spaces(&tab[i]);
 		printf("%s", tab[i]);
 		free(str);
@@ -286,6 +288,7 @@ char	**parser(char *map_name, t_data *data)
 	if (is_overflow(tab, data) == -1)
 	{
 		//free memory
+		free_2dimension(tab);
 		printf("map is invalid!\n");
 		return (NULL);//error
 	}
