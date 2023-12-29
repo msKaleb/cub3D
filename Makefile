@@ -90,13 +90,13 @@ endif
 all:		$(NAME)
 
 pre-build:
-			make bonus -sC LibFT/
+			make bonus -sC libft/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			make -sC $(MLXDIR)
 
 pre-build-bonus:
-			make bonus -sC LibFT/
+			make bonus -sC libft/
 			$(ECHO) $(BLUE) "$$HEADER" $(NONE)
 			$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
 			make -sC $(MLXDIR)

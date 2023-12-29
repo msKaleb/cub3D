@@ -6,37 +6,56 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/28 19:00:40 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 12:28:00 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cub3d.h"
+//#include "ft_cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include "colors.h"
 
-// #include "libft/libft.h"//for test
+#include "libft/libft.h"//for test
 
 
-// typedef struct	s_point
-// {
-// 	int			x;
-// 	int			y;
-// }				t_point;
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
 
-// // void	flood_fill(char **tab, t_point size, t_point begin);
+void	flood_fill(char **tab, t_point size, t_point begin);
 
-// /**
-// * @brief obtain data in general (main structure)
-// */
-// typedef struct s_data
-// {
-// 	int		num_rows;
-// 	int		num_cols;
-// 	int		num_person;
-// 	t_point	pt_person;
-// }	t_data;
+/**
+* @brief obtain data in general (main structure)
+*/
+typedef struct s_data
+{
+	int		num_rows;
+	int		num_cols;
+	int		num_person;
+	t_point	pt_person;
+}	t_data;
 
+
+size_t	ft_stroverwrite(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	srclen;
+
+	srclen = ft_strlen(src);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (src[i] && i < dstsize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		// dst[i] = '\0';
+	}
+	return (srclen);
+}
 
 int	check_file_format(char *str)
 {
@@ -98,6 +117,7 @@ void	check_map(t_data **data, char *map_name)
 		//
 		//also it's neccessary check if there are NO, SU, WE, EA, C, and F before map
 		//
+		printf("%s", line);
 		count_cols(data, line);
 		(*data)->num_rows++;
 		free(line);
@@ -111,6 +131,7 @@ void	replace_spaces(char **str)
 	int	i;
 
 	i = 0;
+	printf("replace: \n%s", *str);
 	while ((*str)[i])
 	{
 		if ((*str)[i] == 32)
@@ -134,25 +155,74 @@ char	**parser(char *map_name, t_data *data)
 	printf("check! check_map\n");
 	printf("data->row: %d\ndata->cols: %d\ndata->person: %d\n", data->num_rows, data->num_cols, data->num_person);
 	// data->num_rows = count_rows(map_name);
-	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
+	
+	// tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
+	// if (!tab)
+	// 	exit(0);//memory allocation error
+
+
+	// If you want to fill with 0 the map, these lines//
+
+	tab = (char **)malloc((data->num_rows + 1) * sizeof(char *));
 	if (!tab)
-		exit(0);//memory allocation error
+		exit(0);
+	// printf("Line: %d tab: %p\n", __LINE__, tab);
+	int	j = -1;
+	while (++j < data->num_rows)
+	{
+		tab[j] = (char *)malloc((data->num_cols + 1) * sizeof(char));
+		if (!tab[j])
+			exit(0);//memory allocation error
+		// printf("Line: %d tab[j]: %p\n", __LINE__, tab[j]);
+		tab[j] = ft_memset(tab[j], '0', data->num_cols - 1);
+		// if (j != data->num_rows -1)
+			tab[j][data->num_cols - 1] = '\n';
+	}
+
+	// for (int i = 0; tab[i]; i++)
+	// 	printf("%s", tab[i]);
+
+
+	// If you want to fill with 0 the map, these lines//
+
+	
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("open failed\n");
 		exit(-3);//error file open failed
 	}
+	// printf("Line: %d tab: %p\n", __LINE__, tab);
 	str = get_next_line(fd);
 	printf("%s\ncheck result of replace spaces!!%s\n", BLUE, RESET);
-	while (++i < data->num_rows)
+/* 	while (++i < data->num_rows)
 	{
 		tab[i] = ft_strdup(str);
 		replace_spaces(&tab[i]);
 		printf("%s", tab[i]);
 		free(str);
 		str = get_next_line(fd);
+	} */
+	
+	// If you want to fill with 0 the map, these lines//
+	i = -1;
+	while (++i < data->num_rows)
+	{
+		printf("\n%d line \n", i);
+
+		// tab[i] = ft_strdup(str);
+		// ft_strlcpy(tab[i], str, ft_strlen(str));
+		ft_stroverwrite(tab[i], str, ft_strlen(str));
+		printf("%s", tab[i]);
+		replace_spaces(&tab[i]);
+		printf("%s", tab[i]);
+		free(str);
+		str = get_next_line(fd);
 	}
+
+
+
+	// If you want to fill with 0 the map, these lines//
 
 	t_point	size;
 
@@ -167,30 +237,36 @@ char	**parser(char *map_name, t_data *data)
 
 
 
-// int	main(int ac, char **av)
-// {
-// 	t_data	data;
-// 	int		fd;
+int	main(int ac, char **argv)
+{
+	t_data	data;
+	int		fd;
 
-// 	ft_bzero(&data, 1 * sizeof(t_data));
-// 	fd = 0;
-// 	if (ac != 2)
-// 	{
-// 		printf("bad argument\n");
-// 		return (-1);//error bad argument
-// 	}
-// 	//check format;
-// 	if (check_file_format(av[1]) == -1)
-// 		return (-2);//error incorrect file format 
+	ft_bzero(&data, 1 * sizeof(t_data));
+	fd = 0;
+	if (ac != 2)
+	{
+		printf("bad argument\n");
+		return (-1);//error bad argument
+	}
+	//check format;
+	if (check_file_format(argv[1]) == -1)
+		return (-2);//error incorrect file format 
 
-// 	//check file
-// 	// fd = open(av[1], O_RDONLY);
-// 	// if (fd < 0)
-// 	// {
-// 	// 	printf("ajajajaaaaaaaa\n");
-// 	// 	return (-3);//error file open failed
-// 	// }
-// 	parser(av[1], &data);
-// 	printf("after parser\n");
-// 	return (0);
-// }
+	//check file
+	// fd = open(av[1], O_RDONLY);
+	// if (fd < 0)
+	// {
+	// 	printf("ajajajaaaaaaaa\n");
+	// 	return (-3);//error file open failed
+	// }
+	// parser(argv[1], &data);
+	printf("after parser\n");
+		/* parser */
+	char	**map;
+	map = parser(argv[1], &data);	
+	for (int i = 0; map[i]; i++)
+		printf("%s", map[i]);
+	/*  */
+	return (0);
+}
