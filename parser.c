@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 13:22:07 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 13:32:09 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ int	is_overflow(char **map, t_data *data)
 
 	i = 0;
 	//the first line, the last line check
-	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 1], 'F'))
+	printf("last line: %s", map[data->num_rows - 2]);
+	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 2], 'F'))
 	{
 		printf("the first or last\n");
 		return (-1);
@@ -161,6 +162,10 @@ int	is_overflow(char **map, t_data *data)
 	//check each line the first letter and the last
 	while (map[i] && i < data->num_rows)
 	{
+		printf("\nCHECK!");
+		printf("map[%d][0]: %c\nmap[%d][ft_strlen(map[%d]) - 1]: %c\n", i, map[i][0], i, i, map[i][ft_strlen(map[i]) - 1]);
+		printf("map[%d][data->num_cols - 1]: %c\n", i, map[i][data->num_cols - 1]);
+
 		if (map[i][0] == 'F')
 		{
 			printf("the first letter: %c\n", map[i][0]);
