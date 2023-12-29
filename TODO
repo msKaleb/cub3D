@@ -1,2 +1,3 @@
 quitar -Wno-deprecated de makefile de minilibx
 controlar relink en bonus
+Quitar todos los "//DELETE"

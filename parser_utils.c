@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 17:41:49 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 17:09:50 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,56 +17,29 @@
 
 #include "libft/libft.h"//for test
 
-# define GREEN			"\033[32m"				/* Green */
-# define RESET			"\033[0m"
-
-
-typedef struct	s_point
+size_t	ft_stroverwrite(char *dst, const char *src, size_t dstsize)
 {
-	int			x;
-	int			y;
-}				t_point;
+	size_t	i;
+	size_t	srclen;
 
-void	flood_fill(char **tab, t_point size, t_point begin);
-
-/**
-* @brief obtain data in general (main structure)
-*/
-typedef struct s_data
-{
-	int		num_rows;
-	int		num_cols;
-	int		num_person;
-	t_point	pt_person;
-}	t_data;
-
-/**
- *	@note 231229 not use
-  */
-  
-// size_t	ft_stroverwrite(char *dst, const char *src, size_t dstsize)
-// {
-// 	size_t	i;
-// 	size_t	srclen;
-
-// 	(void)dstsize;
-// 	printf("overwriting\n");
-// 	printf("%s\n\n", dst);
-// 	// printf("%s\n%s", dst, src);
+	(void)dstsize;
+	printf("overwriting\n");
+	printf("%s\n\n", dst);
+	// printf("%s\n%s", dst, src);
 	
-// 	srclen = ft_strlen(src);
-// 	i = 0;
-// 	if (dstsize > 0)
-// 	{
-// 		while (src[i] && i < srclen - 1)
-// 		{
-// 			dst[i] = src[i];
-// 			i++;
-// 		}
-// 		// dst[i] = '\0';
-// 	}
-// 	return (srclen);
-// }
+	srclen = ft_strlen(src);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (src[i] && i < srclen - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		// dst[i] = '\0';
+	}
+	return (srclen);
+}
 
 int	check_file_format(char *str)
 {
@@ -159,21 +132,27 @@ int	is_overflow(char **map, t_data *data)
 
 	i = 0;
 	//the first line, the last line check
-	
-	//skip until the wall
-	while (map[data->num_rows - 1 - i][0] == '\n')
-		i++;
-	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 1 - i], 'F'))
+	printf("last line: %s", map[data->num_rows - 2]);
+	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 2], 'F'))
 	{
-		printf("the first\n");
+		printf("the first or last\n");
 		return (-1);
 	}
-	i = 0;
-	//check each line the first letter and the last(without '\n')
+	//check each line the first letter and the last
 	while (map[i] && i < data->num_rows)
 	{
-		if (map[i][0] == 'F' || map[i][(int)ft_strlen(map[i]) - 2] == 'F')
+		printf("\nCHECK!");
+		printf("map[%d][0]: %c\nmap[%d][ft_strlen(map[%d]) - 1]: %c\n", i, map[i][0], i, i, map[i][ft_strlen(map[i]) - 1]);
+		printf("map[%d][data->num_cols - 1]: %c\n", i, map[i][data->num_cols - 1]);
+
+		if (map[i][0] == 'F')
 		{
+			printf("the first letter: %c\n", map[i][0]);
+			return (-1);
+		}
+		if (map[i][ft_strlen(map[i]) - 1] == 'F' || map[i][data->num_cols - 1] == 'F')
+		{
+			printf("the last letter: %c\n", map[i][ft_strlen(map[i])]);
 			return (-1);
 		}
 		i++;
