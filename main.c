@@ -6,15 +6,15 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 20:10:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:56:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-/* char	**test_map(void)
+/* void	test_map(char **map)
 {
-	char	**map = (char *[]){
+	map = (char *[]){
 		"1111111111",
 		"1000000011",
 		"1000000001",
@@ -23,16 +23,24 @@
 		"1110110N01",
 		"1111111111",
 	};
-	return (map);
 } */
+
+void	init_player(t_player *player)
+{
+	player->posX = 7;
+	player->posY = 5;
+	player->dirX = -1;
+	player->dirY = 0;
+	player->planeX = 0;
+	player->planeY = 0.66;
+}
 
 int	main(int argc, char *argv[])
 {
 	t_mlx	m;
 	int		fd;
 	t_data	data;
-	char	**map;
-	(void)map;
+
 	(void)data;
 	
 	if (argc < 2)
@@ -44,7 +52,27 @@ int	main(int argc, char *argv[])
 	// map = parser(argv[1], &data);	
 	// for (int i = 0; map[i]; i++)
 	// 	printf("%s", map[i]);
-	/*  */
+
+	// testing....
+	{
+		// init on [7][5]
+		char	*test_map[7] = {
+			"1111111111",
+			"1000000011",
+			"1000000001",
+			"1101000001",
+			"1100100001",
+			"1110110001",
+			"1111111111",
+		};
+		(void)test_map;
+		t_player	mikel;
+		
+		init_player(&mikel);
+		
+	}
+	// testing....
+	
 	init_mlx(&m);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);

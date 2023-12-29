@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 18:56:45 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 14:27:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,16 @@ typedef struct s_data
 	t_point	pt_person;
 }	t_data;
 
+// the FOV is 2 * atan(0.66/1.0)=66°
+typedef struct s_player
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+}				t_player;
 
 /* Functions prototipes */
 int		err_arg_number(void);
