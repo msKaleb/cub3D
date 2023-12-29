@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 12:28:00 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/29 12:55:26 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ size_t	ft_stroverwrite(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 	size_t	srclen;
 
+	(void)dstsize;
+	printf("overwriting\n");
+	printf("%s\n\n", dst);
+	// printf("%s\n%s", dst, src);
+	
 	srclen = ft_strlen(src);
 	i = 0;
 	if (dstsize > 0)
 	{
-		while (src[i] && i < dstsize - 1)
+		while (src[i] && i < srclen - 1)
 		{
 			dst[i] = src[i];
 			i++;
@@ -156,28 +161,34 @@ char	**parser(char *map_name, t_data *data)
 	printf("data->row: %d\ndata->cols: %d\ndata->person: %d\n", data->num_rows, data->num_cols, data->num_person);
 	// data->num_rows = count_rows(map_name);
 	
-	// tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
-	// if (!tab)
-	// 	exit(0);//memory allocation error
+	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
+	if (!tab)
+		exit(0);//memory allocation error
 
 
 	// If you want to fill with 0 the map, these lines//
+	/**
+		231229 it's not working
+	
+	  */
 
-	tab = (char **)malloc((data->num_rows + 1) * sizeof(char *));
-	if (!tab)
-		exit(0);
-	// printf("Line: %d tab: %p\n", __LINE__, tab);
-	int	j = -1;
-	while (++j < data->num_rows)
-	{
-		tab[j] = (char *)malloc((data->num_cols + 1) * sizeof(char));
-		if (!tab[j])
-			exit(0);//memory allocation error
-		// printf("Line: %d tab[j]: %p\n", __LINE__, tab[j]);
-		tab[j] = ft_memset(tab[j], '0', data->num_cols - 1);
-		// if (j != data->num_rows -1)
-			tab[j][data->num_cols - 1] = '\n';
-	}
+	// tab = (char **)malloc((data->num_rows + 1) * sizeof(char *));
+	// if (!tab)
+	// 	exit(0);
+	// // printf("Line: %d tab: %p\n", __LINE__, tab);
+	// int	j = -1;
+	// while (++j < data->num_rows)
+	// {
+	// 	tab[j] = (char *)malloc((data->num_cols + 1) * sizeof(char));
+	// 	if (!tab[j])
+	// 		exit(0);//memory allocation error
+	// 	// printf("Line: %d tab[j]: %p\n", __LINE__, tab[j]);
+	// 	tab[j] = ft_memset(tab[j], '0', data->num_cols - 1);
+	// 	// if (j != data->num_rows -1)
+	// 	tab[j][data->num_cols - 1] = '\n';
+	// 	printf("%s \nlast one %d\ndata->cols %d\n", tab[j], tab[j][data->num_cols - 1], data->num_cols);
+
+	// }
 
 	// for (int i = 0; tab[i]; i++)
 	// 	printf("%s", tab[i]);
@@ -195,30 +206,36 @@ char	**parser(char *map_name, t_data *data)
 	// printf("Line: %d tab: %p\n", __LINE__, tab);
 	str = get_next_line(fd);
 	printf("%s\ncheck result of replace spaces!!%s\n", BLUE, RESET);
-/* 	while (++i < data->num_rows)
+	while (++i < data->num_rows)
 	{
 		tab[i] = ft_strdup(str);
 		replace_spaces(&tab[i]);
 		printf("%s", tab[i]);
 		free(str);
 		str = get_next_line(fd);
-	} */
+	}
 	
 	// If you want to fill with 0 the map, these lines//
-	i = -1;
-	while (++i < data->num_rows)
-	{
-		printf("\n%d line \n", i);
+	/**
+		231229 it's not working
+	
+	*/
+	// i = -1;
+	// while (++i < data->num_rows)
+	// {
+	// 	printf("\n%d line \n", i);
 
-		// tab[i] = ft_strdup(str);
-		// ft_strlcpy(tab[i], str, ft_strlen(str));
-		ft_stroverwrite(tab[i], str, ft_strlen(str));
-		printf("%s", tab[i]);
-		replace_spaces(&tab[i]);
-		printf("%s", tab[i]);
-		free(str);
-		str = get_next_line(fd);
-	}
+	// 	// tab[i] = ft_strdup(str);
+	// 	// ft_strlcpy(tab[i], str, ft_strlen(str));
+	// 	ft_stroverwrite(tab[i], str, ft_strlen(str));
+	// 	printf("%s", tab[i]);
+	// 	printf("%s", str);
+	// 	printf("\n\n\n");
+	// 	replace_spaces(&tab[i]);
+	// 	printf("%s", tab[i]);
+	// 	free(str);
+	// 	str = get_next_line(fd);
+	// }
 
 
 
