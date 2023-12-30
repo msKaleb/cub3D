@@ -6,12 +6,12 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 06:56:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/30 09:56:11 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FT_CUB3D_H
-# define _FT_CUB3D_H
+#ifndef FT_CUB3D_H
+# define FT_CUB3D_H
 
 # include "libft/libft.h"
 # include <stdio.h>
@@ -57,8 +57,8 @@
 
 /* Some needed values */
 # define DEFAULT_COLOR 	0xBADA55	// Badass color
-# define DEFAULT_X 		640
-# define DEFAULT_Y 		480
+# define DEFAULT_X 		640.0
+# define DEFAULT_Y 		480.0
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -82,7 +82,7 @@ typedef struct s_mlx
 	int			endian;
 }				t_mlx;
 
-typedef struct	s_point
+typedef struct s_point
 {
 	int			x;
 	int			y;
@@ -99,15 +99,47 @@ typedef struct s_data
 	t_point	pt_person;
 }	t_data;
 
+/**
+ * @brief raycast structure
+ * @param cam_x 			x coordinate on the camera plane
+ * @param dir_x/dir_y		ray direction vector
+ * @param delta_x/delta_y	distance vector
+ * @param side_x/side_y		distance in grid x/y
+ * @param perp_wall_dist	perpendicular distance from camera plane to the wall
+ * @param map_x/map_y		square of the grid the ray is in
+ * @param step_x/step_y		positive or negative direction
+ * @param line_height		the vertical lines which will form the 3d image
+ * @param is_wall			checks if the ray hit a wall
+ * @param side				type of wall (NS or EW)
+ */
+typedef struct s_raycast
+{
+	double	cam_x;
+	double	dir_x;
+	double	dir_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	double	perp_wall_dist;
+
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		line_height;
+	int		is_wall;
+	int		side;
+}				t_raycast;
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }				t_player;
 
 /* Functions prototipes */
@@ -119,6 +151,7 @@ int		close_mlx(t_mlx *m);
 
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	init_mlx(t_mlx *m);
+void	raycast(t_raycast *ray, t_player *player/* , t_mlx *m */);
 
 void	*free_2dimension(char **strs);//function name??
 
@@ -132,4 +165,4 @@ char	**parser(char *map_name, t_data *data);
   */
 void	flood_fill(char **tab, t_point size, t_point begin);
 
-#endif /* _FT_CUB3D_H */
+#endif /* FT_CUB3D_H */

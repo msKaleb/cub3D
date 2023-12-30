@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 06:59:04 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/30 08:53:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	render_test(t_mlx *m)
 // to be put into another file, e.g. player.c
 void	init_player(t_player *player)
 {
-	player->posX = 7;
-	player->posY = 5;
-	player->dirX = -1;
-	player->dirY = 0;
-	player->planeX = 0;
-	player->planeY = 0.66;
+	player->pos_x = 7;
+	player->pos_y = 5;
+	player->dir_x = -1;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0.66;
 }
 
 int	main(int argc, char *argv[])
