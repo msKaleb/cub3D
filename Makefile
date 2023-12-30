@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/28 20:07:23 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/30 06:55:07 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ MAIN	=	main.c \
 SRC		=	errors.c \
 			mlx_utils.c \
 			parser.c \
-			flood_fill.c 
+			flood_fill.c \
+			free_memory.c \
+			render.c \
 			
 MAIN_B	=	main_bonus.c
 
