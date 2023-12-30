@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 09:56:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:30:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_data
 	int		num_cols;
 	int		num_person;
 	t_point	pt_person;
-}	t_data;
+}				t_data;
 
 /**
  * @brief raycast structure
@@ -140,6 +140,8 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+
+	char	**map;	// maybe put it in another struct
 }				t_player;
 
 /* Functions prototipes */

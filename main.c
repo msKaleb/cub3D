@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 08:53:16 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:49:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	init_player(t_player *player)
 
 int	main(int argc, char *argv[])
 {
-	t_mlx	m;
-	int		fd;
-	t_data	data;
+	t_data		data;
+	t_mlx		m;
+	t_raycast	ray;
+	int			fd;
 
 	(void)data;
 	
@@ -49,10 +50,11 @@ int	main(int argc, char *argv[])
 	// for (int i = 0; map[i]; i++)
 	// 	printf("%s", map[i]);
 
+	init_mlx(&m);
 	// testing....
 	{
-		// init on [7][5]
-		char	*test_map[7] = {
+		// init on [5][7]
+		char	*test_map[10] = {
 			"1111111111",
 			"1000000011",
 			"1000000001",
@@ -63,13 +65,16 @@ int	main(int argc, char *argv[])
 		};
 		(void)test_map;
 		t_player	mikel;
-		
+		mikel.map = test_map;
+		/* mikel.map = malloc(sizeof(char *) * 7);
+		for (int i = 0; i < 7; i++)
+			mikel.map[i] = ft_strdup(test_map[i]); */
+		printf("%c\n", mikel.map[5][7]);
 		init_player(&mikel);
-		
+		raycast(&ray, &mikel);
 	}
 	// testing....
 
-	init_mlx(&m);
 	render_test(&m);
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);

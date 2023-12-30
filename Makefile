@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/30 06:55:07 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/30 13:33:42 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ pre-build-bonus:
 			make -sC $(MLXDIR)
 				
 %.o: %.c
-	 		$(CC) $(CCOBJ)
+	 		$(CC) $(CCOBJ) -g -O0
 
 $(NAME):	pre-build $(OBJ) $(OBJ_M)
 			$(CC) $(FLAGS) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
