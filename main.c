@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/31 03:18:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/31 14:58:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	render_test(t_mlx *m)
 
 // to be put into another file, e.g. player.c
 // change the values to the ones from the map
+// now it's looking west
 void	init_player(t_player *player)
 {
 	player->pos_x = 7;
@@ -29,7 +30,7 @@ void	init_player(t_player *player)
 	player->dir_x = -1;
 	player->dir_y = 0;
 	player->plane_x = 0;
-	player->plane_y = 0.66;
+	player->plane_y = -0.66;
 }
 
 void	init_raycast(t_raycast *ray)
@@ -72,13 +73,20 @@ int	main(int argc, char *argv[])
 
 	init_mlx(&m);
 	// testing....
+	// "1111111111",
+	// "1000000011",
+	// "1000000001",
+	// "1101001101",
+	// "1100100001",
+	// "1110110P01",
+	// "1111111111",
 	{
 		// init on [5][7]
 		char	*test_map[10] = {
 			"1111111111",
 			"1000000011",
 			"1000000001",
-			"1101000001",
+			"1101001101",
 			"1100100001",
 			"1110110001",
 			"1111111111",
@@ -89,14 +97,14 @@ int	main(int argc, char *argv[])
 		/* mikel.map = malloc(sizeof(char *) * 7);
 		for (int i = 0; i < 7; i++)
 			mikel.map[i] = ft_strdup(test_map[i]); */
-		printf("%c\n", mikel.map[5][7]);
+		// printf("%c\n", mikel.map[5][7]);
 		init_raycast(&ray);
 		init_player(&mikel);
-		raycast(&ray, &mikel);
+		raycast(&ray, &mikel, &m);
 	}
 	// testing....
 
-	render_test(&m);
+	// render_test(&m);
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
