@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/31 12:57:30 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/31 14:06:38 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	int		num_rows;
 	int		num_cols;
 	int		num_person;
+	int		pos_map;
 	t_point	pt_person;
 	int		dir_person;
 	char	*tex_path[4];
@@ -143,6 +144,7 @@ int	get_cols(char *str)
 	int		pos[3];
 	int		colour[3];
 	char	*tmp;
+	int		ret;
 
 	ft_bzero(pos, sizeof(int) * 3);
 	ft_bzero(colour, sizeof(int) * 3);
@@ -156,7 +158,7 @@ int	get_cols(char *str)
 		while (str[pos[1]] && ft_isdigit(str[pos[1]])/* str[pos[1]] != 32, str[pos[1]] != ',' */)
 			pos[1]++;
 		tmp = ft_substr(str, pos[0], pos[1] - pos[0]);
-		printf("tmp* %s\n", tmp);
+		// printf("tmp* %s\n", tmp);
 		colour[pos[2]] = ft_atoi(tmp);
 		free (tmp);
 		if (colour[pos[2]] < 0 || colour[pos[2]] > 255)
@@ -167,10 +169,12 @@ int	get_cols(char *str)
 	//I need protect from some garbage after colour??
 	if (pos[2] != 3)
 		return (printf("lack of information for colour"), -1);//error OR we can put 0 instead of return error
-	
-	
-	printf("str: %s", str);
-	return (0);
+	// printf("colour[0]: %d\n", colour[0]);
+	// printf("colour[1]: %d\n", colour[1]);
+	// printf("colour[2]: %d\n", colour[2]);
+	ret = (colour[0] << 16) + (colour[1] << 8) + (colour[2]);
+	printf("ret: %d\n", ret);
+	return (ret);
 }
 
 int	obtain_path(t_data **data, char *line)
@@ -178,62 +182,53 @@ int	obtain_path(t_data **data, char *line)
 	int	i;
 
 	i = 0;
+	//move to the next line if there is only '\n'
 	if (line[i] && line[i] == 10)
 		return (1);
 	//skip while there are spaces
 	while (line[i] && line[i] == 32)
 		i++;
 	if (&line[i] && !ft_strncmp(&line[i], "NO ", 3))
-	{
-		printf("I got NO\n");
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
-	}
 	else if (&line[i] && !ft_strncmp(&line[i], "SO ", 3))
-	{
-		printf("I got SO\n");
 		return ((*data)->tex_path[1] = ft_strdup(line + (i + 3)), 0);
-	}
 	else if (&line[i] && !ft_strncmp(&line[i], "WE ", 3))
-	{
-		printf("I got WE\n");
 		return ((*data)->tex_path[2] = ft_strdup(line + (i + 3)), 0);
-	}
 	else if (&line[i] && !ft_strncmp(&line[i], "EA ", 3))
-	{
-		printf("I got EA\n");
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
-	}
 	else if (&line[i] && !ft_strncmp(&line[i], "F ", 2))
-	{
-		printf("I got F\n");
 		return ((*data)->floor_col = get_cols(line + (i + 2)), 0);
-	}
 	else if (&line[i] && !ft_strncmp(&line[i], "C ", 2))
-	{
-		printf("I got C\n");
 		return ((*data)->ceiling_col = get_cols(line + (i + 2)), 0);
-	}
-	// while (line[i])
-	// {
-	// 	if (line[i] && line[i] != 32 && line[i] != '\n')
-	// 		return (-1);
-	// }
-	printf("I got exit\n");
-
-	exit(0);
-	return (0);
+	return (-1);
 }
 
-void	check_map(t_data **data, char *map_name)
+int	is_brank(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (line[i] != 32 && line[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_map(t_data **data, char *map_name)
 {
 	char	*line;
 	int		fd;
+	int		i;
 
+	i = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
 		// exit (err_file(map_name));//to compile with errors.c
-		exit (-3);//error file open failed
+		return (-1);//error file open failed
 	}
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -242,20 +237,25 @@ void	check_map(t_data **data, char *map_name)
 		//also it's neccessary check if there are NO, SU, WE, EA, C, and F before map
 		//
 		printf("%s", line);
-		if (check_paths(*data))//if it returns 1
+		if (check_paths(*data) && !is_brank(line))//if it returns 1
 		{
+			printf("result is_brank %d\n", is_brank(line));
+			if (!(*data)->pos_map)
+				(*data)->pos_map = i;
 			count_cols(data, line);
 			(*data)->num_rows++;
 		}
 		else
 		{
 			if (obtain_path(data, line) == -1)
-				exit (/* close(fd), free (line),  */-4);//error path incorrect
+				return (close(fd), free (line), -1);//error path incorrect
 		}
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
-	close(fd);
+	printf("(*data)->pos_map: %d\n", (*data)->pos_map);
+	return (close(fd), 0);
 }
 
 void	replace_spaces(char **str)
@@ -313,18 +313,26 @@ void	init_data(t_data **data)
 	}
 	(*data)->ceiling_col = 0;
 	(*data)->floor_col = 0;
+	/**
+	* @note CHECK! it's initialized as 0 at home, how about MAC?
+	  */
+	printf("pos_map: %d\n", (*data)->pos_map);
 }
 
 char	**parser(char *map_name, t_data *data)
 {
 	char	**tab;
-	int		i;
+	int		i[2];
 	char 	*str;
 	int		fd = 0;
 
-	i = -1;
 	init_data(&data);
-	check_map(&data, map_name);
+	if (check_map(&data, map_name) == -1)
+	{
+		printf("Im not here??\n");	
+		return (NULL);
+	}
+	ft_bzero(i, sizeof(int) * 2);
 	//DELETE
 	// printf("check! check_map\n");
 	// printf("data->row: %d\ndata->cols: %d\ndata->person: %d\n", data->num_rows, data->num_cols, data->num_person);
@@ -332,40 +340,7 @@ char	**parser(char *map_name, t_data *data)
 	
 	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
 	if (!tab)
-		return (NULL);//memory allocation error
-
-
-	// If you want to fill with 0 the map, these lines//
-	/**
-		231229 it's not working
-	
-	  */
-
-	// tab = (char **)malloc((data->num_rows + 1) * sizeof(char *));
-	// if (!tab)
-	// 	exit(0);
-	// // printf("Line: %d tab: %p\n", __LINE__, tab);
-	// int	j = -1;
-	// while (++j < data->num_rows)
-	// {
-	// 	tab[j] = (char *)malloc((data->num_cols + 1) * sizeof(char));
-	// 	if (!tab[j])
-	// 		exit(0);//memory allocation error
-	// 	// printf("Line: %d tab[j]: %p\n", __LINE__, tab[j]);
-	// 	tab[j] = ft_memset(tab[j], '0', data->num_cols - 1);
-	// 	// if (j != data->num_rows -1)
-	// 	tab[j][data->num_cols - 1] = '\n';
-	// 	printf("%s \nlast one %d\ndata->cols %d\n", tab[j], tab[j][data->num_cols - 1], data->num_cols);
-
-	// }
-
-	// for (int i = 0; tab[i]; i++)
-	// 	printf("%s", tab[i]);
-
-
-	// If you want to fill with 0 the map, these lines//
-
-	
+		return (NULL);//memory allocation error	
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
@@ -375,42 +350,21 @@ char	**parser(char *map_name, t_data *data)
 	// printf("Line: %d tab: %p\n", __LINE__, tab);
 	str = get_next_line(fd);
 	printf("%s\ncheck result of replace spaces!!%s\n", BLUE, RESET);
-	while (++i < data->num_rows)
+	while (str && i[1] < data->num_rows)
 	{
-		tab[i] = ft_strdup(str);
-		if (!tab[i])
-			return (/* free_2dimension(tab), */ NULL);
-		replace_spaces(&tab[i]);
-		printf("%s", tab[i]);
+		if (i[0] >= data->pos_map)
+		{
+			tab[i[1]] = ft_strdup(str);
+			if (!tab[i[1]])
+				return (/* free_2dimension(tab), */ NULL);
+			replace_spaces(&tab[i[1]]);
+			i[1]++;
+		}
+		// printf("%s", tab[i]);
 		free(str);
 		str = get_next_line(fd);
+		i[0]++;
 	}
-	
-	// If you want to fill with 0 the map, these lines//
-	/**
-		231229 it's not working
-	
-	*/
-	// i = -1;
-	// while (++i < data->num_rows)
-	// {
-	// 	printf("\n%d line \n", i);
-
-	// 	// tab[i] = ft_strdup(str);
-	// 	// ft_strlcpy(tab[i], str, ft_strlen(str));
-	// 	ft_stroverwrite(tab[i], str, ft_strlen(str));
-	// 	printf("%s", tab[i]);
-	// 	printf("%s", str);
-	// 	printf("\n\n\n");
-	// 	replace_spaces(&tab[i]);
-	// 	printf("%s", tab[i]);
-	// 	free(str);
-	// 	str = get_next_line(fd);
-	// }
-
-
-
-	// If you want to fill with 0 the map, these lines//
 
 	t_point	size;
 
