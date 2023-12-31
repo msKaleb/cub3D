@@ -74,11 +74,13 @@ static void	dda(t_raycast *ray, t_player *player)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (player->map[ray->map_x][ray->map_y] == '1')
-			ray->is_wall = 1;
+		/* if (player->map[ray->map_y][ray->map_x] == '1') // map_y = rows, map_x = columns
+			ray->is_wall = 1; */
+		ray->is_wall = player->map[ray->map_y][ray->map_x] + '0';
 		// check some values
 		printf("%d", ray->is_wall);
 	}
+	ray->is_wall = 0;
 }
 
 /**
@@ -94,5 +96,10 @@ void	raycast(t_raycast *ray, t_player *player/* , t_mlx *m */)
 		set_ray_values(ray, player, x);
 		get_step_and_side(ray, player);
 		dda(ray, player);
+		if (ray->side == 0)
+			ray->perp_wall_dist = ray->side_x - ray->delta_x;
+		else
+			ray->perp_wall_dist = ray->side_y - ray->delta_y;
+
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 13:49:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/31 03:18:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	render_test(t_mlx *m)
 }
 
 // to be put into another file, e.g. player.c
+// change the values to the ones from the map
 void	init_player(t_player *player)
 {
 	player->pos_x = 7;
@@ -29,6 +30,25 @@ void	init_player(t_player *player)
 	player->dir_y = 0;
 	player->plane_x = 0;
 	player->plane_y = 0.66;
+}
+
+void	init_raycast(t_raycast *ray)
+{
+	ray->cam_x = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->delta_x = 0;
+	ray->delta_y = 0;
+	ray->side_x = 0;
+	ray->side_y = 0;
+	ray->perp_wall_dist = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->line_height = 0;
+	ray->is_wall = 0;
+	ray->side = 0;
 }
 
 int	main(int argc, char *argv[])
@@ -70,6 +90,7 @@ int	main(int argc, char *argv[])
 		for (int i = 0; i < 7; i++)
 			mikel.map[i] = ft_strdup(test_map[i]); */
 		printf("%c\n", mikel.map[5][7]);
+		init_raycast(&ray);
 		init_player(&mikel);
 		raycast(&ray, &mikel);
 	}

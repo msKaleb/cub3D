@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/30 13:30:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/31 03:16:06 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_raycast
 	int		is_wall;
 	int		side;
 }				t_raycast;
+
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
