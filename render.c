@@ -24,8 +24,25 @@ void	print_pixel(t_mlx *m, t_point p, int color)
 void	print_line(t_raycast *ray, t_mlx *m, int x)
 {
 	int	y;
+	int	color;
 
-	y = ray->line_first_px;
-	while (y++ <= ray->line_last_px)
-		print_pixel(m, (t_point){x, y}, DEFAULT_COLOR);
+	y = -1;
+	color = DEFAULT_COLOR;
+	if (ray->side == 1)
+		color = color / 2;
+	// print the ceiling
+	while (++y < ray->line_first_px)
+		print_pixel(m, (t_point){x, y}, DEFAULT_SKY);
+	// print the line
+	while (y <= ray->line_last_px)
+	{
+		print_pixel(m, (t_point){x, y}, color);
+		y++;
+	}
+	// print the floor
+	while (y <= DEFAULT_Y)
+	{
+		print_pixel(m, (t_point){x, y}, DEFAULT_FLOOR);
+		y++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/31 14:55:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/31 18:03:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@
 
 /* Some needed values */
 # define DEFAULT_COLOR 	0xBADA55	// Badass color
+# define DEFAULT_SKY	0x87CEEB
+# define DEFAULT_FLOOR	0x92745B
 # define DEFAULT_X 		640.0
 # define DEFAULT_Y 		480.0
 
