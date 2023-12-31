@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/12/30 13:33:42 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/31 14:40:17 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC		=	errors.c \
 			flood_fill.c \
 			free_memory.c \
 			render.c \
+			raycast.c \
 			
 MAIN_B	=	main_bonus.c
 

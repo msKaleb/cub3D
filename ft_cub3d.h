@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/31 03:16:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/31 14:55:45 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ typedef struct s_raycast
 	int		line_height;
 	int		is_wall;
 	int		side;
+	int		line_first_px;
+	int		line_last_px;
 }				t_raycast;
 
 // the FOV is 2 * atan(0.66/1.0)=66°
@@ -154,7 +156,8 @@ int		close_mlx(t_mlx *m);
 
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	init_mlx(t_mlx *m);
-void	raycast(t_raycast *ray, t_player *player/* , t_mlx *m */);
+void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
+void	print_line(t_raycast *ray, t_mlx *m, int x);
 
 void	*free_2dimension(char **strs);//function name??
 
