@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/31 14:06:38 by nimai            ###   ########.fr       */
+/*   Updated: 2023/12/31 15:36:34 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft/libft.h"//for test
 
 # define GREEN			"\033[32m"				/* Green */
+# define RED			"\033[31m"				/* Red */
 # define RESET			"\033[0m"
 
 
@@ -38,8 +39,9 @@ void	flood_fill(char **tab, t_point size, t_point begin);
 */
 typedef struct s_data
 {
-	int		num_rows;
-	int		num_cols;
+	t_point	map_size;
+	// int		num_rows;
+	// int		num_cols;
 	int		num_person;
 	int		pos_map;
 	t_point	pt_person;
@@ -91,7 +93,7 @@ void	count_cols(t_data **data, char *line)
 			// printf("LINE: %d where am i??\n", __LINE__);
 			(*data)->num_person++;
 			(*data)->pt_person.x = i;
-			(*data)->pt_person.y = (*data)->num_rows;
+			(*data)->pt_person.y = (*data)->map_size.y;
 			(*data)->dir_person = get_direction(line[i]);
 		}
 		else if (line[i] && line[i] != '0' && line[i] != '1' && line[i] != 32 && line[i] != 10)
@@ -101,12 +103,9 @@ void	count_cols(t_data **data, char *line)
 		}
 	}
 	if ((*data)->num_person > 1)
-	{
-		printf("LINE: %d where am i?? line[i]: %d\n", __LINE__, line[i]);
 		exit(-1);//map invalid (more than 1 person);
-	}
-	if (i > (*data)->num_cols)
-		(*data)->num_cols = i;
+	if (i > (*data)->map_size.x)
+		(*data)->map_size.x = i;
 }
 
 /**
@@ -121,14 +120,14 @@ int	check_paths(t_data *data)
 	{
 		if (data->tex_path[i] == NULL)
 		{
-			printf("I don't have enough texture\n");
+			printf("%sI don't have enough texture%s\n", RED, RESET);
 			return (0);
 		}
 		i++;
 	}
 	if (!data->ceiling_col || !data->floor_col)
 	{
-		printf("I don't have enough colour\n");
+		printf("%sI don't have enough colour%s\n", RED, RESET);
 		return (0);
 	}
 	return (1);
@@ -169,9 +168,6 @@ int	get_cols(char *str)
 	//I need protect from some garbage after colour??
 	if (pos[2] != 3)
 		return (printf("lack of information for colour"), -1);//error OR we can put 0 instead of return error
-	// printf("colour[0]: %d\n", colour[0]);
-	// printf("colour[1]: %d\n", colour[1]);
-	// printf("colour[2]: %d\n", colour[2]);
 	ret = (colour[0] << 16) + (colour[1] << 8) + (colour[2]);
 	printf("ret: %d\n", ret);
 	return (ret);
@@ -226,35 +222,25 @@ int	check_map(t_data **data, char *map_name)
 	i = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
-	{
-		// exit (err_file(map_name));//to compile with errors.c
 		return (-1);//error file open failed
-	}
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		//
-		//also it's neccessary check if there are NO, SU, WE, EA, C, and F before map
-		//
-		printf("%s", line);
-		if (check_paths(*data) && !is_brank(line))//if it returns 1
+		// printf("%s", line);
+		if (check_paths(*data) && !is_brank(line))
 		{
-			printf("result is_brank %d\n", is_brank(line));
 			if (!(*data)->pos_map)
 				(*data)->pos_map = i;
 			count_cols(data, line);
-			(*data)->num_rows++;
+			(*data)->map_size.y++;
 		}
 		else
-		{
 			if (obtain_path(data, line) == -1)
 				return (close(fd), free (line), -1);//error path incorrect
-		}
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	printf("(*data)->pos_map: %d\n", (*data)->pos_map);
 	return (close(fd), 0);
 }
 
@@ -282,16 +268,16 @@ int	is_overflow(char **map, t_data *data)
 	//the first line, the last line check
 	
 	//skip until the wall
-	while (map[data->num_rows - 1 - i][0] == '\n')
+	while (map[data->map_size.y - 1 - i][0] == '\n')
 		i++;
-	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->num_rows - 1 - i], 'F'))
+	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->map_size.y - 1 - i], 'F'))
 	{
 		printf("the first\n");
 		return (-1);
 	}
 	i = 0;
 	//check each line the first letter and the last(without '\n')
-	while (map[i] && i < data->num_rows)
+	while (map[i] && i < data->map_size.y)
 	{
 		if (map[i][0] == 'F' || map[i][(int)ft_strlen(map[i]) - 2] == 'F')
 		{
@@ -319,68 +305,57 @@ void	init_data(t_data **data)
 	printf("pos_map: %d\n", (*data)->pos_map);
 }
 
-char	**parser(char *map_name, t_data *data)
+char	**obtain_map(t_data **data, int fd)
 {
-	char	**tab;
 	int		i[2];
-	char 	*str;
-	int		fd = 0;
+	char	**ret;
+	char	*str;
 
-	init_data(&data);
-	if (check_map(&data, map_name) == -1)
-	{
-		printf("Im not here??\n");	
-		return (NULL);
-	}
 	ft_bzero(i, sizeof(int) * 2);
-	//DELETE
-	// printf("check! check_map\n");
-	// printf("data->row: %d\ndata->cols: %d\ndata->person: %d\n", data->num_rows, data->num_cols, data->num_person);
-	// data->num_rows = count_rows(map_name);
-	
-	tab = (char **)ft_calloc(data->num_rows + 1, sizeof(char *));
-	if (!tab)
-		return (NULL);//memory allocation error	
-	fd = open(map_name, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("open failed\n");
-		exit(-3);//error file open failed
-	}
-	// printf("Line: %d tab: %p\n", __LINE__, tab);
+	ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
+	if (!ret)
+		return (NULL);//memory allocation error
 	str = get_next_line(fd);
-	printf("%s\ncheck result of replace spaces!!%s\n", BLUE, RESET);
-	while (str && i[1] < data->num_rows)
+	while (str && i[1] < (*data)->map_size.y)
 	{
-		if (i[0] >= data->pos_map)
+		if (i[0] >= (*data)->pos_map)
 		{
-			tab[i[1]] = ft_strdup(str);
-			if (!tab[i[1]])
-				return (/* free_2dimension(tab), */ NULL);
-			replace_spaces(&tab[i[1]]);
+			ret[i[1]] = ft_strdup(str);
+			if (!ret[i[1]])
+				return (/* free_2dimension(ret), */ NULL);
+			replace_spaces(&ret[i[1]]);
 			i[1]++;
 		}
-		// printf("%s", tab[i]);
 		free(str);
 		str = get_next_line(fd);
 		i[0]++;
 	}
+	close (fd);
+	return (ret);
+}
 
-	t_point	size;
+char	**parser(char *map_name, t_data *data)
+{
+	char	**tab;
+	char 	*str;
+	int		fd;
 
-	size.x = data->num_cols;
-	size.y = data->num_rows;
-
-	printf("\ncheck result of flood fill!!\n");
-
-	flood_fill(tab, size, data->pt_person);
+/**
+ * @note check! if the initialization works well. If so, remove init_data
+  */
+	// init_data(&data);
+	fd = 0;
+	if (check_map(&data, map_name) == -1)
+		return (NULL);
+	fd = open(map_name, O_RDONLY);
+	if (fd < 0)
+		return (/* free_2dimension(tab) */NULL);//error file open failed
+	tab = obtain_map(&data, fd);
+	if (!tab)
+		return (NULL);//error obtain_map failed
+	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
-	{
-		//free memory
-		// free_2dimension(tab);
-		printf("map is invalid!\n");
-		return (NULL);//error
-	}
+		return (printf("map is invalid!\n"),/* free_2dimension(tab) */NULL);//error
 	return (tab);
 }
 
@@ -405,10 +380,15 @@ int	main(int ac, char **argv)
 	char	**map;
 	map = parser(argv[1], &data);
 	if (!map)
+	{
+		printf("failed parser\n");
 		return(1);//
+	}
 	printf("output after parser\n");
 	for (int i = 0; map[i]; i++)
 		printf("%s", map[i]);
 	/*  */
+
+	printf("\ndone all lines in main\n");
 	return (0);
 }
