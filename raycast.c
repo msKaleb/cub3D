@@ -9,8 +9,8 @@ static void	set_ray_values(t_raycast *ray, t_player *player, int x)
 	ray->map_y = (int)player->pos_y;
 	ray->delta_x = fabs(1 / ray->dir_x); // zero division?
 	ray->delta_y = fabs(1 / ray->dir_y);
-	if (ray->dir_y == 0 || ray->dir_x == 0)
-		printf("zero_division\n");
+	/* if (ray->dir_y == 0 || ray->dir_x == 0)
+		printf("zero_division\n"); */
 }
 
 /**
@@ -35,30 +35,6 @@ static void	get_step_and_side(t_raycast *ray, t_player *player)
 	else
 		ray->side_y = (ray->map_y + 1 - player->pos_y) * ray->delta_y;
 }
-
-/* static void	set_dda(t_raycast *ray, t_player *player)
-{
-	if (ray->dir_x < 0)
-	{
-		ray->step_x = -1;
-		ray->side_x = (player->pos_x - ray->map_x) * ray->delta_x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_x;
-	}
-	if (ray->dir_y < 0)
-	{
-		ray->step_y = -1;
-		ray->side_y = (player->pos_y - ray->map_y) * ray->delta_y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->side_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_y;
-	}
-} */
 
 /**
  * @brief performs DDA algorithm
@@ -102,12 +78,12 @@ static void	get_line_height(t_raycast *ray)
 	ray->line_height = (int)(DEFAULT_Y / ray->perp_wall_dist);
 	ray->line_first_px = DEFAULT_Y / 2 - ray->line_height / 2;
 	// ray->line_first_px = -(ray->line_height) / 2 + DEFAULT_Y / 2;
-	if (ray->line_first_px < 0)
+	if (ray->line_first_px < 0 || ray->line_first_px > DEFAULT_Y)
 		ray->line_first_px = 0;
 	ray->line_last_px = DEFAULT_Y / 2 + ray->line_height / 2;
 	// ray->line_last_px = ray->line_height / 2 + DEFAULT_Y / 2;
-	if (ray->line_last_px > DEFAULT_Y)
-		ray->line_last_px = DEFAULT_Y - 1;
+	if (ray->line_last_px > DEFAULT_Y || ray->line_last_px < 0)
+		ray->line_last_px = DEFAULT_Y/*  - 1 */;
 }
 
 /**

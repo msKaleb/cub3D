@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/31 18:03:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/01 19:55:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,14 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 
+	char	dir;
 	char	**map;	// maybe put it in another struct
 }				t_player;
+
+typedef struct s_initial_dir
+{
+	int		orientation[4];
+}				t_initial_dir;
 
 /* Functions prototipes */
 int		err_arg_number(void);
