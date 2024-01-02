@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/01 19:55:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:54:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define DEFAULT_FLOOR	0x92745B
 # define DEFAULT_X 		640.0
 # define DEFAULT_Y 		480.0
+# define MOVE_SPEED		0.2
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -72,17 +73,6 @@
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
 
-/* minilibx structure */
-typedef struct s_mlx
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	void		*addr;
-	int			bpp;
-	int			sl;
-	int			endian;
-}				t_mlx;
 
 typedef struct s_point
 {
@@ -155,6 +145,22 @@ typedef struct s_initial_dir
 	int		orientation[4];
 }				t_initial_dir;
 
+/* minilibx structure */
+typedef struct s_mlx
+{
+	t_player	player;
+	t_raycast	ray;
+
+	void		*mlx;
+	void		*win;
+	void		*img;
+	void		*addr;
+
+	int			bpp;
+	int			sl;
+	int			endian;
+}				t_mlx;
+
 /* Functions prototipes */
 int		err_arg_number(void);
 int		err_file(char *file);
@@ -166,6 +172,10 @@ void	print_pixel(t_mlx *m, t_point p, int color);
 void	init_mlx(t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
+
+void	init_player(t_player *player);
+void	move_player(t_mlx *m, int key_code);
+int		has_to_move(int key_code);
 
 void	*free_2dimension(char **strs);//function name??
 

@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/01 20:20:15 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/02 16:28:22 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC		=	errors.c \
 			free_memory.c \
 			render.c \
 			raycast.c \
+			player.c \
 			# parser.c \
 			
 MAIN_B	=	main_bonus.c

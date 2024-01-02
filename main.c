@@ -6,36 +6,11 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/01 20:25:10 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:47:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-
-/**
- * @brief initialize the struct with parameters from the map
- * @note why do I have to add .5 to pos_x/y???
- * @todo change pos_x/y to the values on the map, now is for testing
-  */
-void	init_player(t_player *player)
-{
-	t_initial_dir	dir;
-
-	if (player->dir == 'N')
-		dir = (t_initial_dir){{0, -1, 1, 0}};
-	else if (player->dir == 'S')
-		dir = (t_initial_dir){{0, 1, -1, 0}};
-	else if (player->dir == 'W')
-		dir = (t_initial_dir){{-1, 0, 0, -1}};
-	else if (player->dir == 'E')
-		dir = (t_initial_dir){{1, 0, 0, 1}};
-	player->pos_x = 17.5;
-	player->pos_y = 8.5;
-	player->dir_x = 0 + dir.orientation[0];
-	player->dir_y = 0 + dir.orientation[1];
-	player->plane_x = 0.66 * dir.orientation[2];
-	player->plane_y = 0.66 * dir.orientation[3];
-}
 
 void	init_raycast(t_raycast *ray)
 {
@@ -56,11 +31,17 @@ void	init_raycast(t_raycast *ray)
 	ray->side = 0;
 }
 
+int	test(int key_code, t_mlx *m)
+{
+	(void)m;
+	printf("%d\n", key_code);
+	return (0);
+}
 int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_mlx		m;
-	t_raycast	ray;
+	// t_raycast	ray;
 	int			fd;
 
 	(void)data;
@@ -88,7 +69,7 @@ int	main(int argc, char *argv[])
 		// 1111000000000001011
 		// 10000000010000000W1
 		// 1111111111111111111
-		// init on [1][2]
+		// init on [8][17]
 		char	*test_map[10] = {
 			"1111111111111111111",
 			"1001001001001000001",
@@ -101,19 +82,21 @@ int	main(int argc, char *argv[])
 			"1000000001000000001",
 			"1111111111111111111"
 		};
-		t_player	mikel;
-		mikel.map = test_map;
-		init_raycast(&ray);
-		mikel.dir = 'W'; // make it point westward, change to the character on the map
-		init_player(&mikel);
-		raycast(&ray, &mikel, &m);
+		// t_player	mikel;
+		m.player.map = test_map;
+		init_raycast(&m.ray);
+		m.player.dir = 'W'; // make it point westward, change to the character on the map
+		init_player(&m.player);
+		raycast(&m.ray, &m.player, &m);
 	}
 	// testing....
 
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-	mlx_key_hook(m.win, &key_hook, &m);
+	// mlx_key_hook(m.win, &key_hook, &m);
+	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &key_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
-	mlx_loop(m.mlx);
+	mlx_loop_hook(m.win, &test, &m);
+	mlx_loop(m.mlx); 
 	// free_2dimension(map);
 	close(fd);
 	return(0);
