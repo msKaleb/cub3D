@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/02 16:54:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:48:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # define DEFAULT_X 		640.0
 # define DEFAULT_Y 		480.0
 # define MOVE_SPEED		0.2
+# define ROTATION_SPEED	0.15
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -142,7 +143,7 @@ typedef struct s_player
 
 typedef struct s_initial_dir
 {
-	int		orientation[4];
+	double	orientation[4];
 }				t_initial_dir;
 
 /* minilibx structure */
@@ -175,6 +176,7 @@ void	print_line(t_raycast *ray, t_mlx *m, int x);
 
 void	init_player(t_player *player);
 void	move_player(t_mlx *m, int key_code);
+void	rotate_player(t_mlx *m, int key_code);
 int		has_to_move(int key_code);
 
 void	*free_2dimension(char **strs);//function name??

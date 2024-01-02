@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/02 19:00:11 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-static void validate_pos(t_player *player, double next_x, double next_y)
+static void	validate_pos(t_player *player, double next_x, double next_y)
 {
 	if (player->map[(int)next_y][(int)next_x] == '0')
 	{
@@ -47,6 +58,7 @@ int	has_to_move(int key_code)
 			return (1);
 	return (0);
 }
+
 void	move_player(t_mlx *m, int key_code)
 {
 	double	next_x;
@@ -64,13 +76,38 @@ void	move_player(t_mlx *m, int key_code)
 	}
 	if (key_code == XK_A)
 	{
-		next_x = m->player.pos_x +  m->player.dir_y * MOVE_SPEED;
-		next_y = m->player.pos_y -  m->player.dir_x * MOVE_SPEED;
+		next_x = m->player.pos_x + m->player.dir_y * MOVE_SPEED;
+		next_y = m->player.pos_y - m->player.dir_x * MOVE_SPEED;
 	}
 	if (key_code == XK_D)
 	{
-		next_x = m->player.pos_x -  m->player.dir_y * MOVE_SPEED;
-		next_y = m->player.pos_y +  m->player.dir_x * MOVE_SPEED;
+		next_x = m->player.pos_x - m->player.dir_y * MOVE_SPEED;
+		next_y = m->player.pos_y + m->player.dir_x * MOVE_SPEED;
 	}
 	validate_pos(&m->player, next_x, next_y);
+}
+
+// rotation matrix:
+// [ cos(a) -sin(a) ]
+// [ sin(a)  cos(a) ]
+void	rotate_player(t_mlx *m, int key_code)
+{
+	double	dir_x;
+	double	plane_x;
+	double	rot;
+	int		dir;
+
+	dir_x = m->player.dir_x;
+	plane_x = m->player.plane_x;
+	if (key_code == XK_LEFT)
+		dir = -1;
+	else if (key_code == XK_RIGHT)
+		dir = 1;
+	else
+		return ;
+	rot = ROTATION_SPEED * dir;
+	m->player.dir_x = dir_x * cos(rot) - m->player.dir_y * sin(rot);
+	m->player.dir_y = dir_x * sin(rot) + m->player.dir_y * cos(rot);
+	m->player.plane_x = plane_x * cos(rot) - m->player.plane_y * sin(rot);
+	m->player.plane_y = plane_x * sin(rot) + m->player.plane_y * cos(rot);
 }

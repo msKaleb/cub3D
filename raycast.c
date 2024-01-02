@@ -98,10 +98,8 @@ void	raycast(t_raycast *ray, t_player *player, t_mlx *m)
 	{
 		set_ray_values(ray, player, x);
 		get_step_and_side(ray, player);
-		// set_dda(ray, player);
 		dda(ray, player);
 		get_line_height(ray);
 		print_line(ray, m, x);
-		// write(1, ft_itoa(ray->perp_wall_dist), 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/02 17:55:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:54:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	key_hook(int key_code, t_mlx *m)
 		mlx_destroy_image(m->mlx, m->img);
 		m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 		move_player(m, key_code);
+		rotate_player(m, key_code);
 		raycast(&m->ray, &m->player, m);
 		mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	}
