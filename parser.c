@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/03 16:59:56 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 22:25:21 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,7 @@ void	init_data(t_data **data)
 	{
 		(*data)->tex_path[i] = NULL;
 	}
+	(*data)->num_person = 0;
 	(*data)->pos_map = 0;
 	(*data)->map_size.x = 0;
 	(*data)->map_size.y = 0;

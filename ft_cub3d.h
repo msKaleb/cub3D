@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 18:28:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:28:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
 
-typedef struct s_mlx t_mlx;
+typedef struct s_mlx	t_mlx;
 
 typedef struct s_point
 {
@@ -103,17 +103,14 @@ typedef struct s_point
 typedef struct s_data
 {
 	t_point	map_size;
-	// int		num_rows;
-	// int		num_cols;
+	t_point	pt_person;
+
 	int		num_person;
 	int		pos_map;
-	t_point	pt_person;
+
 	char	dir_person;
 	char	*tex_path[4];
-	// int		floor_col;
-	// int		ceiling_col;
-}	t_data;
-
+}				t_data;
 
 /**
  * @brief raycast structure
@@ -165,26 +162,25 @@ typedef struct s_texture
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	width;
-	double	height;
-
-	int		motion_ns;
-	int		motion_ew;
-	int		motion_rot;
-
-	char	dir;
-	char	**map;	// maybe put it in another struct
-
-	t_data	*data;
-	t_mlx	*m;
-
 	t_texture	text[MAX_TEXTURES];
+	t_data		*data;
+	t_mlx		*m;
+
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		width;
+	double		height;
+
+	int			motion_ns;
+	int			motion_ew;
+	int			motion_rot;
+
+	char		dir;
+	char		**map;
 }				t_player;
 
 typedef struct s_initial_dir
