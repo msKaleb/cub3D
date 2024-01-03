@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 12:04:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:18:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@
 # define DEFAULT_FLOOR	0x92745B
 # define DEFAULT_X 		640.0
 # define DEFAULT_Y 		480.0
-# define MOVE_SPEED		0.2
-# define ROTATION_SPEED	0.15
+# define MOVE_SPEED		0.07
+# define ROTATION_SPEED	0.03
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -172,6 +172,10 @@ int		err_file(char *file);
 int		err_mlx(void);
 int		key_hook(int key_code, t_mlx *m);
 int		close_mlx(t_mlx *m);
+int		has_to_move(int key_code);
+int		render_frame(t_mlx *m);
+int		set_motion(int key_code, t_mlx *m);
+int		release_motion(int key_code, t_mlx *m);
 
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	init_mlx(t_mlx *m);
@@ -179,10 +183,8 @@ void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 
 void	init_player(t_player *player);
-void	move_player(t_mlx *m, int key_code);
-void	rotate_player(t_mlx *m, int key_code);
-int		has_to_move(int key_code);
-
+void	move_player(t_mlx *m);
+void	rotate_player(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
 
 /**
