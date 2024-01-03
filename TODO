@@ -8,3 +8,4 @@
 
 -en la función key_hook() meter las lineas mlx_destroy_image, mlx_new_image y mlx_put_image_to_window 
 	fuera de la condición, porque es redundante; en lugar de pulsaciones de tecla, mantener pulsada
+-Check si los pasos de texturas son valiabres (existe, tiene perimso?)
