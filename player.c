@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 15:59:08 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:02:52 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	validate_pos(t_player *player, double next_x, double next_y)
 {
-	if (player->map[(int)next_y][(int)next_x] == '0')
+	if (player->map[(int)next_y][(int)next_x] == 'F')
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
