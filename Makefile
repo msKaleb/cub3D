@@ -60,8 +60,10 @@ LIBFT	=	libft/libft.a
 ifeq ($(OS), Linux)
 # Linux
 	ECHO = echo -e
-	CCOBJ = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	CCOBJ = -Wall -Wextra -Werror -I/usr/include -I./minilibx_linux -O3 -c $< -o $@
+#	CCOBJ = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+#	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 	MLXDIR = minilibx_linux/
 	MLX = $(MLXDIR)libmlx_Linux.a
 else ifeq ($(OS), Darwin)
@@ -109,7 +111,7 @@ pre-build-bonus:
 	 		$(CC) $(CCOBJ) -g -O0
 
 $(NAME):	pre-build $(OBJ) $(OBJ_M)
-			$(CC) $(FLAGS) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
