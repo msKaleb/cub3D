@@ -189,10 +189,10 @@ int	get_rgb(char *str)
 int	obtain_path(t_data **data, char *line, t_raycast **ray)
 {
 	int	i;
-	int	colour;
+	// int	colour;
 
 	i = 0;
-	colour = 0;
+	// colour = 0;
 	//move to the next line if there is only '\n'
 	if (!line || (line[i] && line[i] == 10))
 		return (1);
