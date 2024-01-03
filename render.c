@@ -34,9 +34,9 @@ void	print_line(t_raycast *ray, t_mlx *m, int x)
 	while (y < ray->line_first_px)
 		print_pixel(m, (t_point){x, y++}, DEFAULT_SKY);
 	// print the line
-	while (y <= ray->line_last_px)
+	while (y < ray->line_last_px)
 		print_pixel(m, (t_point){x, y++}, color);
 	// print the floor
-	while (y <= DEFAULT_Y)
+	while (y < DEFAULT_Y)
 		print_pixel(m, (t_point){x, y++}, DEFAULT_FLOOR);
 }

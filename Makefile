@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/02 16:28:22 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/03 11:13:02 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ else ifeq ($(OS), Darwin)
 # Add -g -O0 in CCOBJ for debugging
 	ECHO = echo
 	CCOBJ = -Wall -Wextra -Werror -Imlx -c $< -o $@
-	FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	FLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit
 	MLXDIR = minilibx_opengl/
 	MLX = $(MLXDIR)libmlx.a
 endif
