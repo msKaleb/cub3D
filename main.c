@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 11:30:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:19:23 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ int	main(int argc, char *argv[])
 	t_mlx		m;
 	// t_raycast	ray;
 	int			fd;
+	char		**map;
 
-	(void)data;
-
+	init_data(&data);
 	if (argc < 2)
 		return (err_arg_number());
+	if (check_file_format(argv[1]) == -1)
+		return (err_arg_number());//error incorrect file format 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (err_file(argv[1]));

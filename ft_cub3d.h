@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 12:04:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:12:19 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,34 @@ typedef struct s_point
 /**
 * @brief obtain data in general (main structure)
 */
+// typedef struct s_data
+// {
+// 	int		num_rows;
+// 	int		num_cols;
+// 	int		num_person;
+// 	t_point	pt_person;
+// }				t_data;
+/**
+* @brief obtain data in general (main structure)
+* @param tex_path[0]: noth
+* @param tex_path[1]: south
+* @param tex_path[2]: west
+* @param tex_path[3]: east
+*/
 typedef struct s_data
 {
-	int		num_rows;
-	int		num_cols;
+	t_point	map_size;
+	// int		num_rows;
+	// int		num_cols;
 	int		num_person;
+	int		pos_map;
 	t_point	pt_person;
-}				t_data;
+	int		dir_person;
+	char	*tex_path[4];
+	int		floor_col;
+	int		ceiling_col;
+}	t_data;
+
 
 /**
  * @brief raycast structure
