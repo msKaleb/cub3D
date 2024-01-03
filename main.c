@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 15:58:59 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:47:34 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init_raycast(t_raycast *ray)
 	ray->line_height = 0;
 	ray->is_wall = 0;
 	ray->side = 0;
+	ray->ceiling_col = -1;
+	ray->floor_col = -1;
 }
 
 int	test(int key_code, t_mlx *m)
@@ -89,9 +91,8 @@ int	main(int argc, char *argv[])
 	// 		"1111111111111111111"
 	// 	};
 		// t_player	mikel;
-	m.player.map = parser(argv[1], &data);
-	printf("Line: %d\n", __LINE__);
 	init_raycast(&m.ray);
+	m.player.map = parser(argv[1], &data, &m.ray);
 	m.player.dir = data.dir_person; // make it point westward, change to the character on the map
 	init_player(&m.player, &data);
 	raycast(&m.ray, &m.player, &m);
@@ -107,4 +108,3 @@ int	main(int argc, char *argv[])
 	// free_2dimension(map);
 	return(0);
 }
-

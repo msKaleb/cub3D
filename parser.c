@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/03 15:54:42 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:59:56 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	count_cols(t_data **data, char *line)
 /**
  *@note check before start the main map
   */
-int	check_paths(t_data *data)
+int	check_paths(t_data *data, t_raycast *ray)
 {
 	int	i;
 
@@ -116,14 +116,14 @@ int	check_paths(t_data *data)
 	{
 		if (data->tex_path[i] == NULL)
 		{
-			printf("%sI don't have enough texture%s\n", GREEN, RESET);
+			// printf("%sI don't have enough texture%s\n", GREEN, RESET);
 			return (0);
 		}
 		i++;
 	}
-	if (data->ceiling_col == -1 || data->floor_col == -1)
+	if (ray->ceiling_col == -1 || ray->floor_col == -1)
 	{
-		printf("%sI don't have enough colour%s\n", GREEN, RESET);
+		// printf("%sI don't have enough colour%s\n", GREEN, RESET);
 		return (0);
 	}
 	return (1);
@@ -182,11 +182,11 @@ int	get_rgb(char *str)
 	if (!is_brank(&str[pos[0]]))
 		return (printf("I have more than I should have\n"), -1);//error OR we can put 0 instead of return error
 	ret = (colour[0] << 16) + (colour[1] << 8) + (colour[2]);
-	printf("ret: %d\n", ret);
+	// printf("ret: %d\n", ret);
 	return (ret);
 }
 
-int	obtain_path(t_data **data, char *line)
+int	obtain_path(t_data **data, char *line, t_raycast **ray)
 {
 	int	i;
 	int	colour;
@@ -208,13 +208,13 @@ int	obtain_path(t_data **data, char *line)
 	else if (!ft_strncmp(&line[i], "EA ", 3))
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "F ", 2))
-		return ((*data)->floor_col = get_rgb(line + (i + 2)));
+		return ((*ray)->floor_col = get_rgb(line + (i + 2)));
 	else if (!ft_strncmp(&line[i], "C ", 2))
-		return ((*data)->ceiling_col = get_rgb(line + (i + 2)));
+		return ((*ray)->ceiling_col = get_rgb(line + (i + 2)));
 	return (-1);
 }
 
-int	check_map(t_data **data, char *map_name)
+int	check_map(t_data **data, char *map_name, t_raycast **ray)
 {
 	char	*line;
 	int		fd;
@@ -228,7 +228,7 @@ int	check_map(t_data **data, char *map_name)
 	while (line != NULL)
 	{
 		// printf("%s", line);
-		if (check_paths(*data) && !is_brank(line))
+		if (check_paths(*data, *ray) && !is_brank(line))
 		{
 			if (!(*data)->pos_map)
 				(*data)->pos_map = i;
@@ -237,7 +237,7 @@ int	check_map(t_data **data, char *map_name)
 			(*data)->map_size.y++;
 		}
 		else
-			if (obtain_path(data, line) == -1)
+			if (obtain_path(data, line, ray) == -1)
 				return (close(fd), free (line), -1);//error path incorrect
 		free(line);
 		line = get_next_line(fd);
@@ -296,9 +296,11 @@ void	init_data(t_data **data)
 	{
 		(*data)->tex_path[i] = NULL;
 	}
-	(*data)->ceiling_col = -1;
-	(*data)->floor_col = -1;
 	(*data)->pos_map = 0;
+	(*data)->map_size.x = 0;
+	(*data)->map_size.y = 0;
+	(*data)->pt_person.x = 0;
+	(*data)->pt_person.y = 0;
 }
 
 char	**obtain_map(t_data **data, int fd)
@@ -330,19 +332,14 @@ char	**obtain_map(t_data **data, int fd)
 	return (ret);
 }
 
-char	**parser(char *map_name, t_data *data)
+char	**parser(char *map_name, t_data *data, t_raycast *ray)
 {
 	char	**tab;
-	// char 	*str;
 	int		fd;
 
-/**
- * @note check! if the initialization works well. If so, remove init_data
-  */
 	init_data(&data);
 	fd = 0;
-	printf("Line: %d\n", __LINE__);
-	if (check_map(&data, map_name) == -1)
+	if (check_map(&data, map_name, &ray) == -1)
 		return (NULL);
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)

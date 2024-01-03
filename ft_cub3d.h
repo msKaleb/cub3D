@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 16:00:26 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:44:33 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ typedef struct s_data
 	t_point	pt_person;
 	char	dir_person;
 	char	*tex_path[4];
-	int		floor_col;
-	int		ceiling_col;
+	// int		floor_col;
+	// int		ceiling_col;
 }	t_data;
 
 
@@ -146,6 +146,8 @@ typedef struct s_raycast
 	int		side;
 	int		line_first_px;
 	int		line_last_px;
+	int		floor_col;
+	int		ceiling_col;
 }				t_raycast;
 
 // the FOV is 2 * atan(0.66/1.0)=66°
@@ -213,7 +215,7 @@ void	*free_2dimension(char **strs);//function name??
 /**
  * @brief parser
   */
-char	**parser(char *map_name, t_data *data);
+char	**parser(char *map_name, t_data *data, t_raycast *ray);
 void	init_data(t_data **data);
 int		check_file_format(char *str);
 
