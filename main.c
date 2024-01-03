@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 16:47:34 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 17:10:41 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	main(int argc, char *argv[])
 		// t_player	mikel;
 	init_raycast(&m.ray);
 	m.player.map = parser(argv[1], &data, &m.ray);
+	if (!m.player.map)
+		return (1);
 	m.player.dir = data.dir_person; // make it point westward, change to the character on the map
 	init_player(&m.player, &data);
 	raycast(&m.ray, &m.player, &m);
