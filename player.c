@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 15:25:33 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:59:08 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_player(t_player *player, t_data *data)
 	player->height = (double)data->map_size.y;
 }
 
-int	has_to_move(int key_code)
+/* int	has_to_move(int key_code)
 {
 	long	*keys;
 	int		i;
@@ -62,32 +62,28 @@ int	has_to_move(int key_code)
 		if (key_code == keys[i])
 			return (1);
 	return (0);
-}
+} */
 
-void	move_player(t_mlx *m, int key_code)
+void	move_player(t_mlx *m/* , int key_code */)
 {
 	double	next_x;
 	double	next_y;
 
-	if (key_code == XK_W)
+	next_x = m->player.pos_x;
+	next_y = m->player.pos_y;
+	if (m->player.motion_ns != 0)
 	{
-		next_x = m->player.pos_x + m->player.dir_x * MOVE_SPEED;
-		next_y = m->player.pos_y + m->player.dir_y * MOVE_SPEED;
+		next_x = m->player.pos_x + m->player.dir_x
+			* (MOVE_SPEED * m->player.motion_ns);
+		next_y = m->player.pos_y + m->player.dir_y
+			* (MOVE_SPEED * m->player.motion_ns);
 	}
-	if (key_code == XK_S)
+	if (m->player.motion_ew != 0)
 	{
-		next_x = m->player.pos_x - m->player.dir_x * MOVE_SPEED;
-		next_y = m->player.pos_y - m->player.dir_y * MOVE_SPEED;
-	}
-	if (key_code == XK_A)
-	{
-		next_x = m->player.pos_x + m->player.dir_y * MOVE_SPEED;
-		next_y = m->player.pos_y - m->player.dir_x * MOVE_SPEED;
-	}
-	if (key_code == XK_D)
-	{
-		next_x = m->player.pos_x - m->player.dir_y * MOVE_SPEED;
-		next_y = m->player.pos_y + m->player.dir_x * MOVE_SPEED;
+		next_x = m->player.pos_x + m->player.dir_y
+			* (MOVE_SPEED * m->player.motion_ew / 2);
+		next_y = m->player.pos_y + m->player.dir_x
+			* (MOVE_SPEED * -m->player.motion_ew / 2);
 	}
 	validate_pos(&m->player, next_x, next_y);
 }
@@ -95,16 +91,21 @@ void	move_player(t_mlx *m, int key_code)
 // rotation matrix:
 // [ cos(a) -sin(a) ]
 // [ sin(a)  cos(a) ]
-void	rotate_player(t_mlx *m, int key_code)
+void	rotate_player(t_mlx *m)
 {
 	double	dir_x;
 	double	plane_x;
-	double	rot;
-	int		dir;
 
 	dir_x = m->player.dir_x;
 	plane_x = m->player.plane_x;
-	if (key_code == XK_LEFT)
+	if (m->player.motion_rot != 0)
+	{
+		m->player.dir_x = dir_x * cos(ROTATION_SPEED * m->player.motion_rot) - m->player.dir_y * sin(ROTATION_SPEED * m->player.motion_rot);
+		m->player.dir_y = dir_x * sin(ROTATION_SPEED * m->player.motion_rot) + m->player.dir_y * cos(ROTATION_SPEED * m->player.motion_rot);
+		m->player.plane_x = plane_x * cos(ROTATION_SPEED * m->player.motion_rot) - m->player.plane_y * sin(ROTATION_SPEED * m->player.motion_rot);
+		m->player.plane_y = plane_x * sin(ROTATION_SPEED * m->player.motion_rot) + m->player.plane_y * cos(ROTATION_SPEED * m->player.motion_rot);
+	}
+	/* if (key_code == XK_LEFT)
 		dir = -1;
 	else if (key_code == XK_RIGHT)
 		dir = 1;
@@ -114,21 +115,42 @@ void	rotate_player(t_mlx *m, int key_code)
 	m->player.dir_x = dir_x * cos(rot) - m->player.dir_y * sin(rot);
 	m->player.dir_y = dir_x * sin(rot) + m->player.dir_y * cos(rot);
 	m->player.plane_x = plane_x * cos(rot) - m->player.plane_y * sin(rot);
-	m->player.plane_y = plane_x * sin(rot) + m->player.plane_y * cos(rot);
+	m->player.plane_y = plane_x * sin(rot) + m->player.plane_y * cos(rot); */
 }
 
-void	set_motion(t_mlx *m, int key_code)
+int		set_motion(int key_code, t_mlx *m)
 {
+	if (key_code == XK_ESCAPE)
+		close_mlx(m);
 	if (key_code == XK_W)
 		m->player.motion_ns = 1;
 	else if (key_code == XK_S)
 		m->player.motion_ns = -1;
 	else if (key_code == XK_A)
-		m->player.motion_ew = -1;
-	else if (key_code == XK_S)
 		m->player.motion_ew = 1;
+	else if (key_code == XK_D)
+		m->player.motion_ew = -1;
 	else if (key_code == XK_LEFT)
 		m->player.motion_rot = -1;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot= 1;
+	render_frame(m);
+	return (0);
+}
+
+int	release_motion(int key_code, t_mlx *m)
+{
+	if (key_code == XK_W)
+		m->player.motion_ns = 0;
+	else if (key_code == XK_S)
+		m->player.motion_ns = -0;
+	else if (key_code == XK_A)
+		m->player.motion_ew = -0;
+	else if (key_code == XK_D)
+		m->player.motion_ew = 0;
+	else if (key_code == XK_LEFT)
+		m->player.motion_rot = -0;
+	else if (key_code == XK_RIGHT)
+		m->player.motion_rot= 0;
+	return (0);
 }
