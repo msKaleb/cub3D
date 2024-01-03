@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/02 19:00:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:06:43 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	validate_pos(t_player *player, double next_x, double next_y)
 
 /**
  * @brief initialize the struct with parameters from the map
- * @note why do I have to add .5 to pos_x/y???
+ * @note add .5 to the position to place it in the center of the tile
  * @todo change pos_x/y to the values on the map, now is for testing
   */
 void	init_player(t_player *player)
@@ -44,6 +44,9 @@ void	init_player(t_player *player)
 	player->dir_y = 0 + dir.orientation[1];
 	player->plane_x = 0.66 * dir.orientation[2];
 	player->plane_y = 0.66 * dir.orientation[3];
+	player->motion_ns = 0;
+	player->motion_ew = 0;
+	player->motion_rot = 0;
 }
 
 int	has_to_move(int key_code)
@@ -110,4 +113,20 @@ void	rotate_player(t_mlx *m, int key_code)
 	m->player.dir_y = dir_x * sin(rot) + m->player.dir_y * cos(rot);
 	m->player.plane_x = plane_x * cos(rot) - m->player.plane_y * sin(rot);
 	m->player.plane_y = plane_x * sin(rot) + m->player.plane_y * cos(rot);
+}
+
+void	set_motion(t_mlx *m, int key_code)
+{
+	if (key_code == XK_W)
+		m->player.motion_ns = 1;
+	else if (key_code == XK_S)
+		m->player.motion_ns = -1;
+	else if (key_code == XK_A)
+		m->player.motion_ew = -1;
+	else if (key_code == XK_S)
+		m->player.motion_ew = 1;
+	else if (key_code == XK_LEFT)
+		m->player.motion_rot = -1;
+	else if (key_code == XK_RIGHT)
+		m->player.motion_rot= 1;
 }

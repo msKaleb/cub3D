@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/02 18:48:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:04:02 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+
+	int		motion_ns;
+	int		motion_ew;
+	int		motion_rot;
 
 	char	dir;
 	char	**map;	// maybe put it in another struct
