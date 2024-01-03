@@ -7,10 +7,8 @@ static void	set_ray_values(t_raycast *ray, t_player *player, int x)
 	ray->dir_y = player->dir_y + player->plane_y * ray->cam_x;
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->delta_x = fabs(1 / ray->dir_x); // zero division?
+	ray->delta_x = fabs(1 / ray->dir_x);
 	ray->delta_y = fabs(1 / ray->dir_y);
-	/* if (ray->dir_y == 0 || ray->dir_x == 0)
-		printf("zero_division\n"); */
 }
 
 /**
@@ -55,35 +53,28 @@ static void	dda(t_raycast *ray, t_player *player)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (player->map[ray->map_y][ray->map_x] == '1') {
-			ray->is_wall = 1;
-			// printf("is wall [%d][%d]\n", ray->map_y, ray->map_x);
-			// ray->side == 0 ? printf("side EW\n") : printf("side NS\n");
-		} // map_y = rows, map_x = columns
-		/* else
-			printf("is NOT wall [%d][%d]\n", ray->map_y, ray->map_x); */
-		// ray->is_wall = player->map[ray->map_y][ray->map_x] + '0';
+		ray->is_wall = player->map[ray->map_y][ray->map_x] - '0';
 	}
 	ray->is_wall = 0;
 }
 
+/**
+ * @brief since we are printing screen_width lines (e.g. 480),
+ * we need to get how long is each wall
+  */
 static void	get_line_height(t_raycast *ray)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = ray->side_x - ray->delta_x;
 	else
 		ray->perp_wall_dist = ray->side_y - ray->delta_y;
-	/* printf("wall_dist: %f | sidedist_x: %f | deltadist_x: %f\n", 
-		ray->perp_wall_dist, ray->side_x, ray->delta_x); */
 	ray->line_height = (int)(DEFAULT_Y / ray->perp_wall_dist);
 	ray->line_first_px = DEFAULT_Y / 2 - ray->line_height / 2;
-	// ray->line_first_px = -(ray->line_height) / 2 + DEFAULT_Y / 2;
 	if (ray->line_first_px < 0 || ray->line_first_px > DEFAULT_Y)
 		ray->line_first_px = 0;
 	ray->line_last_px = DEFAULT_Y / 2 + ray->line_height / 2;
-	// ray->line_last_px = ray->line_height / 2 + DEFAULT_Y / 2;
 	if (ray->line_last_px > DEFAULT_Y || ray->line_last_px < 0)
-		ray->line_last_px = DEFAULT_Y/*  - 1 */;
+		ray->line_last_px = DEFAULT_Y;
 }
 
 /**
@@ -92,7 +83,7 @@ static void	get_line_height(t_raycast *ray)
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m)
 {
 	int	x;
-	(void)m;
+
 	x = -1;
 	while (++x < DEFAULT_X)
 	{
