@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 17:10:41 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 18:31:04 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,64 +43,20 @@ int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_mlx		m;
-	// t_raycast	ray;
-	int			fd = 0;
-	// char		**map;
 
-	// init_data(&data);
 	if (argc < 2)
 		return (err_arg_number());
 	if (check_file_format(argv[1]) == -1)
 		return (err_arg_number());//error incorrect file format 
-	//
-	//
-	// fd = open(argv[1], O_RDONLY);
-	// if (fd == -1)
-	// 	return (err_file(argv[1]));
-	//
-	//
-	/* parser */
-	// map = parser(argv[1], &data);	
-	// for (int i = 0; map[i]; i++)
-	// 	printf("%s", map[i]);
-
 	init_mlx(&m);
-	// testing....
-	// {
-	// 	// 1111111111111111111
-	// 	// 1001001001001000001
-	// 	// 1011000001000001001
-	// 	// 1001001001111101111
-	// 	// 1001111000001001001
-	// 	// 1000000000000001001
-	// 	// 1001111111111001001
-	// 	// 1111000000000001011
-	// 	// 10000000010000000W1
-	// 	// 1111111111111111111
-	// 	// init on [8][17]
-	// 	char	*test_map[10] = {
-	// 		"1111111111111111111",
-	// 		"1001001001001000001",
-	// 		"1011000001000001001",
-	// 		"1001001001111101111",
-	// 		"1001111000001001001",
-	// 		"1000000000000001001",
-	// 		"1001111111111001001",
-	// 		"1111000000000001011",
-	// 		"1000000001000000001",
-	// 		"1111111111111111111"
-	// 	};
-		// t_player	mikel;
 	init_raycast(&m.ray);
 	m.player.map = parser(argv[1], &data, &m.ray);
 	if (!m.player.map)
 		return (1);
-	m.player.dir = data.dir_person; // make it point westward, change to the character on the map
-	init_player(&m.player, &data);
+	m.player.dir = data.dir_person;
+	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
-	// testing....
 
-	close(fd);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &set_motion, &m);
 	mlx_hook(m.win, ON_KEYUP, (1L<<1), &release_motion, &m);

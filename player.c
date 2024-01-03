@@ -6,11 +6,28 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 16:07:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 18:44:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
+
+void	load_textures(t_texture *text, t_mlx *m, t_data *data)
+{
+	(void)data;
+	int	i;
+
+	i = -1;
+	while (++i < MAX_TEXTURES)
+	{
+		text[i].texture = mlx_xpm_file_to_image(m->mlx, ft_strtrim(data->tex_path[i], "\n"),
+			&text[i].text_w, &text[i].text_h);
+		if (!text[i].texture)
+			exit(printf("kaka"));
+		text[i].text_addr = mlx_get_data_addr(text[i].texture,
+			&text[i].bpp, &text[i].size_line, &text[i].endian);
+	}
+}
 
 static void	validate_pos(t_player *player, double next_x, double next_y)
 {
@@ -26,7 +43,7 @@ static void	validate_pos(t_player *player, double next_x, double next_y)
  * @note add .5 to the position to place it in the center of the tile
  * @todo change pos_x/y to the values on the map, now is for testing
   */
-void	init_player(t_player *player, t_data *data)
+void	init_player(t_player *player, t_data *data, t_mlx *m)
 {
 	t_initial_dir	dir;
 
@@ -49,6 +66,7 @@ void	init_player(t_player *player, t_data *data)
 	player->motion_rot = 0;
 	player->width = (double)data->map_size.x;
 	player->height = (double)data->map_size.y;
+	load_textures(player->text, m, data);
 }
 
 /* int	has_to_move(int key_code)

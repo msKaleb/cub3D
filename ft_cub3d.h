@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 16:44:33 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 18:28:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define DEFAULT_Y 		480.0
 # define MOVE_SPEED		0.07
 # define ROTATION_SPEED	0.03
+# define MAX_TEXTURES	4
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN		2
@@ -74,6 +75,7 @@
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
 
+typedef struct s_mlx t_mlx;
 
 typedef struct s_point
 {
@@ -150,6 +152,16 @@ typedef struct s_raycast
 	int		ceiling_col;
 }				t_raycast;
 
+typedef struct s_texture
+{
+	void	*texture;
+	void	*text_addr;
+	int		text_w;
+	int		text_h;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}				t_texture;
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
@@ -168,6 +180,11 @@ typedef struct s_player
 
 	char	dir;
 	char	**map;	// maybe put it in another struct
+
+	t_data	*data;
+	t_mlx	*m;
+
+	t_texture	text[MAX_TEXTURES];
 }				t_player;
 
 typedef struct s_initial_dir
@@ -207,7 +224,7 @@ void	init_mlx(t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 
-void	init_player(t_player *player, t_data *data);
+void	init_player(t_player *player, t_data *data, t_mlx *m);
 void	move_player(t_mlx *m);
 void	rotate_player(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
