@@ -53,7 +53,8 @@ static void	dda(t_raycast *ray, t_player *player)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		ray->is_wall = player->map[ray->map_y][ray->map_x] - '0';
+		if (player->map[ray->map_y][ray->map_x] == '1')
+			ray->is_wall = 1;
 	}
 	ray->is_wall = 0;
 }

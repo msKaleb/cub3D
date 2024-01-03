@@ -54,3 +54,4 @@ dkms.conf
 cub3D
 .vscode*
 *.bak
+.DS_Store
