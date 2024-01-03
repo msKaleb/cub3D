@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 14:12:19 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:44:49 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_data
 	int		num_person;
 	int		pos_map;
 	t_point	pt_person;
-	int		dir_person;
+	char	dir_person;
 	char	*tex_path[4];
 	int		floor_col;
 	int		ceiling_col;
@@ -157,6 +157,8 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	double	width;
+	double	height;
 
 	int		motion_ns;
 	int		motion_ew;
@@ -199,7 +201,7 @@ void	init_mlx(t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 
-void	init_player(t_player *player);
+void	init_player(t_player *player, t_data *data);
 void	move_player(t_mlx *m, int key_code);
 void	rotate_player(t_mlx *m, int key_code);
 int		has_to_move(int key_code);
@@ -210,6 +212,8 @@ void	*free_2dimension(char **strs);//function name??
  * @brief parser
   */
 char	**parser(char *map_name, t_data *data);
+void	init_data(t_data **data);
+int		check_file_format(char *str);
 
 /**
  * @brief flood_fill

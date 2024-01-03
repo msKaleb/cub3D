@@ -6,50 +6,45 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/03 14:07:56 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:54:42 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft_cub3d.h"
+#include "ft_cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include "colors.h"
 
-#include "libft/libft.h"//for test
+// #include "libft/libft.h"//for test
 
-# define GREEN			"\033[32m"				/* Green */
-# define RED			"\033[31m"				/* Red */
-# define RESET			"\033[0m"
+// typedef struct	s_point
+// {
+// 	int			x;
+// 	int			y;
+// }				t_point;
 
+// void	flood_fill(char **tab, t_point size, t_point begin);
 
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
-
-void	flood_fill(char **tab, t_point size, t_point begin);
-
-/**
-* @brief obtain data in general (main structure)
-* @param tex_path[0]: noth
-* @param tex_path[1]: south
-* @param tex_path[2]: west
-* @param tex_path[3]: east
-*/
-typedef struct s_data
-{
-	t_point	map_size;
-	// int		num_rows;
-	// int		num_cols;
-	int		num_person;
-	int		pos_map;
-	t_point	pt_person;
-	int		dir_person;
-	char	*tex_path[4];
-	int		floor_col;
-	int		ceiling_col;
-}	t_data;
+// /**
+// * @brief obtain data in general (main structure)
+// * @param tex_path[0]: noth
+// * @param tex_path[1]: south
+// * @param tex_path[2]: west
+// * @param tex_path[3]: east
+// */
+// typedef struct s_data
+// {
+// 	t_point	map_size;
+// 	// int		num_rows;
+// 	// int		num_cols;
+// 	int		num_person;
+// 	int		pos_map;
+// 	t_point	pt_person;
+// 	int		dir_person;
+// 	char	*tex_path[4];
+// 	int		floor_col;
+// 	int		ceiling_col;
+// }	t_data;
 
 int	check_file_format(char *str)
 {
@@ -94,7 +89,7 @@ int	count_cols(t_data **data, char *line)
 			(*data)->num_person++;
 			(*data)->pt_person.x = i;
 			(*data)->pt_person.y = (*data)->map_size.y;
-			(*data)->dir_person = get_direction(line[i]);
+			(*data)->dir_person = line[i];
 		}
 		else if (line[i] && line[i] != '0' && line[i] != '1' && line[i] != 32 && line[i] != 10)
 		{
@@ -303,6 +298,7 @@ void	init_data(t_data **data)
 	}
 	(*data)->ceiling_col = -1;
 	(*data)->floor_col = -1;
+	(*data)->pos_map = 0;
 }
 
 char	**obtain_map(t_data **data, int fd)
@@ -337,7 +333,7 @@ char	**obtain_map(t_data **data, int fd)
 char	**parser(char *map_name, t_data *data)
 {
 	char	**tab;
-	char 	*str;
+	// char 	*str;
 	int		fd;
 
 /**
@@ -345,6 +341,7 @@ char	**parser(char *map_name, t_data *data)
   */
 	init_data(&data);
 	fd = 0;
+	printf("Line: %d\n", __LINE__);
 	if (check_map(&data, map_name) == -1)
 		return (NULL);
 	fd = open(map_name, O_RDONLY);
@@ -361,35 +358,35 @@ char	**parser(char *map_name, t_data *data)
 
 
 
-int	main(int ac, char **argv)
-{
-	t_data	data;
-	int		fd;
+// int	main(int ac, char **argv)
+// {
+// 	t_data	data;
+// 	int		fd;
 
-	ft_bzero(&data, 1 * sizeof(t_data));
-	fd = 0;
-	if (ac != 2)
-	{
-		printf("bad argument\n");
-		return (-1);//error bad argument
-	}
-	//check format;
-	if (check_file_format(argv[1]) == -1)
-		return (-2);//error incorrect file format 
-		/* parser */
-	char	**map;
-	map = parser(argv[1], &data);
-	if (!map)
-	{
-		//free
-		printf("failed parser\n");
-		return(1);//
-	}
-	printf("output after parser\n");
-	for (int i = 0; map[i]; i++)
-		printf("%s", map[i]);
-	/*  */
+// 	ft_bzero(&data, 1 * sizeof(t_data));
+// 	fd = 0;
+// 	if (ac != 2)
+// 	{
+// 		printf("bad argument\n");
+// 		return (-1);//error bad argument
+// 	}
+// 	//check format;
+// 	if (check_file_format(argv[1]) == -1)
+// 		return (-2);//error incorrect file format 
+// 		/* parser */
+// 	char	**map;
+// 	map = parser(argv[1], &data);
+// 	if (!map)
+// 	{
+// 		//free
+// 		printf("failed parser\n");
+// 		return(1);//
+// 	}
+// 	printf("output after parser\n");
+// 	for (int i = 0; map[i]; i++)
+// 		printf("%s", map[i]);
+// 	/*  */
 
-	printf("\ndone all lines in main\n");
-	return (0);
-}
+// 	printf("\ndone all lines in main\n");
+// 	return (0);
+// }

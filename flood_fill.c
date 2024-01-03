@@ -1,15 +1,10 @@
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
+#include "ft_cub3d.h"
 
 void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
 		|| tab[cur.y][cur.x] != to_fill)
 		return;
-
 	tab[cur.y][cur.x] = 'F';
 	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
 	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);

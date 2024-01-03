@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/03 11:13:02 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/03 15:28:41 by nimai            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC		=	errors.c \
 			render.c \
 			raycast.c \
 			player.c \
-			# parser.c \
+			parser.c \
 			
 MAIN_B	=	main_bonus.c
 

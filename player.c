@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 12:06:43 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:25:33 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	validate_pos(t_player *player, double next_x, double next_y)
  * @note add .5 to the position to place it in the center of the tile
  * @todo change pos_x/y to the values on the map, now is for testing
   */
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_data *data)
 {
 	t_initial_dir	dir;
 
@@ -38,8 +38,8 @@ void	init_player(t_player *player)
 		dir = (t_initial_dir){{-1, 0, 0, -1}};
 	else if (player->dir == 'E')
 		dir = (t_initial_dir){{1, 0, 0, 1}};
-	player->pos_x = 17.5;
-	player->pos_y = 8.5;
+	player->pos_x = (double)data->pt_person.x + 0.5;
+	player->pos_y = (double)data->pt_person.y + 0.5;
 	player->dir_x = 0 + dir.orientation[0];
 	player->dir_y = 0 + dir.orientation[1];
 	player->plane_x = 0.66 * dir.orientation[2];
@@ -47,6 +47,8 @@ void	init_player(t_player *player)
 	player->motion_ns = 0;
 	player->motion_ew = 0;
 	player->motion_rot = 0;
+	player->width = (double)data->map_size.x;
+	player->height = (double)data->map_size.y;
 }
 
 int	has_to_move(int key_code)

@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 14:19:23 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:46:05 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,21 @@ int	main(int argc, char *argv[])
 	t_data		data;
 	t_mlx		m;
 	// t_raycast	ray;
-	int			fd;
-	char		**map;
+	int			fd = 0;
+	// char		**map;
 
-	init_data(&data);
+	// init_data(&data);
 	if (argc < 2)
 		return (err_arg_number());
 	if (check_file_format(argv[1]) == -1)
 		return (err_arg_number());//error incorrect file format 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (err_file(argv[1]));
+	//
+	//
+	// fd = open(argv[1], O_RDONLY);
+	// if (fd == -1)
+	// 	return (err_file(argv[1]));
+	//
+	//
 	/* parser */
 	// map = parser(argv[1], &data);	
 	// for (int i = 0; map[i]; i++)
@@ -60,37 +64,37 @@ int	main(int argc, char *argv[])
 
 	init_mlx(&m);
 	// testing....
-	{
-		// 1111111111111111111
-		// 1001001001001000001
-		// 1011000001000001001
-		// 1001001001111101111
-		// 1001111000001001001
-		// 1000000000000001001
-		// 1001111111111001001
-		// 1111000000000001011
-		// 10000000010000000W1
-		// 1111111111111111111
-		// init on [8][17]
-		char	*test_map[10] = {
-			"1111111111111111111",
-			"1001001001001000001",
-			"1011000001000001001",
-			"1001001001111101111",
-			"1001111000001001001",
-			"1000000000000001001",
-			"1001111111111001001",
-			"1111000000000001011",
-			"1000000001000000001",
-			"1111111111111111111"
-		};
+	// {
+	// 	// 1111111111111111111
+	// 	// 1001001001001000001
+	// 	// 1011000001000001001
+	// 	// 1001001001111101111
+	// 	// 1001111000001001001
+	// 	// 1000000000000001001
+	// 	// 1001111111111001001
+	// 	// 1111000000000001011
+	// 	// 10000000010000000W1
+	// 	// 1111111111111111111
+	// 	// init on [8][17]
+	// 	char	*test_map[10] = {
+	// 		"1111111111111111111",
+	// 		"1001001001001000001",
+	// 		"1011000001000001001",
+	// 		"1001001001111101111",
+	// 		"1001111000001001001",
+	// 		"1000000000000001001",
+	// 		"1001111111111001001",
+	// 		"1111000000000001011",
+	// 		"1000000001000000001",
+	// 		"1111111111111111111"
+	// 	};
 		// t_player	mikel;
-		m.player.map = test_map;
-		init_raycast(&m.ray);
-		m.player.dir = 'W'; // make it point westward, change to the character on the map
-		init_player(&m.player);
-		raycast(&m.ray, &m.player, &m);
-	}
+	m.player.map = parser(argv[1], &data);
+	printf("Line: %d\n", __LINE__);
+	init_raycast(&m.ray);
+	m.player.dir = data.dir_person; // make it point westward, change to the character on the map
+	init_player(&m.player, &data);
+	raycast(&m.ray, &m.player, &m);
 	// testing....
 
 	close(fd);
