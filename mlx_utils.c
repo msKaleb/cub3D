@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 16:07:14 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:48:21 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-/**
- * @todo free the map
-  */
 int	close_mlx(t_mlx *m)
 {
+	free_map(&m->player);
 	mlx_destroy_window(m->mlx, m->win);
 	free(m->mlx);
 	exit(EXIT_SUCCESS);
