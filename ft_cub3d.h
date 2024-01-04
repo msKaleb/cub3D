@@ -107,7 +107,8 @@ typedef struct s_data
 
 	int		num_person;
 	int		pos_map;
-
+	int		floor_col;
+	int		ceiling_col;
 	char	dir_person;
 	char	*tex_path[4];
 }				t_data;
@@ -228,7 +229,7 @@ void	*free_2dimension(char **strs);//function name??
 /**
  * @brief parser
   */
-char	**parser(char *map_name, t_data *data, t_raycast *ray);
+char	**parser(char *map_name, t_data *data);
 void	init_data(t_data **data);
 int		check_file_format(char *str);
 

@@ -107,7 +107,7 @@ int	count_cols(t_data **data, char *line)
 /**
  *@note check before start the main map
   */
-int	check_paths(t_data *data, t_raycast *ray)
+int	check_paths(t_data *data)
 {
 	int	i;
 
@@ -121,7 +121,7 @@ int	check_paths(t_data *data, t_raycast *ray)
 		}
 		i++;
 	}
-	if (ray->ceiling_col == -1 || ray->floor_col == -1)
+	if (data->ceiling_col == -1 || data->floor_col == -1)
 	{
 		// printf("%sI don't have enough colour%s\n", GREEN, RESET);
 		return (0);
@@ -186,7 +186,7 @@ int	get_rgb(char *str)
 	return (ret);
 }
 
-int	obtain_path(t_data **data, char *line, t_raycast **ray)
+int	obtain_path(t_data **data, char *line)
 {
 	int	i;
 	// int	colour;
@@ -208,13 +208,13 @@ int	obtain_path(t_data **data, char *line, t_raycast **ray)
 	else if (!ft_strncmp(&line[i], "EA ", 3))
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "F ", 2))
-		return ((*ray)->floor_col = get_rgb(line + (i + 2)));
+		return ((*data)->floor_col = get_rgb(line + (i + 2)));
 	else if (!ft_strncmp(&line[i], "C ", 2))
-		return ((*ray)->ceiling_col = get_rgb(line + (i + 2)));
+		return ((*data)->ceiling_col = get_rgb(line + (i + 2)));
 	return (-1);
 }
 
-int	check_map(t_data **data, char *map_name, t_raycast **ray)
+int	check_map(t_data **data, char *map_name)
 {
 	char	*line;
 	int		fd;
@@ -227,10 +227,7 @@ int	check_map(t_data **data, char *map_name, t_raycast **ray)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!*line)
-			;
-		// printf("%s", line);
-		else if (check_paths(*data, *ray) && !is_brank(line))
+		if (check_paths(*data) && !is_brank(line))
 		{
 			if (!(*data)->pos_map)
 				(*data)->pos_map = i;
@@ -239,7 +236,7 @@ int	check_map(t_data **data, char *map_name, t_raycast **ray)
 			(*data)->map_size.y++;
 		}
 		else
-			if (obtain_path(data, line, ray) == -1)
+			if (obtain_path(data, line) == -1)
 				return (close(fd), free (line), -1);//error path incorrect
 		free(line);
 		line = get_next_line(fd);
@@ -304,6 +301,8 @@ void	init_data(t_data **data)
 	(*data)->map_size.y = 0;
 	(*data)->pt_person.x = 0;
 	(*data)->pt_person.y = 0;
+	(*data)->ceiling_col = -1;
+	(*data)->floor_col = -1;
 }
 
 char	**obtain_map(t_data **data, int fd)
@@ -335,20 +334,20 @@ char	**obtain_map(t_data **data, int fd)
 	return (ret);
 }
 
-char	**parser(char *map_name, t_data *data, t_raycast *ray)
+char	**parser(char *map_name, t_data *data)
 {
 	char	**tab;
 	int		fd;
 
 	init_data(&data);
 	fd = 0;
-	if (check_map(&data, map_name, &ray) == -1)
+	if (check_map(&data, map_name) == -1)
 		return (NULL);
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 		return (/* free_2dimension(tab) */NULL);//error file open failed
 	tab = obtain_map(&data, fd);
-	if (!tab)
+	if (!tab || !*tab)
 		return (NULL);//error obtain_map failed
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)

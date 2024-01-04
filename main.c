@@ -12,7 +12,7 @@
 
 #include "ft_cub3d.h"
 
-void	init_raycast(t_raycast *ray)
+void	init_raycast(t_raycast *ray, t_data *data)
 {
 	ray->cam_x = 0;
 	ray->dir_x = 0;
@@ -29,8 +29,8 @@ void	init_raycast(t_raycast *ray)
 	ray->line_height = 0;
 	ray->is_wall = 0;
 	ray->side = 0;
-	ray->ceiling_col = -1;
-	ray->floor_col = -1;
+	ray->ceiling_col = data->ceiling_col;
+	ray->floor_col = data->floor_col;
 }
 
 int	test(int key_code, t_mlx *m)
@@ -48,11 +48,11 @@ int	main(int argc, char *argv[])
 		return (err_arg_number());
 	if (check_file_format(argv[1]) == -1)
 		return (err_arg_number());//error incorrect file format 
-	init_mlx(&m);
-	init_raycast(&m.ray);
-	m.player.map = parser(argv[1], &data, &m.ray);
+	m.player.map = parser(argv[1], &data);
 	if (!m.player.map)
 		return (printf("Failed map loading\n"), 1);
+	init_mlx(&m);
+	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
