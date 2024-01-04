@@ -227,8 +227,10 @@ int	check_map(t_data **data, char *map_name, t_raycast **ray)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		if (!*line)
+			;
 		// printf("%s", line);
-		if (check_paths(*data, *ray) && !is_brank(line))
+		else if (check_paths(*data, *ray) && !is_brank(line))
 		{
 			if (!(*data)->pos_map)
 				(*data)->pos_map = i;
