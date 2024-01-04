@@ -27,6 +27,8 @@ void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 		text[i].text_addr = mlx_get_data_addr(text[i].texture,
 			&text[i].bpp, &text[i].size_line, &text[i].endian);
 	}
+	if (i == 4)
+		printf("FINISH load texture\n");
 }
 
 static void	validate_pos(t_player *player, double next_x, double next_y)

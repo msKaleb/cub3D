@@ -154,6 +154,7 @@ typedef struct s_texture
 {
 	void	*texture;
 	void	*text_addr;
+	int		**matrix;
 	int		text_w;
 	int		text_h;
 	int		bpp;

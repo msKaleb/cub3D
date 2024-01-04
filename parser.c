@@ -59,22 +59,6 @@ int	check_file_format(char *str)
 	return (0);
 }
 
-int	get_direction(char c)
-{
-	int	ret;
-
-	ret = 0;
-	if (c == 'N')
-		ret = 0;
-	if (c == 'S')
-		ret = 180;
-	if (c == 'W')
-		ret = 270;
-	if (c == 'E')
-		ret = 90;
-	return (ret);
-}
-
 int	count_cols(t_data **data, char *line)
 {
 	int	i;
@@ -201,12 +185,16 @@ int	obtain_path(t_data **data, char *line)
 		i++;
 	if (!ft_strncmp(&line[i], "NO ", 3))
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
+		// return ((*data)->tex_path[0] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "SO ", 3))
 		return ((*data)->tex_path[1] = ft_strdup(line + (i + 3)), 0);
+		// return ((*data)->tex_path[1] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "WE ", 3))
 		return ((*data)->tex_path[2] = ft_strdup(line + (i + 3)), 0);
+		// return ((*data)->tex_path[2] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "EA ", 3))
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
+		// return ((*data)->tex_path[3] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "F ", 2))
 		return ((*data)->floor_col = get_rgb(line + (i + 2)));
 	else if (!ft_strncmp(&line[i], "C ", 2))
