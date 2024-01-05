@@ -27,15 +27,18 @@ void	print_line(t_raycast *ray, t_mlx *m, int x)
 	int	color;
 
 	y = 0;
-	color = DEFAULT_COLOR;
+	color = DEFAULT_COLOR; // remove this
 	if (ray->side == 1)
 		color = color / 2;
 	// print the ceiling
 	while (y < ray->line_first_px)
 		print_pixel(m, (t_point){x, y++}, ray->ceiling_col);
-	// print the line
-	while (y < ray->line_last_px)
-		print_pixel(m, (t_point){x, y++}, color);
+	// print the line (change this loop for color from get_texel_color)
+	/* while (y < ray->line_last_px)
+		print_pixel(m, (t_point){x, y++}, color); */
+	get_texel_color(m, &m->texture, x);
+	y += ray->line_height;
+	// print_texture_line(first_px, last_px)
 	// print the floor
 	while (y < DEFAULT_Y)
 		print_pixel(m, (t_point){x, y++}, ray->floor_col);

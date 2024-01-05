@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_cub3d.h                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/05 13:54:17 by nimai            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
@@ -161,6 +148,8 @@ typedef struct s_texture
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		text_x_coord;
+	int		text_y_coord;
 }				t_texture;
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
@@ -194,6 +183,7 @@ typedef struct s_initial_dir
 /* minilibx structure */
 typedef struct s_mlx
 {
+	t_texture	texture;
 	t_player	player;
 	t_raycast	ray;
 
@@ -209,9 +199,9 @@ typedef struct s_mlx
 
 /* Functions prototipes */
 int		release_motion(int key_code, t_mlx *m);
-int		set_motion(int key_code, t_mlx *m);
 // int		key_hook(int key_code, t_mlx *m);
 // int		has_to_move(int key_code);
+int		set_motion(int key_code, t_mlx *m);
 int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
@@ -221,15 +211,14 @@ int		err_mlx(void);
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
+void	get_texel_color(t_mlx *m, t_texture *t, int x);
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 void	trim_non_ascii(char **tab, int rows);
-void	texture_calculations(t_mlx *m, t_texture *t);
 void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
 void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
-
 void	*free_2dimension(char **strs);//function name??
 
 /**
