@@ -6,7 +6,7 @@
 #    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/05 13:54:40 by nimai            ###   ########.fr        #
+#    Updated: 2024/01/05 15:37:16 by nimai            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,10 @@ SRC		=	errors.c \
 			utils.c \
 			textures.c \
 			
-MAIN_B	=	main_bonus.c
+MAIN_B	=	main_bonus.c #for now
 
-SRC_B	=
+SRC_B	=	parser_bonus.c \
+			minimap_bonus.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -120,7 +121,7 @@ $(NAME):	pre-build $(OBJ) $(OBJ_M)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
-			$(CC) $(FLAGS) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 			
 clean:

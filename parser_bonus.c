@@ -6,11 +6,11 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 14:05:52 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 15:08:21 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cub3d.h"
+#include "ft_cub3d_bonus.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include "colors.h"
@@ -46,20 +46,7 @@
 // 	int		ceiling_col;
 // }	t_data;
 
-int	check_file_format(char *str)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (ft_strcmp(".cub", str + (len - 4)))
-	{
-		printf("not cub\n");
-		return (-1);
-	}
-	return (0);
-}
-
-void	init_data(t_data **data)
+static void	init_data(t_data **data)
 {
 	int	i;
 
@@ -78,15 +65,16 @@ void	init_data(t_data **data)
 	(*data)->floor_col = -1;
 }
 
-char	**obtain_map(t_data **data, int fd)
+static char	**obtain_map(t_data **data, int fd)
 {
 	int		i[2];
 	char	**ret;
 	char	*str;
 
 	ft_bzero(i, sizeof(int) * 2);
+	(*data)->minimap = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
 	ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
-	if (!ret)
+	if (!ret || !(*data)->minimap)
 		return (NULL);//memory allocation error
 	str = get_next_line(fd);
 	while (str && i[1] < (*data)->map_size.y)
@@ -94,7 +82,8 @@ char	**obtain_map(t_data **data, int fd)
 		if (i[0] >= (*data)->pos_map)
 		{
 			ret[i[1]] = ft_strdup(str);
-			if (!ret[i[1]])
+			(*data)->minimap[i[1]] = ft_strdup(str);
+			if (!ret[i[1]] || !(*data)->minimap[i[1]])
 				return (/* free_2dimension(ret), */ NULL);
 			replace_spaces(&ret[i[1]]);
 			i[1]++;
@@ -107,7 +96,7 @@ char	**obtain_map(t_data **data, int fd)
 	return (ret);
 }
 
-char	**parser(char *map_name, t_data *data)
+char	**parser_bonus(char *map_name, t_data *data)
 {
 	char	**tab;
 	int		fd;
@@ -123,51 +112,18 @@ char	**parser(char *map_name, t_data *data)
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
 		return (NULL);//error obtain_map failed
-	for(int i = 0; tab[i]; i++)
-	{
-		printf("%s", tab[i]);
-	}
-	for(int i = 0; tab[i]; i++)
-	{
-		printf("%s", tab[i]);
-	}
+	// for(int i = 0; tab[i]; i++)
+	// {
+	// 	printf("%s", tab[i]);
+	// }
+	// printf("\n\nfinish write map\n");
+	// for(int i = 0; data->minimap[i]; i++)
+	// {
+	// 	printf("%s", data->minimap[i]);
+	// }
+	// printf("\n\nfinish write map\n");
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET),/* free_2dimension(tab) */NULL);//error
 	return (tab);
 }
-
-
-
-// int	main(int ac, char **argv)
-// {
-// 	t_data	data;
-// 	int		fd;
-
-// 	ft_bzero(&data, 1 * sizeof(t_data));
-// 	fd = 0;
-// 	if (ac != 2)
-// 	{
-// 		printf("bad argument\n");
-// 		return (-1);//error bad argument
-// 	}
-// 	//check format;
-// 	if (check_file_format(argv[1]) == -1)
-// 		return (-2);//error incorrect file format 
-// 		/* parser */
-// 	char	**map;
-// 	map = parser(argv[1], &data);
-// 	if (!map)
-// 	{
-// 		//free
-// 		printf("failed parser\n");
-// 		return(1);//
-// 	}
-// 	printf("output after parser\n");
-// 	for (int i = 0; map[i]; i++)
-// 		printf("%s", map[i]);
-// 	/*  */
-
-// 	printf("\ndone all lines in main\n");
-// 	return (0);
-// }

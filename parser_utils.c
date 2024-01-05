@@ -6,13 +6,26 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 13:24:17 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 15:00:11 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 #include <fcntl.h>
 #include <stdio.h>
+
+int	check_file_format(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (ft_strcmp(".cub", str + (len - 4)))
+	{
+		printf("not cub\n");
+		return (-1);
+	}
+	return (0);
+}
 
 int	is_brank(char *line)
 {

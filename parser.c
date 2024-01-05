@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 14:04:30 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 15:00:13 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,7 @@
 // 	int		ceiling_col;
 // }	t_data;
 
-int	check_file_format(char *str)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (ft_strcmp(".cub", str + (len - 4)))
-	{
-		printf("not cub\n");
-		return (-1);
-	}
-	return (0);
-}
-
-void	init_data(t_data **data)
+static void	init_data(t_data **data)
 {
 	int	i;
 
@@ -78,7 +65,7 @@ void	init_data(t_data **data)
 	(*data)->floor_col = -1;
 }
 
-char	**obtain_map(t_data **data, int fd)
+static char	**obtain_map(t_data **data, int fd)
 {
 	int		i[2];
 	char	**ret;
