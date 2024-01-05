@@ -212,6 +212,7 @@ void	init_player(t_player *player, t_data *data, t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	get_texel_color(t_mlx *m, t_texture *t, int x);
 void	print_pixel(t_mlx *m, t_point p, int color);
+void	print_texel(t_mlx *m, t_point p, int color);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 void	trim_non_ascii(char **tab, int rows);
 void	free_map(t_player *player);

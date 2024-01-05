@@ -2,7 +2,14 @@
 
 /* static */ int	darken_color(int color)
 {
-	return ((color / 2) << 16) + ((color / 2) << 8) + (color / 2);
+	int	darker;
+	int	rgb[3];
+
+	rgb[0] = ((color >> 16) & 0xFF) / 2;
+	rgb[1] = ((color >> 8) & 0xFF) / 2;
+	rgb[2] = ((color >> 0) & 0xFF) / 2;
+	darker =  (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
+	return (darker);
 }
 
 static int	get_text_x_coord(t_mlx *m, int width)
@@ -30,18 +37,16 @@ void	get_texel_color(t_mlx *m, t_texture *t, int x)
 	int		y;
 
 	t->text_x_coord = get_text_x_coord(m, t->text_w);
-	step = 1.0 * t->text_h / m->ray.line_height;
-	// step = (double)(t->text_h / m->ray.line_height); ??
+	step = (double)t->text_h / (double)m->ray.line_height;
 	text_pos = (m->ray.line_first_px - DEFAULT_Y / 2 + m->ray.line_height / 2) * step;
 	y = m->ray.line_first_px - 1;
 	while (y < m->ray.line_last_px)
 	{
 		t->text_y_coord = (int)text_pos & (t->text_h - 1);
 		text_pos += step;
-		// color = xpm[t->text_h * t->text_y_coord + t->text_x_coord]; // get the color from the texture
-		color = 8224125; // just for debugging purposes
-		/* if (m->ray.side == 1)
-			color = darken_color(color); */
+		color = ((int *)t->text_addr)[t->text_h * t->text_y_coord + t->text_x_coord];
+		if (m->ray.side == 1)
+			color = darken_color(color);
 		print_pixel(m, (t_point){x, y++}, color);
 	}
 }
