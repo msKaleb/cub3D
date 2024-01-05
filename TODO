@@ -10,3 +10,4 @@
 
 -Buscar todo malloc, calloc, strdup, etc. por todo el código
 -Limitar el la velocidad de movimiento al framerate
+-modificar print_line() para pasar el color concreto de la textura(ahora usa colores por defecto)

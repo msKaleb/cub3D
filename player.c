@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/04 21:21:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:35:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-
-/**
- * @brief load the textures from the .cub file
-  */
-void	load_textures(t_texture *text, t_mlx *m, t_data *data)
-{
-	char	*path;
-	int		i;
-
-	(void)data;
-	i = -1;
-	trim_non_ascii(data->tex_path, MAX_TEXTURES);
-	while (++i < MAX_TEXTURES)
-	{
-		path = data->tex_path[i];
-		text[i].texture = mlx_xpm_file_to_image(m->mlx, path,
-				&text[i].text_w, &text[i].text_h);
-		if (!text[i].texture)
-			exit(printf("Error loading texture: %s\n", path));
-		text[i].text_addr = mlx_get_data_addr(text[i].texture,
-				&text[i].bpp, &text[i].size_line, &text[i].endian);
-	}
-}
 
 /**
  * @brief check if the coming move is out of bounds or into a wall

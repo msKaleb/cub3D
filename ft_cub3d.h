@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/04 21:04:15 by msoria-j         ###   ########.fr       */
+/*   Created: Invalid Date        by              +#+  #+#    #+#             */
+/*   Updated: 2024/01/05 12:38:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
@@ -216,11 +218,13 @@ int		err_file(char *file);
 int		close_mlx(t_mlx *m);
 int		err_mlx(void);
 
+void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 void	trim_non_ascii(char **tab, int rows);
+void	texture_calculations(t_mlx *m, t_texture *t);
 void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
 void	move_player(t_mlx *m);
