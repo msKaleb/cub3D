@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/03 22:25:21 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:41:59 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,16 +185,12 @@ int	obtain_path(t_data **data, char *line)
 		i++;
 	if (!ft_strncmp(&line[i], "NO ", 3))
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
-		// return ((*data)->tex_path[0] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "SO ", 3))
 		return ((*data)->tex_path[1] = ft_strdup(line + (i + 3)), 0);
-		// return ((*data)->tex_path[1] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "WE ", 3))
 		return ((*data)->tex_path[2] = ft_strdup(line + (i + 3)), 0);
-		// return ((*data)->tex_path[2] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "EA ", 3))
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
-		// return ((*data)->tex_path[3] = ft_strjoin("./", line + (i + 3)), 0);
 	else if (!ft_strncmp(&line[i], "F ", 2))
 		return ((*data)->floor_col = get_rgb(line + (i + 2)));
 	else if (!ft_strncmp(&line[i], "C ", 2))

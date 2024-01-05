@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 18:44:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:42:14 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 		text[i].text_addr = mlx_get_data_addr(text[i].texture,
 			&text[i].bpp, &text[i].size_line, &text[i].endian);
 	}
-	if (i == 4)
-		printf("FINISH load texture\n");
 }
 
 static void	validate_pos(t_player *player, double next_x, double next_y)
