@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 11:41:59 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 12:49:07 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	is_brank(char *line)
 	i = 0;
 	while (line && line[i])
 	{
+		printf("is_brank: %d\n", line[i]);
 		if (line[i] != 32 && line[i] != '\n')
 			return (0);
 		i++;
@@ -173,27 +174,25 @@ int	get_rgb(char *str)
 int	obtain_path(t_data **data, char *line)
 {
 	int	i;
-	// int	colour;
 
 	i = 0;
-	// colour = 0;
 	//move to the next line if there is only '\n'
 	if (!line || (line[i] && line[i] == 10))
 		return (1);
 	//skip while there are spaces
 	while (line[i] && line[i] == 32)
 		i++;
-	if (!ft_strncmp(&line[i], "NO ", 3))
+	if (!(*data)->tex_path[0] && !ft_strncmp(&line[i], "NO ", 3))
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
-	else if (!ft_strncmp(&line[i], "SO ", 3))
+	else if (!(*data)->tex_path[1] && !ft_strncmp(&line[i], "SO ", 3))
 		return ((*data)->tex_path[1] = ft_strdup(line + (i + 3)), 0);
-	else if (!ft_strncmp(&line[i], "WE ", 3))
+	else if (!(*data)->tex_path[2] && !ft_strncmp(&line[i], "WE ", 3))
 		return ((*data)->tex_path[2] = ft_strdup(line + (i + 3)), 0);
-	else if (!ft_strncmp(&line[i], "EA ", 3))
+	else if (!(*data)->tex_path[3] && !ft_strncmp(&line[i], "EA ", 3))
 		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
-	else if (!ft_strncmp(&line[i], "F ", 2))
+	else if ((*data)->floor_col == -1 && !ft_strncmp(&line[i], "F ", 2))
 		return ((*data)->floor_col = get_rgb(line + (i + 2)));
-	else if (!ft_strncmp(&line[i], "C ", 2))
+	else if ((*data)->ceiling_col == -1 && !ft_strncmp(&line[i], "C ", 2))
 		return ((*data)->ceiling_col = get_rgb(line + (i + 2)));
 	return (-1);
 }
@@ -211,7 +210,7 @@ int	check_map(t_data **data, char *map_name)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (check_paths(*data) && !is_brank(line))
+		if (check_paths(*data)/*  && !is_brank(line) */)
 		{
 			if (!(*data)->pos_map)
 				(*data)->pos_map = i;
@@ -226,6 +225,8 @@ int	check_map(t_data **data, char *map_name)
 		line = get_next_line(fd);
 		i++;
 	}
+	if (!(*data)->num_person)
+		return (printf("no person\n"), close(fd), -1);
 	return (close(fd), 0);
 }
 
