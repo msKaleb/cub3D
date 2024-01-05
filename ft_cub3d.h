@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:25:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/05 11:41:14 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/04 21:04:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,24 +206,26 @@ typedef struct s_mlx
 }				t_mlx;
 
 /* Functions prototipes */
+int		release_motion(int key_code, t_mlx *m);
+int		set_motion(int key_code, t_mlx *m);
+// int		key_hook(int key_code, t_mlx *m);
+// int		has_to_move(int key_code);
+int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
-int		err_mlx(void);
-int		key_hook(int key_code, t_mlx *m);
 int		close_mlx(t_mlx *m);
-int		has_to_move(int key_code);
-int		render_frame(t_mlx *m);
-int		set_motion(int key_code, t_mlx *m);
-int		release_motion(int key_code, t_mlx *m);
-
-void	print_pixel(t_mlx *m, t_point p, int color);
-void	init_mlx(t_mlx *m);
-void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
-void	print_line(t_raycast *ray, t_mlx *m, int x);
+int		err_mlx(void);
 
 void	init_player(t_player *player, t_data *data, t_mlx *m);
-void	move_player(t_mlx *m);
+void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
+void	print_pixel(t_mlx *m, t_point p, int color);
+void	print_line(t_raycast *ray, t_mlx *m, int x);
+void	trim_non_ascii(char **tab, int rows);
+void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
+void	move_player(t_mlx *m);
+void	init_mlx(t_mlx *m);
+
 void	*free_2dimension(char **strs);//function name??
 
 /**
