@@ -1,4 +1,3 @@
-
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
 

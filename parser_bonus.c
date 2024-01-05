@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 14:04:30 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 14:05:52 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,14 @@ char	**parser(char *map_name, t_data *data)
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
 		return (NULL);//error obtain_map failed
+	for(int i = 0; tab[i]; i++)
+	{
+		printf("%s", tab[i]);
+	}
+	for(int i = 0; tab[i]; i++)
+	{
+		printf("%s", tab[i]);
+	}
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET),/* free_2dimension(tab) */NULL);//error
