@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 13:47:32 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 22:01:09 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	obtain_path(t_data **data, char *line)
 	if (!line || (line[i] && line[i] == 10))
 		return (1);
 	//skip while there are spaces
-	while (line[i] && line[i] == 32)
+	// while (line[i] && line[i] == 32)
+	while (line[i] && is_space(line[i]))
 		i++;
 	if (!(*data)->tex_path[0] && !ft_strncmp(&line[i], "NO ", 3))
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);

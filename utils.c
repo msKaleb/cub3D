@@ -1,6 +1,6 @@
 #include "ft_cub3d.h"
 
-static int	ft_isspace(char c)
+int	is_space(char c)
 {
 	if (c == ' ' || (c > 8 && c < 14))
 		return (1);
@@ -23,7 +23,7 @@ void	trim_non_ascii(char **tab, int rows)
 		tmp = ft_calloc(1, ft_strlen(tab[i]));
 		while (++j < (int)ft_strlen(tab[i]))
 		{
-			if (!ft_isspace(tab[i][j]))
+			if (!is_space(tab[i][j]))
 				tmp[k++] = tab[i][j];
 		}
 		free(tab[i]);

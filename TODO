@@ -1,15 +1,8 @@
 -quitar -Wno-deprecated de makefile de minilibx
 -controlar relink en bonus
 -Quitar todos los "//DELETE"
--mi compilador dice lo siguiente en parser.c (linea "if (&line[i] && !ft_strncmp(&line[i], "NO ", 3))")
-	"parser.c:187:22: error: the comparison will always evaluate as 'true' for the pointer operand in 'line + (sizetype)i'"
-	quizá sea mejor poner al principio de la función "if (!line) return;" y quitar "&line[i]" de cada if
 -Check si los pasos de texturas son valiabres (existe, tiene perimso?)
--en el parseo de mapa, escapar espacios, tabulaciones, etc. (maps/sample/good/works.cub da error),
-	de momento he puesto un strtrim en load_textures()
-
 -Buscar todo malloc, calloc, strdup, etc. por todo el código
 -Limitar el la velocidad de movimiento al framerate
 -modificar print_line() para pasar el color concreto de la textura(ahora usa colores por defecto)
-
--"int cc = ((125 / 2) << 16) + ((125 / 2) << 8) + (125 / 2);" for darker color
+-mlx_new_image() para almacenar el mapa y después mlx_put_image_to_window()

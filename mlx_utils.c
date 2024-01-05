@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/05 15:30:33 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/05 21:55:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,6 @@ void	init_mlx(t_mlx *m)
 	if (m->img == NULL)
 		exit(err_mlx());
 	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
-}
-
-// char *ns = ft_itoa(m->player.motion_ns);
-// char *ew = ft_itoa(m->player.motion_ew);
-// mlx_string_put(m->mlx, m->win, 20, 20, 0x00FFFFFF, ns);
-// mlx_string_put(m->mlx, m->win, 20, 40, 0x00FFFFFF, ew);
-int	render_frame(t_mlx *m)
-{
-	move_player(m);
-	rotate_player(m);
-	mlx_destroy_image(m->mlx, m->img);
-	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
-	raycast(&m->ray, &m->player, m);
-	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-	return (0);
 }
 
 int	set_motion(int key_code, t_mlx *m)

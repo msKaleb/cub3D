@@ -29,7 +29,7 @@ static int	get_text_x_coord(t_mlx *m, int width)
 	return (text_x_coord);
 }
 
-void	get_texel_color(t_mlx *m, t_texture *t, int x)
+void	print_wall_line(t_mlx *m, t_texture *t, int x)
 {
 	double	step;
 	double	text_pos;
