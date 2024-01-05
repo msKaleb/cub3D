@@ -1,2 +1,6 @@
 1. textures path: if there are more than 1, e.g.: 2 NO's
 
+::maps/sample/bad
+1. file_letter_end.cub it seems a valid map
+
+::maps/sample/good
