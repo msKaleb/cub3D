@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid Date        by              +#+  #+#    #+#             */
-/*   Updated: 2024/01/05 12:38:30 by msoria-j         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/05 13:54:17 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,8 +236,26 @@ void	*free_2dimension(char **strs);//function name??
  * @brief parser
   */
 char	**parser(char *map_name, t_data *data);
-void	init_data(t_data **data);
 int		check_file_format(char *str);
+
+/**
+ * @brief parser_utils
+  */
+int		is_brank(char *line);
+void	replace_spaces(char **str);
+int		is_overflow(char **map, t_data *data);
+
+/**
+ * @brief parser_check_map
+  */
+int		check_map(t_data **data, char *map_name);
+
+
+
+/**
+ * @brief parser_get_rgb
+  */
+int		get_rgb(char *str);
 
 /**
  * @brief flood_fill
