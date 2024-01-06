@@ -34,7 +34,6 @@ void	draw_minimap(t_mlx *m, t_data *data)
 {
 	t_point	i;
 
-	i.x = -1;
 	i.y = -1;
 
 	// (void)m;
@@ -44,19 +43,20 @@ void	draw_minimap(t_mlx *m, t_data *data)
 	printf("data->map_size.x: %d\n", data->map_size.x);
 	while (++i.y < data->map_size.y)
 	{
+		i.x = -1;
 		while (++i.x < data->map_size.x)
 		{
 			if (data->minimap[i.y][i.x] == 32)
 			{
-				draw_one_block(m, i, get_rgb("255,255,255"));
+				draw_one_block(m, i, 0x00FFFFFF);
 			}
-			if (data->minimap[i.y][i.x] == '1')
+			else if (data->minimap[i.y][i.x] == '1')
 			{
-				draw_one_block(m, i, get_rgb("0,0,0"));
+				draw_one_block(m, i, 0x00000000);
 			}
-			if (data->minimap[i.y][i.x] == '0')
+			else if (data->minimap[i.y][i.x] == '0')
 			{
-				draw_one_block(m, i, get_rgb("172,171,171"));				
+				draw_one_block(m, i, 0x00FF0000);				
 			}
 		}
 	}
