@@ -63,6 +63,9 @@
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
 
+//minimap
+# define BLOCKSIZE 12
+
 typedef struct s_mlx	t_mlx;
 
 typedef struct s_point

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cub3d.h"
+#include "ft_cub3d_bonus.h"
 
 /**
  * @brief check if the coming move is out of bounds or into a wall
@@ -53,6 +53,7 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 	player->motion_rot = 0;
 	player->width = (double)data->map_size.x;
 	player->height = (double)data->map_size.y;
+	player->data = data;
 	load_textures(player->text, m, data);
 }
 
