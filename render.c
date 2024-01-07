@@ -52,11 +52,10 @@ int	render_frame(t_mlx *m)
 	mlx_destroy_image(m->mlx, m->img);
 	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	raycast(&m->ray, &m->player, m);
-	printf("Line: %d File: %s\n", __LINE__, __FILE__);
-	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
+	// mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+	// mlx_destroy_image(m->mlx, m->img);
+	// m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	minimap(m, m->player.data);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-	printf("Line: %d File: %s\n", __LINE__, __FILE__);
 	return (0);
 }
