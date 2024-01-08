@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/05 21:55:10 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:34:53 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,9 @@ int	release_motion(int key_code, t_mlx *m)
 		m->player.motion_rot = -0;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
+	else if (key_code == XK_Q)
+		// debugging
+		printf("dirX: %f - dirY: %f\n", m->ray.dir_x, m->ray.dir_y);
+		// debugging
 	return (0);
 }

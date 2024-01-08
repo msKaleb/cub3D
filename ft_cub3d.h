@@ -83,7 +83,7 @@ typedef struct s_point
 // }				t_data;
 /**
 * @brief obtain data in general (main structure)
-* @param tex_path[0]: noth
+* @param tex_path[0]: north
 * @param tex_path[1]: south
 * @param tex_path[2]: west
 * @param tex_path[3]: east
@@ -112,7 +112,7 @@ typedef struct s_data
  * @param step_x/step_y		positive or negative direction
  * @param line_height		the vertical lines which will form the 3d image
  * @param is_wall			checks if the ray hit a wall
- * @param side				type of wall (NS or EW)
+ * @param side				orientation of wall (0 towards E-W / 1 towards N-S)
  */
 typedef struct s_raycast
 {

@@ -36,6 +36,8 @@ static void	get_step_and_side(t_raycast *ray, t_player *player)
 
 /**
  * @brief performs DDA algorithm
+ * @note side = 0 -> points west/eastwards (x axis)
+ * @note side = 1 -> points south/northwards (y axis)
  */
 static void	dda(t_raycast *ray, t_player *player)
 {
