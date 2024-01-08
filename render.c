@@ -30,7 +30,7 @@ void	print_line(t_raycast *ray, t_mlx *m, int x)
 	while (y < ray->line_first_px)
 		print_pixel(m, (t_point){x, y++}, ray->ceiling_col);
 	// print the wall line
-	print_wall_line(m, &m->player.text[0], x); // change [0] for needed one (NO SO EA WE)
+	print_wall_line(m, m->player.text, x); // change [0] for needed one (NO SO EA WE)
 	y += ray->line_height;
 	// print the floor
 	while (y < DEFAULT_Y)

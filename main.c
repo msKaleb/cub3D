@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/03 22:20:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:54:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,17 @@ int	main(int argc, char *argv[])
 		return (err_arg_number());//error incorrect file format 
 	m.player.map = parser(argv[1], &data);
 	if (!m.player.map)
-		return (printf("Failed map loading\n"), 1);
+		return (err_map());
 	init_mlx(&m);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
 
-	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &set_motion, &m);
 	mlx_hook(m.win, ON_KEYUP, (1L<<1), &release_motion, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop_hook(m.mlx, &render_frame, &m);
 	mlx_loop(m.mlx); 
-	// free_2dimension(map);
 	return(0);
 }

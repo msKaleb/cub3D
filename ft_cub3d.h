@@ -2,6 +2,7 @@
 # define FT_CUB3D_H
 
 # include "libft/libft.h"
+# include "colors.h"
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
@@ -47,21 +48,24 @@
 # define DEFAULT_COLOR 	0xBADA55	// Badass color
 # define DEFAULT_SKY	0x87CEEB
 # define DEFAULT_FLOOR	0x92745B
-# define DEFAULT_X 		640.0
-# define DEFAULT_Y 		480.0
+# define DEFAULT_X 		800.0
+# define DEFAULT_Y 		600.0
 # define MOVE_SPEED		0.07
 # define ROTATION_SPEED	0.03
 # define MAX_TEXTURES	4
 
 /* Events and values for mlx_hook */
-# define ON_KEYDOWN		2
-# define ON_KEYUP		3
-# define ON_MOUSEDOWN	4
-# define ON_MOUSEUP		5
-# define ON_MOUSEMOVE	6
-# define ON_EXPOSE		12
-# define ON_DESTROY		17
-# define X_MASK			131072 // (1L << 17), for Linux
+# define ON_KEYDOWN			2
+# define ON_KEYUP			3
+# define ON_MOUSEDOWN		4
+# define ON_MOUSEUP			5
+# define ON_MOUSEMOVE		6
+# define ON_EXPOSE			12
+# define ON_DESTROY			17
+# define X_KEYPRESS			1		// (1L << 0)
+# define X_KEYRELEASE		2		// (1L << 1)
+# define X_POINTERMOTION	64		// (1L << 6)
+# define X_MASK				131072	// (1L << 17), for Linux
 
 typedef struct s_mlx	t_mlx;
 
@@ -203,8 +207,9 @@ int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
 int		close_mlx(t_mlx *m);
+int		err_mlx(t_mlx *m);
 int		is_space(char c);
-int		err_mlx(void);
+int		err_map(void);
 
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);

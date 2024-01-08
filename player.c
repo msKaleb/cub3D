@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/05 11:35:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:30:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,18 @@ static void	validate_pos(t_player *player, double next_x, double next_y)
 		player->pos_x = next_x;
 		player->pos_y = next_y;
 	}
+	/* else if ((next_x < player->width - 2 && next_y < player->height - 2)
+		&& (next_x > 1 && next_y > 1)
+		&& player->map[(int)next_y][(int)next_x] != ' ')
+	{
+		player->pos_x = next_x;
+		player->pos_y = next_y;
+	} */
 }
 
 /**
  * @brief initialize the struct with parameters from the map
  * @note add .5 to the position to place it in the center of the tile
- * @todo change pos_x/y to the values on the map, now is for testing
   */
 void	init_player(t_player *player, t_data *data, t_mlx *m)
 {
