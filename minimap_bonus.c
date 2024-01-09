@@ -13,36 +13,6 @@
 #include "ft_cub3d_bonus.h"
 #include "colors.h"
 
-static void	print_player(t_mlx *m, t_point point, int colour, t_point size)
-{
-	t_point pos;
-
-	pos.x = (point.x * BLOCKSIZE - size.x);
-	while (pos.x < ((point.x * BLOCKSIZE) + BLOCKSIZE))
-	{
-		pos.y = (point.y * BLOCKSIZE - size.y);
-		while (pos.y < ((point.y * BLOCKSIZE) + BLOCKSIZE))
-		{
-			print_pixel(m, pos, colour);
-			pos.y++;
-		}
-		pos.x++;
-	}
-}
-
-static void	draw_player_side_edge(t_mlx *m, t_point i, char **minimap, t_point size)
-{
-	if (minimap[i.y - 1][i.x - 1] == '1')
-	{
-		size.x = 0;
-		size.y = 0;
-	}
-	else if (minimap[i.y][i.x - 1] == '1')
-		size.x = 0;
-	else if(minimap[i.y - 1][i.x] == '1')
-		size.y = 0;
-	print_player(m, i, 0x0000FFFF, size);
-}
 // /*static*/ void	draw_player_edge(t_mlx *m, t_point i, char **minimap, t_point size)
 // {
 // 	if(minimap[i.y][i.x] == '0')
@@ -74,22 +44,6 @@ static void	draw_player_side_edge(t_mlx *m, t_point i, char **minimap, t_point s
 // 	print_player(m, i, 0x0000FFFF, size);
 // }
 
-static void	draw_player_on_edge(t_mlx *m, t_point i, char **minimap, t_point size)
-{
-	size.x = 0;
-	size.y = 0;
-	if (minimap[i.y - 1][i.x - 1] != '1')
-	{
-		i.x -= 1;
-		i.y -= 1;
-	}
-	else if (minimap[i.y][i.x - 1] == '1')
-		i.y -= 1;
-	else if (minimap[i.y - 1][i.x] == '1')
-		i.x -= 1;
-	print_player(m, i, 0x0000FFFF, size);
-}
-
 static void	print_one_block(t_mlx *m, t_point point, int colour)
 {
 	t_point pos;
@@ -105,20 +59,6 @@ static void	print_one_block(t_mlx *m, t_point point, int colour)
 		}
 		pos.x++;
 	}
-}
-
-static void	draw_player(t_mlx *m, t_point i, char **minimap)
-{
-	t_point	size;
-
-	size.x = 1;
-	size.y = 1;
-	if (minimap[i.y][i.x] == '1')
-		draw_player_on_edge(m, i, minimap, size);
-	else if (minimap[i.y][i.x] == '0' && (minimap[i.y][i.x - 1] == '1' || minimap[i.y - 1][i.x] == '1' || minimap[i.y - 1][i.x - 1] == '1'))
-		draw_player_side_edge(m, i, minimap, size);			
-	else
-		print_player(m, i, 0x0000FFFF, size);
 }
 
 static void	draw_minimap(t_mlx *m, t_data *data)

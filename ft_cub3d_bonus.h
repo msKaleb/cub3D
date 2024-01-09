@@ -252,5 +252,7 @@ void	flood_fill(char **tab, t_point size, t_point begin);
 
 void	minimap(t_mlx *m, t_data *data);
 
+void	draw_player(t_mlx *m, t_point i, char **minimap);
+
 
 #endif /* FT_CUB3D_H */

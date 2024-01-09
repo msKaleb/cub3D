@@ -49,6 +49,7 @@ MAIN_B	=	main_bonus.c #for now
 
 SRC_B	=	parser_bonus.c \
 			minimap_bonus.c \
+			minimap_utils_bonus.c \
 			render_bonus.c \
 
 
