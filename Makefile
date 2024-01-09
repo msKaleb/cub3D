@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/09 18:17:34 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/09 18:32:27 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,7 @@ pre-build-bonus:
 $(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B)
 			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
+			@rm .bonus
 
 #bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
 # bonus:		pre-build-bonus $(OBJ) $(OBJ) $(OBJ_M)
@@ -136,7 +137,8 @@ $(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B)
 # 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 bonus:		BONUS := 1
-bonus:		re
+bonus:		$(NAME)
+			@touch .bonus
 
 clean:
 			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
