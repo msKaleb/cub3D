@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 09:47:09 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/09 09:47:10 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_cub3d.h"
 
 static void	set_ray_values(t_raycast *ray, t_player *player, int x)
@@ -55,6 +67,9 @@ static void	dda(t_raycast *ray, t_player *player)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
+		if (ray->map_y > player->height || ray->map_x > player->width
+			|| ray->map_y < 0 || ray->map_x < 0)
+			break ;
 		if (player->map[ray->map_y][ray->map_x] == '1')
 			ray->is_wall = 1;
 	}
