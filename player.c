@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_cub3d_bonus.h"
+// #include "ft_cub3d_bonus.h"
 #include "ft_cub3d.h"
 
 // for debugging purposes

@@ -67,13 +67,13 @@ int	main(int argc, char *argv[])
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
-	// minimap(&m, &data);
 
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &set_motion, &m);
 	mlx_hook(m.win, ON_KEYUP, (1L<<1), &release_motion, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
-	mlx_loop_hook(m.mlx, &render_frame, &m);
+
+	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);
 	// free_2dimension(map);
 	return(0);

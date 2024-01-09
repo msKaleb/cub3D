@@ -48,7 +48,9 @@ SRC		=	errors.c \
 MAIN_B	=	main_bonus.c #for now
 
 SRC_B	=	parser_bonus.c \
-			minimap_bonus.c
+			minimap_bonus.c \
+			render_bonus.c \
+
 
 OBJ		=	$(SRC:.c=.o)
 

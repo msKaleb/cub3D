@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft_cub3d.h"
-#include "ft_cub3d_bonus.h"
+#include "ft_cub3d.h"
+// #include "ft_cub3d_bonus.h"
 
 /**
 * @brief In order to know where to put the vertex, we calculate the offset
@@ -70,7 +70,8 @@ int	render_frame(t_mlx *m)
 	// mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	// mlx_destroy_image(m->mlx, m->img);
 	// m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
-	minimap(m, m->player.data);
+
+	// minimap(m, m->player.data);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	return (0);
 }
