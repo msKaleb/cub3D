@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/09 14:32:24 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/09 20:00:25 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,37 +29,42 @@ OS		=	$(shell uname -s)
 
 NAME	=	cub3D
 
-MAIN	=	main.c \
+#MAIN	=	main.c \
 
-SRC		=	errors.c \
+# Common sources
+SRC_C	=	errors.c \
 			mlx_utils.c \
 			flood_fill.c \
 			free_memory.c \
-			render.c \
 			raycast.c \
 			player.c \
-			parser.c \
 			parser_utils.c \
 			parser_check_map.c \
 			parser_get_rgb.c \
 			utils.c \
 			textures.c \
-			
-MAIN_B	=	main_bonus.c #for now
+			render.c \
 
-SRC_B	=	parser_bonus.c \
+# Mandatory sources
+SRC_M	=	main.c \
+			parser.c \
+	
+#MAIN_B	=	main_bonus.c #for now
+
+SRC_B	=	main_bonus.c \
+			parser_bonus.c \
+			render_bonus.c \
 			minimap_bonus.c \
 			minimap_utils_bonus.c \
-			render_bonus.c \
+			ft_bonus.c \
 
+OBJ_C	=	$(SRC_C:.c=.o)
 
-OBJ		=	$(SRC:.c=.o)
-
-OBJ_M	=	$(MAIN:.c=.o)
+OBJ_M	=	$(SRC_M:.c=.o)
 
 OBJ_B	=	$(SRC_B:.c=.o)
 
-OBJ_MB	=	$(MAIN_B:.c=.o)
+#OBJ_MB	=	$(MAIN_B:.c=.o)
 
 CC		=	gcc
 
@@ -100,44 +105,49 @@ ITALIC=$(COLOR)3m
 BOLD=$(COLOR)1m
 BRIGHT_WHITE=$(COLOR)97m
 
-# ifndef VERBOSE
-# 	MAKEFLAGS += --silent
-# endif
+ifndef VERBOSE
+	MAKEFLAGS += --silent
+endif
 
 all:		$(NAME)
 
-pre-build:
+%.o: %.c
+	 		$(CC) $(CCOBJ) -g -O0
+
+$(NAME):	$(OBJ_C) $(OBJ_M)
+
 			make bonus -sC libft/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			make -sC $(MLXDIR)
+			
+			$(CC) $(WWW) $(OBJ_M) $(OBJ_C) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\t$(NAME) ready!"$(NONE)
+			@rm -rf .bonus
 
-pre-build-bonus:
+bonus:		.bonus
+
+.bonus:		$(OBJ_C) $(OBJ_B)
+
 			make bonus -sC libft/
 			$(ECHO) $(BLUE) "$$HEADER" $(NONE)
 			$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
 			make -sC $(MLXDIR)
-				
-%.o: %.c
-	 		$(CC) $(CCOBJ) -g -O0
 
-$(NAME):	pre-build $(OBJ) $(OBJ_M)
-			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
-			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
+			$(CC) $(WWW) $(OBJ_C) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\t$(NAME) (bonus) ready!"$(NONE)
+			@touch .bonus
+			@rm -rf $(OBJ_M)
 
-bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
-			$(CC) $(WWW) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
-			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
-			
 clean:
-			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
-#			make clean -sC libft/
-#			make clean -sC $(MLXDIR)
+			$(RM) $(OBJ_C) $(OBJ_B) $(OBJ_M)
+			make clean -sC libft/
+			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-#			make fclean -sC libft/
+			make fclean -sC libft/
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re bonus pre-build pre-build-bonus
+.PHONY:		all clean fclean re bonus

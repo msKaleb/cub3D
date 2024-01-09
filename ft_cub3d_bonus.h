@@ -254,5 +254,9 @@ void	minimap(t_mlx *m, t_data *data);
 
 void	draw_player(t_mlx *m, t_point i, char **minimap);
 
+// bonus functions
+int		set_motion_bonus(int key_code, t_mlx *m);
+void	move_player_bonus(t_mlx *m);
+
 
 #endif /* FT_CUB3D_H */
