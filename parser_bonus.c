@@ -112,16 +112,6 @@ char	**parser_bonus(char *map_name, t_data *data)
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
 		return (NULL);//error obtain_map failed
-	// for(int i = 0; tab[i]; i++)
-	// {
-	// 	printf("%s", tab[i]);
-	// }
-	// printf("\n\nfinish write map\n");
-	// for(int i = 0; data->minimap[i]; i++)
-	// {
-	// 	printf("%s", data->minimap[i]);
-	// }
-	// printf("\n\nfinish write map\n");
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET),/* free_2dimension(tab) */NULL);//error

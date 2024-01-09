@@ -72,10 +72,8 @@ int	main(int argc, char *argv[])
 	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &set_motion, &m);
 	mlx_hook(m.win, ON_KEYUP, (1L<<1), &release_motion, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
-	printf("Line: %d File: %s\n", __LINE__, __FILE__);
 	mlx_loop_hook(m.mlx, &render_frame, &m);
 	mlx_loop(m.mlx);
-	printf("Line: %d File: %s\n", __LINE__, __FILE__);
 	// free_2dimension(map);
 	return(0);
 }
