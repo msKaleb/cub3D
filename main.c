@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/08 23:31:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 09:56:20 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,6 @@ void	init_raycast(t_raycast *ray, t_data *data)
 	ray->floor_col = data->floor_col;
 }
 
-int	test(int key_code, t_mlx *m)
-{
-	(void)m;
-	printf("%d\n", key_code);
-	return (0);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_data		data;
@@ -48,7 +41,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (err_arg_number());
 	if (check_file_format(argv[1]) == -1)
-		return (err_arg_number());//error incorrect file format 
+		return (err_arg_number());
 	m.player.map = parser(argv[1], &data);
 	if (!m.player.map)
 		return (err_map());
@@ -57,10 +50,10 @@ int	main(int argc, char *argv[])
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
-	mlx_hook(m.win, ON_KEYDOWN, (1L<<0), &set_motion, &m);
-	mlx_hook(m.win, ON_KEYUP, (1L<<1), &release_motion, &m);
+	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion, &m);
+	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop_hook(m.mlx, &render_frame, &m);
-	mlx_loop(m.mlx); 
-	return(0);
+	mlx_loop(m.mlx);
+	return (0);
 }

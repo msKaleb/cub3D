@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cub3d.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/09 10:05:00 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
 
@@ -241,8 +253,6 @@ int		is_overflow(char **map, t_data *data);
  * @brief parser_check_map
   */
 int		check_map(t_data **data, char *map_name);
-
-
 
 /**
  * @brief parser_get_rgb

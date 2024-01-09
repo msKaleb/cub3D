@@ -3,6 +3,7 @@
 -Quitar todos los "//DELETE"
 -Check si los pasos de texturas son valiabres (existe, tiene perimso?)
 -Buscar todo malloc, calloc, strdup, etc. por todo el código
--Limitar el la velocidad de movimiento al framerate
--modificar print_line() para pasar el color concreto de la textura(ahora usa colores por defecto)
+-Limitar la velocidad de movimiento al framerate
 -mlx_new_image() para almacenar el mapa y después mlx_put_image_to_window()
+
+-maps/sample/good/test_map.cub segfaults -------

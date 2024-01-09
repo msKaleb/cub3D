@@ -6,20 +6,15 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/08 20:02:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 10:01:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-/* int	close_mlx(t_mlx *m)
-{
-	free_map(&m->player);
-	mlx_destroy_window(m->mlx, m->win);
-	free(m->mlx);
-	exit(EXIT_SUCCESS);
-} */
-
+/**
+ * @brief free memory and destroy the mlx window
+  */
 int	close_mlx(t_mlx *m)
 {
 	free_map(&m->player);
@@ -53,6 +48,9 @@ void	init_mlx(t_mlx *m)
 	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
 }
 
+/**
+ * @brief set of events on key press
+  */
 int	set_motion(int key_code, t_mlx *m)
 {
 	if (key_code == XK_ESCAPE)
@@ -73,6 +71,9 @@ int	set_motion(int key_code, t_mlx *m)
 	return (0);
 }
 
+/**
+ * @brief set of events on key release
+  */
 int	release_motion(int key_code, t_mlx *m)
 {
 	if (key_code == XK_W)
@@ -87,9 +88,5 @@ int	release_motion(int key_code, t_mlx *m)
 		m->player.motion_rot = -0;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
-	else if (key_code == XK_Q)
-		// debugging
-		printf("dirX: %f - dirY: %f\n", m->ray.dir_x, m->ray.dir_y);
-		// debugging
 	return (0);
 }
