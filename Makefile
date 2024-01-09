@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/09 18:32:27 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/09 19:25:07 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,11 +124,18 @@ pre-build-bonus:
 	 		$(CC) -DBONUS=$(BONUS) $(CCOBJ) -g -O0
 
 
+		
+# include to_normal into pre-build
 # $(NAME):	pre-build $(OBJ) $(OBJ_M)
-$(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B)
+$(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B) to_normal
 			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
-			@rm .bonus
+
+to_normal:
+			@if [ -f ".bonus" ]; then \
+				rm -rf *.o; \
+				rm -rf .bonus; \
+			fi
 
 #bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
 # bonus:		pre-build-bonus $(OBJ) $(OBJ) $(OBJ_M)
@@ -136,9 +143,19 @@ $(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B)
 # 			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 # 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
+to_bonus:
+			@if [ -f ".bonus" ]; then \
+				echo nanai; \
+			else \
+				rm -rf *.o; \
+				touch .bonus; \
+			fi
+
 bonus:		BONUS := 1
-bonus:		$(NAME)
-			@touch .bonus
+bonus:		to_bonus $(OBJ) $(OBJ_M) $(OBJ_B)
+			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
+
 
 clean:
 			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
@@ -151,4 +168,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re bonus pre-build pre-build-bonus test
+.PHONY:		all clean fclean re bonus pre-build pre-build-bonus to_normal
