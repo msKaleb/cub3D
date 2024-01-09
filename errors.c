@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:17:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/28 16:45:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 10:05:57 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 int	err_arg_number(void)
 {
-	printf("Usage: ./cub3D map.cub\n");
+	printf("%sUsage: ./cub3D map.cub%s\n", GREEN, RESET);
 	return (1);
 }
 
 int	err_file(char *file)
 {
-	printf("Could not open the file: %s\n", file);
+	printf("%sCould not open the file:%s %s\n", RED, RESET, file);
 	return (1);
 }
-int	err_mlx(void)
+
+int	err_mlx(t_mlx *m)
 {
-	printf("Error on minilbx\n");
+	printf("%sError on minilbx%s\n", RED, RESET);
+	close_mlx(m);
+	return (1);
+}
+
+int	err_map(void)
+{
+	printf("%sFailed map loading%s\n", RED, RESET);
 	return (1);
 }

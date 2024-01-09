@@ -55,3 +55,5 @@ cub3D
 .vscode*
 *.bak
 .DS_Store
+cub_editor
+borrar.cub

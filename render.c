@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 09:52:48 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/09 09:52:49 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // #include "ft_cub3d.h"
 #include "ft_cub3d_bonus.h"
 
-/*
-*In order to know where to put the vertex, we calculate the offset
-*using the values filled by the 'mlx_get_data_addr()' function:
-*bits per pixel, size of line, and the endian value, then we use the formula
-*'y * size_line + x * (bits_per_pixel / 8)' to change the atributes
-*of a specific vertex (or pixel).
-*/
+/**
+* @brief In order to know where to put the vertex, we calculate the offset
+* using the values filled by the 'mlx_get_data_addr()' function:
+* bits per pixel, size of line, and the endian value, then we use the formula
+* '(y * size_line) + (x * (bits_per_pixel / 8))' to change the atributes
+* of a specific pixel.
+ */
 void	print_pixel(t_mlx *m, t_point p, int color)
 {
 	char	*ptr;
@@ -22,18 +34,21 @@ void	print_pixel(t_mlx *m, t_point p, int color)
 	*(unsigned int *)ptr = mlx_get_color_value(m->mlx, color);
 }
 
+/**
+ * @brief for each x coordinate, prints the corresponding line,
+ * starting with the ceiling (first loop), next the portion
+ * corresponding to the wall (print_wall_line()), and finally a
+ * loop for the floor portion
+  */
 void	print_line(t_raycast *ray, t_mlx *m, int x)
 {
 	int	y;
 
 	y = 0;
-	// print the ceiling
 	while (y < ray->line_first_px)
 		print_pixel(m, (t_point){x, y++}, ray->ceiling_col);
-	// print the wall line
-	print_wall_line(m, &m->player.text[0], x); // change [0] for needed one (NO SO EA WE)
+	print_wall_line(m, m->player.text, x);
 	y += ray->line_height;
-	// print the floor
 	while (y < DEFAULT_Y)
 		print_pixel(m, (t_point){x, y++}, ray->floor_col);
 }
