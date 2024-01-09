@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	count_cols(t_data **data, char *line)
+static int	count_cols(t_data **data, char *line)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ int	count_cols(t_data **data, char *line)
 /**
  *@note check before start the main map
   */
-int	check_paths(t_data *data)
+static int	check_paths(t_data *data)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ int	check_paths(t_data *data)
 	return (1);
 }
 
-int	obtain_path(t_data **data, char *line)
+static int	obtain_path(t_data **data, char *line)
 {
 	int	i;
 
@@ -96,7 +96,7 @@ int	obtain_path(t_data **data, char *line)
 	return (-1);
 }
 
-int	check_each_line(t_data **data, char *line, int i)
+static int	check_each_line(t_data **data, char *line, int i)
 {
 	if (!(*data)->pos_map)
 		(*data)->pos_map = i;

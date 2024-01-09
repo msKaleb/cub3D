@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	separate_rgb(char *str, int pos[3], int colour[3])
+static int	separate_rgb(char *str, int pos[3], int colour[3])
 {
 	char	*tmp;
 
