@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:52:48 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 19:38:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:30:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	print_line(t_raycast *ray, t_mlx *m, int x)
 		print_pixel(m, (t_point){x, y++}, ray->ceiling_col);
 	print_wall_line(m, m->player.text, x);
 	y += ray->line_height;
+	if (y < 0)
+		y = 0;
+	if (y > DEFAULT_Y)
+		y = DEFAULT_Y;
 	while (y < DEFAULT_Y)
 		print_pixel(m, (t_point){x, y++}, ray->floor_col);
 }
