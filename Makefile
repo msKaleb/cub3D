@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/05 15:37:16 by nimai            ###   ########.fr        #
+#    Updated: 2024/01/09 14:32:24 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,14 @@ CC		=	gcc
 
 LIBFT	=	libft/libft.a
 
+WWW		=	-Wall -Wextra -Werror
+
 # Define flags according to OS
 ifeq ($(OS), Linux)
 # Linux
 	ECHO = echo -e
-	CCOBJ = -Wall -Wextra -Werror -I/usr/include -I./minilibx_linux -O3 -c $< -o $@
-#	CCOBJ = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	CCOBJ = $(WWW) -I/usr/include -I./minilibx_linux -O3 -c $< -o $@
+#	CCOBJ = $(WWW) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 #	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 	MLXDIR = minilibx_linux/
@@ -78,7 +80,7 @@ else ifeq ($(OS), Darwin)
 # Mac (-lm compiler option)
 # Add -g -O0 in CCOBJ for debugging
 	ECHO = echo
-	CCOBJ = -Wall -Wextra -Werror -Imlx -c $< -o $@
+	CCOBJ = $(WWW) -Imlx -c $< -o $@
 	FLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit
 	MLXDIR = minilibx_opengl/
 	MLX = $(MLXDIR)libmlx.a
@@ -97,9 +99,9 @@ ITALIC=$(COLOR)3m
 BOLD=$(COLOR)1m
 BRIGHT_WHITE=$(COLOR)97m
 
-ifndef VERBOSE
-	MAKEFLAGS += --silent
-endif
+# ifndef VERBOSE
+# 	MAKEFLAGS += --silent
+# endif
 
 all:		$(NAME)
 
@@ -119,21 +121,21 @@ pre-build-bonus:
 	 		$(CC) $(CCOBJ) -g -O0
 
 $(NAME):	pre-build $(OBJ) $(OBJ_M)
-			$(CC) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
-			$(CC) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+			$(CC) $(WWW) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 			
 clean:
 			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
-			make clean -sC libft/
-			make clean -sC $(MLXDIR)
+#			make clean -sC libft/
+#			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-			make fclean -sC libft/
+#			make fclean -sC libft/
 
 re:			fclean $(NAME)
 

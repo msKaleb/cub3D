@@ -196,6 +196,7 @@ typedef struct s_mlx
 }				t_mlx;
 
 /* Functions prototipes */
+
 int		release_motion(int key_code, t_mlx *m);
 int		set_motion(int key_code, t_mlx *m);
 int		render_frame(t_mlx *m);
@@ -216,7 +217,7 @@ void	print_line(t_raycast *ray, t_mlx *m, int x);
 void	trim_non_ascii(char **tab, int rows);
 void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
-void	move_player(t_mlx *m);
+// void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
 

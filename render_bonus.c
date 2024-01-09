@@ -44,6 +44,44 @@
 // char *ew = ft_itoa(m->player.motion_ew);
 // mlx_string_put(m->mlx, m->win, 20, 20, 0x00FFFFFF, ns);
 // mlx_string_put(m->mlx, m->win, 20, 40, 0x00FFFFFF, ew);
+
+
+/**
+ * @brief check if the coming move is out of bounds or into a wall
+  */
+static void	validate_pos(t_player *player, double next_x, double next_y)
+{
+	if (player->map[(int)next_y][(int)next_x] == 'F')
+	{
+		player->pos_x = next_x;
+		player->pos_y = next_y;
+	}
+}
+
+static void	move_player(t_mlx *m)
+{
+	double	next_x;
+	double	next_y;
+
+	next_x = m->player.pos_x;
+	next_y = m->player.pos_y;
+	if (m->player.motion_ns != 0)
+	{
+		next_x = m->player.pos_x + m->player.dir_x
+			* (MOVE_SPEED * m->player.motion_ns);
+		next_y = m->player.pos_y + m->player.dir_y
+			* (MOVE_SPEED * m->player.motion_ns);
+	}
+	if (m->player.motion_ew != 0)
+	{
+		next_x = m->player.pos_x + m->player.dir_y
+			* (MOVE_SPEED * m->player.motion_ew / 2);
+		next_y = m->player.pos_y + m->player.dir_x
+			* (MOVE_SPEED * -m->player.motion_ew / 2);
+	}
+	validate_pos(&m->player, next_x, next_y);
+}
+
 /**
  * @brief refreshes the frame and applies character movement
   */
@@ -55,6 +93,7 @@ int	render_frame_bonus(t_mlx *m)
 	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	raycast(&m->ray, &m->player, m);
 	minimap(m, m->player.data);
+	printf("%f\n", m->player.width);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	return (0);
 }
