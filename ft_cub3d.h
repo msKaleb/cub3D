@@ -6,12 +6,16 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 10:05:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:18:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
+
+# ifndef BONUS
+#  define BONUS 0
+# endif /* BONUS */
 
 # include "libft/libft.h"
 # include "colors.h"
@@ -263,5 +267,10 @@ int		get_rgb(char *str);
  * @brief flood_fill
   */
 void	flood_fill(char **tab, t_point size, t_point begin);
+
+// bonus functions
+char	**parser_bonus(char *map_name, t_data *data);
+void	minimap(t_mlx *m, t_data *data);
+void	validate_pos_bonus(t_player *player, double next_x, double next_y);
 
 #endif /* FT_CUB3D_H */

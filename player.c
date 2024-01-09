@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 09:45:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:21:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ void	move_player(t_mlx *m)
 		next_y = m->player.pos_y + m->player.dir_x
 			* (MOVE_SPEED * -m->player.motion_ew / 2);
 	}
-	validate_pos(&m->player, next_x, next_y);
+	if (BONUS == 1)
+		validate_pos_bonus(&m->player, next_x, next_y);
+	else
+		validate_pos(&m->player, next_x, next_y);
 }
 
 // rotation matrix:

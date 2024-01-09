@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/09 14:32:24 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/09 18:17:34 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRC_B	=	parser_bonus.c \
 			minimap_bonus.c \
 			minimap_utils_bonus.c \
 			render_bonus.c \
-
+			ft_bonus.c \
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -66,6 +66,8 @@ CC		=	gcc
 LIBFT	=	libft/libft.a
 
 WWW		=	-Wall -Wextra -Werror
+
+BONUS	=	0
 
 # Define flags according to OS
 ifeq ($(OS), Linux)
@@ -108,8 +110,8 @@ all:		$(NAME)
 
 pre-build:
 			make bonus -sC libft/
-			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
-			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
+#			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
+#			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			make -sC $(MLXDIR)
 
 pre-build-bonus:
@@ -119,16 +121,23 @@ pre-build-bonus:
 			make -sC $(MLXDIR)
 				
 %.o: %.c
-	 		$(CC) $(CCOBJ) -g -O0
+	 		$(CC) -DBONUS=$(BONUS) $(CCOBJ) -g -O0
 
-$(NAME):	pre-build $(OBJ) $(OBJ_M)
-			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+
+# $(NAME):	pre-build $(OBJ) $(OBJ_M)
+$(NAME):	$(OBJ) $(OBJ_M) $(OBJ_B)
+			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
-bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
-			$(CC) $(WWW) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
-			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
-			
+#bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
+# bonus:		pre-build-bonus $(OBJ) $(OBJ) $(OBJ_M)
+#			$(CC) $(WWW) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+# 			$(CC) $(WWW) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) $(FLAGS) -o $(NAME)
+# 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
+
+bonus:		BONUS := 1
+bonus:		re
+
 clean:
 			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
 #			make clean -sC libft/
@@ -140,4 +149,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re bonus pre-build pre-build-bonus
+.PHONY:		all clean fclean re bonus pre-build pre-build-bonus test

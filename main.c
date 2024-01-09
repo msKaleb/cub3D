@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 09:56:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:20:44 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	main(int argc, char *argv[])
 		return (err_arg_number());
 	if (check_file_format(argv[1]) == -1)
 		return (err_arg_number());
-	m.player.map = parser(argv[1], &data);
+	if (BONUS == 1)
+		m.player.map = parser_bonus(argv[1], &data);
+	else
+		m.player.map = parser(argv[1], &data);
 	if (!m.player.map)
 		return (err_map());
 	init_mlx(&m);

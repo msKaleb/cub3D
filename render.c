@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:52:48 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 14:34:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:15:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	render_frame(t_mlx *m)
 	mlx_destroy_image(m->mlx, m->img);
 	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	raycast(&m->ray, &m->player, m);
+	if (BONUS)
+		minimap(m, m->player.data);
 	// mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	// mlx_destroy_image(m->mlx, m->img);
 	// m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
-	printf("%f\n", m->player.width); // debugging
-
-	// minimap(m, m->player.data);
+	// printf("%f\n", m->player.width); // debugging
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	return (0);
 }

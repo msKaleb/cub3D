@@ -55,6 +55,7 @@ static void	validate_pos(t_player *player, double next_x, double next_y)
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
+		ft_fprintf(1, "%c\n", player->map[(int)next_y][(int)next_x]);
 	}
 }
 
