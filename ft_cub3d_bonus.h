@@ -64,7 +64,8 @@
 # define X_MASK			131072 // (1L << 17), for Linux
 
 //minimap
-# define BLOCKSIZE 6
+# define BLOCKSIZE 3
+# define PLAYERSIZE 6
 
 typedef struct s_mlx	t_mlx;
 

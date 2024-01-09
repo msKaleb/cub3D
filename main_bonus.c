@@ -51,16 +51,17 @@ int	main(int argc, char *argv[])
 	m.player.map = parser_bonus(argv[1], &data);
 	if (!m.player.map)
 		return (printf("Failed map loading\n"), 1);
-	for(int i = 0; m.player.map[i]; i++)
-	{
-		printf("%s", m.player.map[i]);
-	}
-	printf("\n\nfinish write map to render\n");
-	for(int i = 0; data.minimap[i]; i++)
-	{
-		printf("%s", data.minimap[i]);
-	}
-	printf("\n\nfinish write map to minimap\n");
+	// for(int i = 0; m.player.map[i]; i++)
+	// {
+	// 	printf("%s", m.player.map[i]);
+	// }
+	// printf("\n\nfinish write map to render\n");
+	// for(int i = 0; data.minimap[i]; i++)
+	// {
+	// 	printf("%s", data.minimap[i]);
+	// }
+	// printf("\n\nfinish write map to minimap\n");
+	// exit(0);
 	init_mlx(&m);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
