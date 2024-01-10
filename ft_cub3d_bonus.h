@@ -255,7 +255,9 @@ void	flood_fill(char **tab, t_point size, t_point begin);
 
 void	minimap(t_mlx *m, t_data *data);
 
-void	draw_player(t_mlx *m, t_point i, char **minimap);
+// void	draw_player(t_mlx *m, t_point i, char **minimap);
+void	draw_player(t_mlx *m, t_point i, t_data *data);
+
 
 // bonus functions
 int		mouse_rotation_bonus(int x, int y, t_mlx *m);
