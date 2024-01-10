@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 22:01:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:21:32 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@ static int	obtain_path(t_data **data, char *line)
 
 	i = 0;
 	//move to the next line if there is only '\n'
-	if (!line || (line[i] && line[i] == 10))
-		return (1);
-	//skip while there are spaces
-	// while (line[i] && line[i] == 32)
+
+	//240110 has been removed
+	// if (!line || (line[i] && line[i] == 10))
+	// 	return (1);
+
 	while (line[i] && is_space(line[i]))
 		i++;
+	if (!line || !line[i] || (line[i] && line[i] == 10))
+		return (1);
 	if (!(*data)->tex_path[0] && !ft_strncmp(&line[i], "NO ", 3))
 		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
 	else if (!(*data)->tex_path[1] && !ft_strncmp(&line[i], "SO ", 3))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_bonus.c                                    :+:      :+:    :+:   */
+/*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:32:54 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 16:48:37 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 10:58:38 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	print_player(t_mlx *m, t_point point, int colour, t_point size)
 {
 	t_point pos;
 
-	pos.x = (point.x * BLOCKSIZE - size.x);
-	while (pos.x < ((point.x * BLOCKSIZE) + BLOCKSIZE))
+	pos.x = (point.x * m->player.data->blocksize - size.x);
+	while (pos.x < ((point.x * m->player.data->blocksize) + m->player.data->blocksize))
 	{
-		pos.y = (point.y * BLOCKSIZE - size.y);
-		while (pos.y < ((point.y * BLOCKSIZE) + BLOCKSIZE))
+		pos.y = (point.y * m->player.data->blocksize - size.y);
+		while (pos.y < ((point.y * m->player.data->blocksize) + m->player.data->blocksize))
 		{
 			print_pixel(m, pos, colour);
 			pos.y++;

@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 15:00:11 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 11:35:32 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,15 @@ void	replace_spaces(char **str)
 int	is_overflow(char **map, t_data *data)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (map[data->map_size.y - 1 - i][0] == '\n')
 		i++;
-	if (ft_strchr(map[0], 'F') || ft_strchr(map[data->map_size.y - 1 - i], 'F'))
+	if (map[j][0] == 32 || map[j][0] == 10)
+		j++;
+	if (ft_strchr(map[j], 'F') || ft_strchr(map[data->map_size.y - 1 - i], 'F'))
 	{
 		printf("the first or the last line\n");
 		return (-1);

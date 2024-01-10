@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 15:00:13 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 11:31:26 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ char	**parser(char *map_name, t_data *data)
 	if (!tab || !*tab)
 		return (NULL);//error obtain_map failed
 	flood_fill(tab, data->map_size, data->pt_person);
+	// for (int i = 0; tab[i]; i ++)
+	// {
+	// 	printf("%s", tab[i]);
+	// }
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET),/* free_2dimension(tab) */NULL);//error
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/05 15:08:21 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 10:57:04 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static void	init_data(t_data **data)
 	(*data)->pt_person.y = 0;
 	(*data)->ceiling_col = -1;
 	(*data)->floor_col = -1;
+	(*data)->blocksize = 3;
 }
 
-static char *obtain_double_str(char *str, t_data *data, int nb_line)
+static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 {
-
 	char	*ret;
 	size_t	i;
 	size_t	j;
