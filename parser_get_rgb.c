@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 12:04:21 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 12:14:31 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	separate_rgb(char *str, int pos[3], int colour[3])
 	pos[1] = pos[0];
 	while (str[pos[1]] && ft_isdigit(str[pos[1]])/* str[pos[1]] != 32, str[pos[1]] != ',' */)
 		pos[1]++;
-	if (((str[pos[1]]) && str[pos[1]] != 32 && str[pos[1]] != 10) || (pos[2] != 2 && str[pos[1]] != ','))
+	if (((str[pos[1]]) && (str[pos[1]] != 32 && str[pos[1]] != 10) && pos[2] != 2 && str[pos[1]] != ',') || (pos[2] == 2 && str[pos[1]] == ','))
 		return (printf("colour has incorrect letter\n"), -1);
 	tmp = ft_substr(str, pos[0], pos[1] - pos[0]);
 	colour[pos[2]] = ft_atoi(tmp);
