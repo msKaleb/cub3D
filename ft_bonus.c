@@ -23,6 +23,10 @@ int	set_motion_bonus(int key_code, t_mlx *m)
 	return (0);
 }
 
+/**
+ * @brief calculates the next position of the player
+ * and checks if it's inside a wall (collisions)
+  */
 void	move_player_bonus(t_mlx *m)
 {
 	double	next_x;
@@ -51,22 +55,20 @@ void	move_player_bonus(t_mlx *m)
 	}
 }
 
+/**
+ * @brief rotates the camera in y axis with the mouse
+  */
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
-	int	chunk = (DEFAULT_X / 2) / 10;
-	int speed;
-
-	speed = -(10 - (x / chunk)) / 3;
-	
 	if (x < 0)
-		mlx_mouse_move(m->win, 0, y);
-	else if (x > DEFAULT_X)
 		mlx_mouse_move(m->win, DEFAULT_X, y);
-	if (x < (DEFAULT_X / 2))
-		m->player.motion_rot = speed;
-	else if (x > (DEFAULT_X / 2))
-		m->player.motion_rot = speed;
-	if (m->cur.x == x)
+	else if (x > DEFAULT_X)
+		mlx_mouse_move(m->win, 0, y);
+	if (m->cur.x > x + 2)
+		m->player.motion_rot = -2;
+	else if (m->cur.x < x - 2)
+		m->player.motion_rot = 2;
+	else
 		m->player.motion_rot = 0;
 	m->cur.x = x;
 	m->cur.y = y;
