@@ -74,7 +74,7 @@ static char	**obtain_map(t_data **data, int fd)
 	(*data)->minimap = (char **)ft_calloc(((*data)->map_size.y * 2) + 1, sizeof(char *));
 	ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
 	if (!ret || !(*data)->minimap)
-		return (NULL);//memory allocation error
+		return (close (fd), free_2dimension(ret), free_2dimension((*data)->minimap));//memory allocation error
 	str = get_next_line(fd);
 	while (str && i[1] < (*data)->map_size.y && i[2] < ((*data)->map_size.y * 2))
 	{
@@ -83,9 +83,8 @@ static char	**obtain_map(t_data **data, int fd)
 			ret[i[1]] = ft_strdup(str);
 			(*data)->minimap[i[2]] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
 			(*data)->minimap[i[2] + 1] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
-			// (*data)->minimap[i[1]] = ft_strdup(str);
 			if (!ret[i[1]] || !(*data)->minimap[i[2]] || !(*data)->minimap[++i[2]])
-				return (/* free_2dimension(ret), */ NULL);
+				return (close (fd), free_2dimension(ret), free_2dimension((*data)->minimap));
 			replace_spaces(&ret[i[1]]);
 			i[1]++;
 			i[2]++;
@@ -114,9 +113,9 @@ char	**parser_bonus(char *map_name, t_data *data)
 		return (free_2dimension(tab));//error file open failed
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
-		return (NULL);//error obtain_map failed
+		return (free_2dimension(tab), free_2dimension(data->minimap));//error obtain_map failed
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
-		return (printf("%smap is not closed%s\n", RED, RESET), free_2dimension(tab));//error
+		return (printf("%smap is not closed%s\n", RED, RESET), free_2dimension(tab), free_2dimension(data->minimap));//error
 	return (tab);
 }
