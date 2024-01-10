@@ -99,6 +99,16 @@ void	move_player_bonus(t_mlx *m)
 	double	next_x;
 	double	next_y;
 
+	// put into another function
+	{
+		double	testx, testy;
+		testx = m->player.pos_x + m->player.dir_x
+			* (MOVE_SPEED);
+		testy = m->player.pos_y + m->player.dir_y
+			* (MOVE_SPEED);
+		ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
+	}
+
 	next_x = m->player.pos_x;
 	next_y = m->player.pos_y;
 	if (m->player.motion_ns != 0)
@@ -115,7 +125,7 @@ void	move_player_bonus(t_mlx *m)
 		next_y = m->player.pos_y + m->player.dir_x
 			* (MOVE_SPEED * -m->player.motion_ew / 2);
 	}
-	if (m->player.map[(int)next_y][(int)next_x] == 'F')
+	if (m->player.map[(int)next_y][(int)next_x] == 'F') // && '2' when flag == open
 	{
 		m->player.pos_x = next_x;
 		m->player.pos_y = next_y;

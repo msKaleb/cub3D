@@ -1,21 +1,16 @@
 #include "ft_cub3d.h"
 
-#define DOOR '2'
-
 static void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
-		|| tab[cur.y][cur.x] != to_fill)
+		|| (tab[cur.y][cur.x] != to_fill && tab[cur.y][cur.x] != '2'))
 		return ;
-	tab[cur.y][cur.x] = 'F';
+	if (tab[cur.y][cur.x] == to_fill)
+		tab[cur.y][cur.x] = 'F';
 	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x - 1, cur.y}, DOOR);
 	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x + 1, cur.y}, DOOR);
 	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y - 1}, DOOR);
 	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y + 1}, DOOR);
 }
 
 void	flood_fill(char **tab, t_point size, t_point begin)

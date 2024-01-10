@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:47:09 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 14:25:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:54:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static void	dda(t_raycast *ray, t_player *player)
 		if (ray->map_y >= player->height || ray->map_x >= player->width
 			|| ray->map_y < 0 || ray->map_x < 0)
 			break ;
-		if (player->map[ray->map_y][ray->map_x] == '1')
+		if (player->map[ray->map_y][ray->map_x] == '1'
+			|| player->map[ray->map_y][ray->map_x] == '2')
 			ray->is_wall = 1;
 	}
 	ray->is_wall = 0;
