@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 19:32:53 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:05:02 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	init_raycast(t_raycast *ray, t_data *data)
 	ray->floor_col = data->floor_col;
 }
 
-int	test(int key_code, t_mlx *m)
+/* int	test(int key_code, t_mlx *m)
 {
 	(void)m;
 	printf("%d\n", key_code);
 	return (0);
-}
+} */
 int	main(int argc, char *argv[])
 {
 	t_data		data;
@@ -63,15 +63,18 @@ int	main(int argc, char *argv[])
 	// printf("\n\nfinish write map to minimap\n");
 	// exit(0);
 	init_mlx(&m);
+	m.cur.x = 0;
+	m.cur.y = 0;
+	mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
-
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion_bonus, &m);
 	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
+	mlx_hook(m.win, ON_MOUSEMOVE, X_POINTERMOTION, &mouse_rotation_bonus, &m);
 
 	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);

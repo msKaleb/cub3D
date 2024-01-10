@@ -186,6 +186,7 @@ typedef struct s_mlx
 	t_texture	texture;
 	t_player	player;
 	t_raycast	ray;
+	t_point		cur;
 
 	void		*mlx;
 	void		*win;
@@ -257,6 +258,7 @@ void	minimap(t_mlx *m, t_data *data);
 void	draw_player(t_mlx *m, t_point i, char **minimap);
 
 // bonus functions
+int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
 void	move_player_bonus(t_mlx *m);
 

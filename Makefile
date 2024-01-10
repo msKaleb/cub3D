@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/09 20:00:25 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/10 15:04:52 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,13 +141,15 @@ bonus:		.bonus
 
 clean:
 			$(RM) $(OBJ_C) $(OBJ_B) $(OBJ_M)
-			make clean -sC libft/
-			make clean -sC $(MLXDIR)
+#			make clean -sC libft/
+#			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-			make fclean -sC libft/
+#			make fclean -sC libft/
 
 re:			fclean $(NAME)
+
+rebonus:	fclean bonus
 
 .PHONY:		all clean fclean re bonus
