@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 11:21:32 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 16:17:56 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	count_cols(t_data **data, char *line)
 /**
  *@note check before start the main map
   */
-static int	check_paths(t_data *data)
+int	check_paths(t_data *data)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ static int	check_paths(t_data *data)
 	return (1);
 }
 
-static int	obtain_path(t_data **data, char *line)
+int	obtain_path(t_data **data, char *line)
 {
 	int	i;
 

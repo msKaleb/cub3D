@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 14:18:01 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 16:18:58 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ char	**parser_bonus(char *map_name, t_data *data)
 
 	tab = NULL;
 	init_data(&data);
-	if (check_map(&data, map_name) == -1)
+	if (check_map_bonus(&data, map_name) == -1)
 		return (NULL);
 	if (!data->num_person)
 		return (printf("no person\n"), NULL);

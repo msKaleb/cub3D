@@ -241,7 +241,8 @@ int		is_overflow(char **map, t_data *data);
 /**
  * @brief parser_check_map
   */
-int		check_map(t_data **data, char *map_name);
+int		check_paths(t_data *data);
+int		obtain_path(t_data **data, char *line);
 
 /**
  * @brief parser_get_rgb
@@ -260,6 +261,7 @@ void	draw_player(t_mlx *m, t_point i, t_data *data);
 
 
 // bonus functions
+int		check_map_bonus(t_data **data, char *map_name);
 int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
 void	move_player_bonus(t_mlx *m);
