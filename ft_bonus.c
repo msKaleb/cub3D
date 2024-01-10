@@ -99,15 +99,16 @@ void	move_player_bonus(t_mlx *m)
 	double	next_x;
 	double	next_y;
 
-	// put into another function
-	{
-		double	testx, testy;
-		testx = m->player.pos_x + m->player.dir_x
-			* (MOVE_SPEED);
-		testy = m->player.pos_y + m->player.dir_y
-			* (MOVE_SPEED);
-		ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
-	}
+	// this is to check what kind of square is in front of us 
+	// TODO put into another function
+	// {
+	// 	double	testx, testy;
+	// 	testx = m->player.pos_x + m->player.dir_x
+	// 		* (MOVE_SPEED);
+	// 	testy = m->player.pos_y + m->player.dir_y
+	// 		* (MOVE_SPEED);
+	// 	ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
+	// }
 
 	next_x = m->player.pos_x;
 	next_y = m->player.pos_y;
@@ -137,10 +138,12 @@ void	move_player_bonus(t_mlx *m)
   */
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
-	if (x < 0)
-		mlx_mouse_move(m->win, DEFAULT_X, y);
-	else if (x > DEFAULT_X)
-		mlx_mouse_move(m->win, 0, y);
+	if (x < 10) // in MAC (x < 0)
+		// mlx_mouse_move(m->win, DEFAULT_X, y); // MAC version
+		mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y); // Linux version
+	else if (x > DEFAULT_X - 10) // in MAC (x > DEFAULT_X)
+		// mlx_mouse_move(m->win, 0, y); // MAC version
+		mlx_mouse_move(m->mlx, m->win, 11, y); // Linux version
 	if (m->cur.x > x + 2)
 		m->player.motion_rot = -2;
 	else if (m->cur.x < x - 2)
