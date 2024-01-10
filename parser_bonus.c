@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 10:57:04 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 14:18:01 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 	}
 	while (j < (ft_strlen(str) * 2 + 1))
 	{
+		if (is_brank(&str[i]))
+		{
+			ret [j++] = 10;
+			break ;
+		}
 		ret[j] = str[i];
 		if (str[i] == 0 && nb_line == data->map_size.y - 1)
 			ret[j] = 10;
@@ -61,6 +66,8 @@ static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 		j++;
 	}
 	ret[j] = '\0';
+	if ((int)ft_strlen(ret) > data->map_size.x)
+		data->map_size.x = (int)ft_strlen(ret);
 	return (ret);
 }
 
@@ -97,6 +104,31 @@ static char	**obtain_map(t_data **data, int fd)
 	return (ret);
 }
 
+void	obtain_y_minimap(t_data **data)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	while ((*data)->minimap[i] && is_brank((*data)->minimap[i]))
+		i++;
+	(*data)->pos_map = i;
+	while ((*data)->minimap[i])
+	{
+		if (is_brank((*data)->minimap[i]))
+		{
+			while ((*data)->minimap[i] && is_brank((*data)->minimap[i]))
+				i++;
+			if (!(*data)->minimap[i])
+				break ;
+		}
+		i++;
+		ret++;
+	}
+	(*data)->map_size.y = ret;
+}
+
 char	**parser_bonus(char *map_name, t_data *data)
 {
 	char	**tab;
@@ -114,8 +146,13 @@ char	**parser_bonus(char *map_name, t_data *data)
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
 		return (free_2dimension(tab), free_2dimension(data->minimap));//error obtain_map failed
+	// for (int i = 0; data->minimap[i]; i++)
+	// {
+	// 	printf("%s", data->minimap[i]);
+	// }
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET), free_2dimension(tab), free_2dimension(data->minimap));//error
+	obtain_y_minimap(&data);
 	return (tab);
 }

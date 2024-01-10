@@ -99,7 +99,7 @@ typedef struct s_data
 	char	*tex_path[4];
 	//bonus part
 	char	**minimap;
-	int		blocksize;
+	double	blocksize;
 }				t_data;
 
 /**

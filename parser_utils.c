@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 11:35:32 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/10 13:35:31 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	is_brank(char *line)
 	i = 0;
 	while (line && line[i])
 	{
-		printf("is_brank: %d\n", line[i]);
 		if (line[i] != 32 && line[i] != '\n')
 			return (0);
 		i++;
