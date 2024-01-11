@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/10 20:24:42 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:23:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char *argv[])
 	raycast(&m.ray, &m.player, &m);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion_bonus, &m);
-	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion, &m);
+	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion_bonus, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_hook(m.win, ON_MOUSEMOVE, X_POINTERMOTION, &mouse_rotation_bonus, &m);
 

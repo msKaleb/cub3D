@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:32:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/08 22:32:46 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:06:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int	get_text_x_coord(t_mlx *m, int width)
 // if (m->ray.side == 1 && m->ray.dir_y > 0) -> north side
 static int	get_texture_index(t_mlx *m)
 {
+	if (m->ray.is_wall == 2)
+		return (4);
 	if (m->ray.side == 0 && m->ray.dir_x > 0)
 		return (2);
 	if (m->ray.side == 0 && m->ray.dir_x < 0)
@@ -70,6 +72,7 @@ void	print_wall_line(t_mlx *m, t_texture *t, int x)
 	int		index;
 
 	index = get_texture_index(m);
+	// if (index == 4) return; // leaves a black square
 	t[index].text_x_coord = get_text_x_coord(m, t[index].text_w);
 	step = (double)t[index].text_h / (double)m->ray.line_height;
 	text_pos = (m->ray.line_first_px - DEFAULT_Y / 2 \
@@ -101,6 +104,8 @@ void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 	while (++i < MAX_TEXTURES)
 	{
 		path = data->tex_path[i];
+		if (i == 4)
+			path = "textures/door.xpm";
 		text[i].texture = mlx_xpm_file_to_image(m->mlx, path,
 				&text[i].text_w, &text[i].text_h);
 		if (!text[i].texture)

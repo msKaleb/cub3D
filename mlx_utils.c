@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 10:01:14 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:23:00 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	set_motion(int key_code, t_mlx *m)
   */
 int	release_motion(int key_code, t_mlx *m)
 {
+	
 	if (key_code == XK_W)
 		m->player.motion_ns = 0;
 	else if (key_code == XK_S)
@@ -88,5 +89,8 @@ int	release_motion(int key_code, t_mlx *m)
 		m->player.motion_rot = -0;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
+	// else if (key_code == XK_SPACE)
+	// 	if (get_type(m) == 2)
+	// 		ft_fprintf(1, "Door!\n");	
 	return (0);
 }

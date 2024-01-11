@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:47:09 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/10 16:54:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:23:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	get_step_and_side(t_raycast *ray, t_player *player)
  */
 static void	dda(t_raycast *ray, t_player *player)
 {
+	ray->is_wall = 0;
 	while (ray->is_wall == 0)
 	{
 		if (ray->side_x < ray->side_y)
@@ -70,11 +71,11 @@ static void	dda(t_raycast *ray, t_player *player)
 		if (ray->map_y >= player->height || ray->map_x >= player->width
 			|| ray->map_y < 0 || ray->map_x < 0)
 			break ;
-		if (player->map[ray->map_y][ray->map_x] == '1'
-			|| player->map[ray->map_y][ray->map_x] == '2')
+		if (player->map[ray->map_y][ray->map_x] == '1')
 			ray->is_wall = 1;
+		else if (player->map[ray->map_y][ray->map_x] == '2')
+			ray->is_wall = 2;
 	}
-	ray->is_wall = 0;
 }
 
 /**

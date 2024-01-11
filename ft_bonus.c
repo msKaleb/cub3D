@@ -91,6 +91,44 @@ int	set_motion_bonus(int key_code, t_mlx *m)
 }
 
 /**
+ * @brief set of events on key release
+  */
+int	release_motion_bonus(int key_code, t_mlx *m)
+{
+	
+	if (key_code == XK_W)
+		m->player.motion_ns = 0;
+	else if (key_code == XK_S)
+		m->player.motion_ns = -0;
+	else if (key_code == XK_A)
+		m->player.motion_ew = -0;
+	else if (key_code == XK_D)
+		m->player.motion_ew = 0;
+	else if (key_code == XK_LEFT)
+		m->player.motion_rot = -0;
+	else if (key_code == XK_RIGHT)
+		m->player.motion_rot = 0;
+	else if (key_code == XK_SPACE)
+		if (get_type(m) == 2)
+			ft_fprintf(1, "Door!\n");	
+	return (0);
+}
+
+int	get_type(t_mlx *m)
+	{
+		double	testx, testy;
+		char	c;
+
+		testx = m->player.pos_x + m->player.dir_x
+			* (MOVE_SPEED);
+		testy = m->player.pos_y + m->player.dir_y
+			* (MOVE_SPEED);
+		// ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
+		c = m->player.map[(int)testy][(int)testx];
+		return (c - '0');
+	}
+
+/**
  * @brief calculates the next position of the player
  * and checks if it's inside a wall (collisions)
   */
@@ -109,7 +147,6 @@ void	move_player_bonus(t_mlx *m)
 	// 		* (MOVE_SPEED);
 	// 	ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
 	// }
-
 	next_x = m->player.pos_x;
 	next_y = m->player.pos_y;
 	if (m->player.motion_ns != 0)
