@@ -85,8 +85,8 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 	player->motion_rot = 0;
 	player->width = (double)data->map_size.x;
 	player->height = (double)data->map_size.y;
-	player->height = count_rows(player->map);
 	player->data = data;
+	player->height = count_rows(player->map);
 	load_textures(player->text, m, data);
 }
 

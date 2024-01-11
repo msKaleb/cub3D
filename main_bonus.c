@@ -66,11 +66,13 @@ int	main(int argc, char *argv[])
 	m.cur.x = 0;
 	m.cur.y = 0;
 	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
-	mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
-	mlx_mouse_hide(m.mlx, m.win);
+	// mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
+	// mlx_mouse_hide(m.mlx, m.win);
+	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
+	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	raycast(&m.ray, &m.player, &m);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion_bonus, &m);

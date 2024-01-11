@@ -100,6 +100,7 @@ typedef struct s_data
 	//bonus part
 	char	**minimap;
 	double	blocksize;
+	int		flag_mmap;//1 is corner, 0 is center
 }				t_data;
 
 /**

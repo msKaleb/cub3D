@@ -16,12 +16,19 @@
 static void	print_player(t_mlx *m, t_data *data, t_point point, t_point size)
 {
 	t_point	pos;
+	t_point	start;
 
 	pos.x = ((point.x + 1) * data->blocksize - size.x);
-	while (pos.x < (((point.x + 1) * data->blocksize) + data->blocksize))
+	if (!data->flag_mmap)
+		pos.x += (DEFAULT_X / 2) - ((data->map_size.x * data->blocksize) / 2) - 1;
+	start.x = pos.x;
+	while (pos.x < (start.x + data->blocksize))
 	{
 		pos.y = ((point.y - data->pos_map + 1) * data->blocksize - size.y);
-		while (pos.y < (((point.y - data->pos_map + 1) * data->blocksize) + data->blocksize))
+		if (!data->flag_mmap)
+			pos.y += (DEFAULT_Y / 2) - ((data->map_size.y * data->blocksize) / 2) - 1;
+		start.y = pos.y;
+		while (pos.y < (start.y + data->blocksize))
 		{
 			// print_pixel(m, pos, 0x00000000);
 			print_pixel(m, pos, 0x00FF8300);
