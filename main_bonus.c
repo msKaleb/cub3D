@@ -66,6 +66,8 @@ int	main(int argc, char *argv[])
 	m.cur.x = 0;
 	m.cur.y = 0;
 	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
+
+	//241011nimai: commented 2 lines, because when started the program, start rolling camara
 	// mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
 	// mlx_mouse_hide(m.mlx, m.win);
 	// printf("Line: %d / %s\n", __LINE__, __FILE__);
