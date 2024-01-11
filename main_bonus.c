@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/10 14:05:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:24:42 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	main(int argc, char *argv[])
 	init_mlx(&m);
 	m.cur.x = 0;
 	m.cur.y = 0;
-	mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2);//for linux
-	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2);//for macOS
+	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
+	mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
+	mlx_mouse_hide(m.mlx, m.win);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
