@@ -128,9 +128,11 @@ void	move_player_bonus(t_mlx *m)
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 0)
-		mlx_mouse_move(m->win, DEFAULT_X, y);
+		mlx_mouse_move(m->mlx, m->win, DEFAULT_X, y);
+		// mlx_mouse_move(m->win, DEFAULT_X, y);//for macOS
 	else if (x > DEFAULT_X)
-		mlx_mouse_move(m->win, 0, y);
+		mlx_mouse_move(m->mlx, m->win, 0, y);
+		// mlx_mouse_move(m->win, 0, y);
 	if (m->cur.x > x + 2)
 		m->player.motion_rot = -2;
 	else if (m->cur.x < x - 2)

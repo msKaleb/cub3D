@@ -65,7 +65,8 @@ int	main(int argc, char *argv[])
 	init_mlx(&m);
 	m.cur.x = 0;
 	m.cur.y = 0;
-	mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2);
+	mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2);//for linux
+	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2);//for macOS
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
