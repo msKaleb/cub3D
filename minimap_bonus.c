@@ -81,7 +81,7 @@ static void	draw_minimap(t_mlx *m, t_data *data)
 void	minimap(t_mlx *m, t_data *data)
 {
 	//for now switch the map munual
-	data->flag_mmap = 0;
+	data->flag_mmap = 1;
 	// locate_player(m, data);
 	data->pt_person.x = (int)round(m->player.pos_x * 2);
 	data->pt_person.y = (int)round(m->player.pos_y * 2);
