@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:32:54 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 15:51:12 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/11 16:11:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	draw_minimap(t_mlx *m, t_data *data)
 				print_one_block(m, data, i, 0x00FFFFFF);
 			else if (data->minimap[i.y][i.x] == '1')
 				print_one_block(m, data, i, 0x00000000);
+			else if (data->minimap[i.y][i.x] == '2')
+				print_one_block(m, data, i, 0x004169E1);
 			else if (data->minimap[i.y][i.x] == '0')
 				print_one_block(m, data, i, 0x00FFFFFF);
 			if (i.y == (data->pt_person.y) && i.x == (data->pt_person.x))

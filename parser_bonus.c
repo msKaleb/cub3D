@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 16:18:58 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/11 15:42:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static char	**obtain_map(t_data **data, int fd)
 	{
 		if (i[0] >= (*data)->pos_map)
 		{
-			ret[i[1]] = ft_strdup(str);
+			ret[i[1]] = ft_strdup(str); // leaks
 			(*data)->minimap[i[2]] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
 			(*data)->minimap[i[2] + 1] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
 			if (!ret[i[1]] || !(*data)->minimap[i[2]] || !(*data)->minimap[++i[2]])

@@ -109,8 +109,9 @@ int	release_motion_bonus(int key_code, t_mlx *m)
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
 	else if (key_code == XK_SPACE)
-		if (get_type(m) == 2)
-			ft_fprintf(1, "Door!\n");	
+		if (get_type(m) == 2){
+			m->player.map[m->ray.map_y][m->ray.map_x] = 'D';
+			ft_fprintf(1, "Door!\n");}
 	return (0);
 }
 
@@ -125,6 +126,8 @@ int	get_type(t_mlx *m)
 			* (MOVE_SPEED);
 		// ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
 		c = m->player.map[(int)testy][(int)testx];
+		// if (c == 'D') // fails
+		// 	c = '2';
 		return (c - '0');
 	}
 
@@ -137,16 +140,6 @@ void	move_player_bonus(t_mlx *m)
 	double	next_x;
 	double	next_y;
 
-	// this is to check what kind of square is in front of us 
-	// TODO put into another function
-	// {
-	// 	double	testx, testy;
-	// 	testx = m->player.pos_x + m->player.dir_x
-	// 		* (MOVE_SPEED);
-	// 	testy = m->player.pos_y + m->player.dir_y
-	// 		* (MOVE_SPEED);
-	// 	ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
-	// }
 	next_x = m->player.pos_x;
 	next_y = m->player.pos_y;
 	if (m->player.motion_ns != 0)
@@ -163,7 +156,7 @@ void	move_player_bonus(t_mlx *m)
 		next_y = m->player.pos_y + m->player.dir_x
 			* (MOVE_SPEED * -m->player.motion_ew / 2);
 	}
-	if (m->player.map[(int)next_y][(int)next_x] == 'F') // && '2' when flag == open
+	if (ft_strchr("FD", m->player.map[(int)next_y][(int)next_x])) // && '2' when flag == open
 	{
 		m->player.pos_x = next_x;
 		m->player.pos_y = next_y;
@@ -182,9 +175,9 @@ int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 		// mlx_mouse_move(m->win, 0, y); // MAC version
 		mlx_mouse_move(m->mlx, m->win, 11, y); // Linux version
 	if (m->cur.x > x + 2)
-		m->player.motion_rot = -2;
+		m->player.motion_rot = -1;
 	else if (m->cur.x < x - 2)
-		m->player.motion_rot = 2;
+		m->player.motion_rot = 1;
 	else
 		m->player.motion_rot = 0;
 	m->cur.x = x;

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/11 13:23:14 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:50:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,11 @@ int	main(int argc, char *argv[])
 	// printf("\n\nfinish write map to minimap\n");
 	// exit(0);
 	init_mlx(&m);
-	m.cur.x = 0;
-	m.cur.y = 0;
+	m.cur.x = DEFAULT_X / 2;
+	m.cur.y = DEFAULT_Y / 2;
 	// mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
-
-	//241011nimai: commented 2 lines, because when started the program, start rolling camara
-	// mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
-	// mlx_mouse_hide(m.mlx, m.win);
+	mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
+	mlx_mouse_hide(m.mlx, m.win);
 	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
