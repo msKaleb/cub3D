@@ -265,4 +265,5 @@ int		get_rgb(char *str);
   */
 void	flood_fill(char **tab, t_point size, t_point begin);
 
+
 #endif /* FT_CUB3D_H */

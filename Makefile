@@ -57,6 +57,7 @@ SRC_B	=	main_bonus.c \
 			minimap_bonus.c \
 			minimap_utils_bonus.c \
 			ft_bonus.c \
+			sprite.c \
 
 OBJ_C	=	$(SRC_C:.c=.o)
 

@@ -64,12 +64,12 @@ static void	draw_minimap(t_mlx *m, t_data *data)
 			if (data->minimap[i.y][i.x] == 'E' || \
 			data->minimap[i.y][i.x] == 'S' || \
 			data->minimap[i.y][i.x] == 'N' || \
-			data->minimap[i.y][i.x] == 'W')
+			data->minimap[i.y][i.x] == 'W'|| data->minimap[i.y][i.x] == '0')
 				print_one_block(m, data, i, 0x00FFFFFF);
 			else if (data->minimap[i.y][i.x] == '1')
 				print_one_block(m, data, i, 0x00000000);
-			else if (data->minimap[i.y][i.x] == '0')
-				print_one_block(m, data, i, 0x00FFFFFF);
+			else if (data->minimap[i.y][i.x] == '3')
+				print_one_block(m, data, i, 0x00FF0000);
 			if (i.y == (data->pt_person.y) && i.x == (data->pt_person.x))
 				draw_player(m, i, data);
 			i.x++;

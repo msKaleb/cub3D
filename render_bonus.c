@@ -58,6 +58,7 @@ int	render_frame_bonus(t_mlx *m)
 	mlx_destroy_image(m->mlx, m->img);
 	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	raycast(&m->ray, &m->player, m);
+	sprite(m, m->player.data);
 	minimap(m, m->player.data);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 	return (0);

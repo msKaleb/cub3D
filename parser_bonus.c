@@ -34,6 +34,7 @@ static void	init_data(t_data **data)
 	(*data)->ceiling_col = -1;
 	(*data)->floor_col = -1;
 	(*data)->blocksize = 3;
+	(*data)->num_sprite = 0;
 }
 
 static char	*obtain_double_str(char *str, t_data *data, int nb_line)
@@ -151,6 +152,10 @@ char	**parser_bonus(char *map_name, t_data *data)
 	// 	printf("%s", data->minimap[i]);
 	// }
 	flood_fill(tab, data->map_size, data->pt_person);
+	for (int i = 0; tab[i]; i++)
+	{
+		printf("%s", tab[i]);
+	}
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET), free_2dimension(tab), free_2dimension(data->minimap));//error
 	obtain_y_minimap(&data);

@@ -3,7 +3,7 @@
 static void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
-		|| (tab[cur.y][cur.x] != to_fill && tab[cur.y][cur.x] != '2'))
+		|| (tab[cur.y][cur.x] != to_fill && tab[cur.y][cur.x] != '2' && tab[cur.y][cur.x] != '3'))
 		return ;
 	if (tab[cur.y][cur.x] == to_fill)
 		tab[cur.y][cur.x] = 'F';

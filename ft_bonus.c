@@ -16,7 +16,9 @@ static int	count_cols_bonus(t_data **data, char *line)
 			(*data)->pt_person.y = (*data)->map_size.y;
 			(*data)->dir_person = line[i];
 		}
-		else if (line[i] && line[i] != '0' && line[i] != '1' && line[i] != '2' && line[i] != 32 && line[i] != 10)
+		else if (line[i] == '3')
+			(*data)->num_sprite++;
+		else if (line[i] && !(line[i] >= '0' && line[i] <= '3') && line[i] != 32 && line[i] != 10)
 		{
 			printf("%sMap has invalid letter%s\n", RED, RESET);
 			return(-1);//map invalid (wrong letter)
@@ -39,6 +41,68 @@ static int	check_each_line_bonus(t_data **data, char *line, int i)
 	return (0);
 }
 
+int	obtain_path_bonus(t_data **data, char *line)
+{
+	int	i;
+
+	i = 0;
+	//move to the next line if there is only '\n'
+
+	//240110 has been removed
+	// if (!line || (line[i] && line[i] == 10))
+	// 	return (1);
+
+	while (line[i] && is_space(line[i]))
+		i++;
+	if (!line || !line[i] || (line[i] && line[i] == 10))
+		return (1);
+	if (!(*data)->tex_path[0] && !ft_strncmp(&line[i], "NO ", 3))
+		return ((*data)->tex_path[0] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[1] && !ft_strncmp(&line[i], "SO ", 3))
+		return ((*data)->tex_path[1] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[2] && !ft_strncmp(&line[i], "WE ", 3))
+		return ((*data)->tex_path[2] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[3] && !ft_strncmp(&line[i], "EA ", 3))
+		return ((*data)->tex_path[3] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[4] && !ft_strncmp(&line[i], "S1 ", 3))
+		return ((*data)->tex_path[4] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[5] && !ft_strncmp(&line[i], "S2 ", 3))
+		return ((*data)->tex_path[5] = ft_strdup(line + (i + 3)), 0);
+	else if (!(*data)->tex_path[6] && !ft_strncmp(&line[i], "S3 ", 3))
+		return ((*data)->tex_path[6] = ft_strdup(line + (i + 3)), 0);
+	else if ((*data)->floor_col == -1 && !ft_strncmp(&line[i], "F ", 2))
+		return ((*data)->floor_col = get_rgb(line + (i + 2)));
+	else if ((*data)->ceiling_col == -1 && !ft_strncmp(&line[i], "C ", 2))
+		return ((*data)->ceiling_col = get_rgb(line + (i + 2)));
+	return (-1);
+}
+
+/**
+ *@note check before start the main map
+ *@note 240111nimai: at this moment, texture for stripe is required as well
+  */
+static int	check_paths_bonus(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_TEXTURES)
+	{
+		if (data->tex_path[i] == NULL)
+		{
+			// printf("%sI don't have enough texture%s\n", GREEN, RESET);
+			return (0);
+		}
+		i++;
+	}
+	if (data->ceiling_col == -1 || data->floor_col == -1)
+	{
+		// printf("%sI don't have enough colour%s\n", GREEN, RESET);
+		return (0);
+	}
+	return (1);
+}
+
 int	check_map_bonus(t_data **data, char *map_name)
 {
 	char	*line;
@@ -52,13 +116,13 @@ int	check_map_bonus(t_data **data, char *map_name)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (check_paths(*data)/*  && !is_brank(line) */)
+		if (check_paths_bonus(*data)/*  && !is_brank(line) */)
 		{
 			if (check_each_line_bonus(data, line, i) == -1)
 				return (close(fd), free (line), -1);
 		}
 		else
-			if (obtain_path(data, line) == -1)
+			if (obtain_path_bonus(data, line) == -1)
 				return (close(fd), free (line), -1);//error path incorrect
 		free(line);
 		line = get_next_line(fd);

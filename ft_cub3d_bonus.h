@@ -52,7 +52,7 @@
 # define DEFAULT_Y 		600.0
 # define MOVE_SPEED		0.07
 # define ROTATION_SPEED	0.03
-# define MAX_TEXTURES	4
+# define MAX_TEXTURES	7 //to put animated sprite
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN			2
@@ -96,11 +96,12 @@ typedef struct s_data
 	int		floor_col;
 	int		ceiling_col;
 	char	dir_person;
-	char	*tex_path[4];
+	char	*tex_path[MAX_TEXTURES];
 	//bonus part
 	char	**minimap;
 	double	blocksize;
 	int		flag_mmap;//1 is corner, 0 is center
+	int		num_sprite;
 }				t_data;
 
 /**
@@ -267,5 +268,7 @@ int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
 void	move_player_bonus(t_mlx *m);
 
+//sprite
+void	sprite(t_mlx *m, t_data *data);
 
 #endif /* FT_CUB3D_H */

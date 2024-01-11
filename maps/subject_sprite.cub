@@ -2,6 +2,9 @@ NO textures/wolfenstein/grey_stone.xpm
 SO textures/wolfenstein/purple_stone.xpm
 WE textures/wolfenstein/red_brick.xpm
 EA textures/wolfenstein/wood.xpm
+S1 textures/animation/barrel1.xpm
+S2 textures/animation/barrel2.xpm
+S3 textures/animation/barrel3.xpm
 
 F 0,0,0
 C 225,30,0

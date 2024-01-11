@@ -72,8 +72,8 @@ void	draw_player(t_mlx *m, t_point i, t_data *data)
 {
 	t_point	size;
 
-	size.x = 1;
-	size.y = 1;
+	size.x = 0;
+	size.y = 0;
 	if (data->minimap[i.y][i.x] == '1')
 		draw_player_on_edge(m, i, data, size);
 	else if (data->minimap[i.y][i.x] == '0' && (data->minimap[i.y][i.x - 1] == '1' || data->minimap[i.y - 1][i.x] == '1' || data->minimap[i.y - 1][i.x - 1] == '1'))
