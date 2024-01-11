@@ -213,7 +213,6 @@ int		close_mlx(t_mlx *m);
 int		err_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
-int		get_type(t_mlx *m);
 
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);
@@ -227,6 +226,8 @@ void	rotate_player(t_mlx *m);
 // void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
+
+char	*get_type(t_mlx *m);
 
 /**
  * @brief parser

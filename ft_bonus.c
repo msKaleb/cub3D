@@ -95,40 +95,45 @@ int	set_motion_bonus(int key_code, t_mlx *m)
   */
 int	release_motion_bonus(int key_code, t_mlx *m)
 {
-	
+	char	*current;
+	char	*to_check;
+
+	current = &m->player.map[(int)m->player.pos_y][(int)m->player.pos_x];
 	if (key_code == XK_W)
 		m->player.motion_ns = 0;
 	else if (key_code == XK_S)
-		m->player.motion_ns = -0;
+		m->player.motion_ns = 0;
 	else if (key_code == XK_A)
-		m->player.motion_ew = -0;
+		m->player.motion_ew = 0;
 	else if (key_code == XK_D)
 		m->player.motion_ew = 0;
 	else if (key_code == XK_LEFT)
-		m->player.motion_rot = -0;
+		m->player.motion_rot = 0;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
 	else if (key_code == XK_SPACE)
-		if (get_type(m) == 2){
-			m->player.map[m->ray.map_y][m->ray.map_x] = 'D';
-			ft_fprintf(1, "Door!\n");}
+	{
+		to_check = get_type(m);
+ 		if (*to_check == '2')
+			*to_check = 'D';
+		else if (*to_check == 'D' && current != to_check)
+			*to_check = '2';
+	}
 	return (0);
 }
 
-int	get_type(t_mlx *m)
+char	*get_type(t_mlx *m)
 	{
 		double	testx, testy;
-		char	c;
+		char	*c;
 
 		testx = m->player.pos_x + m->player.dir_x
-			* (MOVE_SPEED);
+			* (MOVE_SPEED * 10);
 		testy = m->player.pos_y + m->player.dir_y
-			* (MOVE_SPEED);
+			* (MOVE_SPEED * 10);
 		// ft_fprintf(1, "type: %c\n", m->player.map[(int)testy][(int)testx]);
-		c = m->player.map[(int)testy][(int)testx];
-		// if (c == 'D') // fails
-		// 	c = '2';
-		return (c - '0');
+		c = &m->player.map[(int)testy][(int)testx];
+		return (c);
 	}
 
 /**
