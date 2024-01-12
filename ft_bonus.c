@@ -173,12 +173,12 @@ void	move_player_bonus(t_mlx *m)
   */
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
-	if (x < 10) // in MAC (x < 0)
-		// mlx_mouse_move(m->win, DEFAULT_X, y); // MAC version
-		mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y); // Linux version
-	else if (x > DEFAULT_X - 10) // in MAC (x > DEFAULT_X)
-		// mlx_mouse_move(m->win, 0, y); // MAC version
-		mlx_mouse_move(m->mlx, m->win, 11, y); // Linux version
+	if (x < 0) // in MAC (x < 0) // in Linux (x < 10)
+		mlx_mouse_move(m->win, DEFAULT_X, y); // MAC version
+		// mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y); // Linux version
+	else if (x > DEFAULT_X) // in MAC (x > DEFAULT_X) // in Linux (x > DEFAULT_X - 10)
+		mlx_mouse_move(m->win, 0, y); // MAC version
+		// mlx_mouse_move(m->mlx, m->win, 11, y); // Linux version
 	if (m->cur.x > x + 2)
 		m->player.motion_rot = -1;
 	else if (m->cur.x < x - 2)
