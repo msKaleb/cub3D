@@ -86,6 +86,8 @@ int	set_motion_bonus(int key_code, t_mlx *m)
 		m->player.motion_rot = -1;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 1;
+	else if (key_code == XK_UP)
+		m->player.shot_flag = 1;
 	render_frame_bonus(m);
 	return (0);
 }

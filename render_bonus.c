@@ -45,7 +45,23 @@
 // mlx_string_put(m->mlx, m->win, 20, 20, 0x00FFFFFF, ns);
 // mlx_string_put(m->mlx, m->win, 20, 40, 0x00FFFFFF, ew);
 
+void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
+{
+	int	x;
+	int	y;
 
+	if (*frame == 50)
+	{
+		*frame = 1;
+		m->player.shot_flag = 0;
+	}
+	x = DEFAULT_X / 2 - weapon[0].width / 2;
+	y = DEFAULT_Y - weapon[0].height;
+	print_image(m, &weapon[*frame / 10], x, y);
+	if (m->player.shot_flag == 1)
+		*frame += 1;
+	// mlx_put_image_to_window(m->mlx, m->win, weapon[0].img,x, y);
+}
 
 
 /**
@@ -60,5 +76,6 @@ int	render_frame_bonus(t_mlx *m)
 	raycast(&m->ray, &m->player, m);
 	minimap(m, m->player.data);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+	render_weapon(m, m->player.weapon, &m->player.wframe);
 	return (0);
 }

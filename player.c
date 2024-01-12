@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 09:45:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:57:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 	player->motion_ns = 0;
 	player->motion_ew = 0;
 	player->motion_rot = 0;
+	player->wframe = 0;
+	player->shot_flag = 0;
 	player->width = (double)data->map_size.x;
 	player->height = (double)data->map_size.y;
 	player->data = data;
