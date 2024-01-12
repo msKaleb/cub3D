@@ -1,10 +1,10 @@
 NO textures/wolfenstein/grey_stone.xpm
 SO textures/wolfenstein/grey_stone.xpm
-WE textures/wolfenstein/mossy.xpm
-EA textures/wolfenstein/mossy.xpm
+WE textures/wolfenstein/grey_stone.xpm
+EA textures/wolfenstein/grey_stone.xpm
 
-F 146,116,91
-C 135,206,235
+F 113,113,113
+C 56,56,56
 
                                                             
                                                             
