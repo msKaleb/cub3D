@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/11 15:42:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:39:48 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,10 @@ char	**parser_bonus(char *map_name, t_data *data)
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (printf("%smap is not closed%s\n", RED, RESET), free_2dimension(tab), free_2dimension(data->minimap));//error
+	// for (int i = 0; tab[i]; i++)
+	// {
+	// 	printf("%s", tab[i]);
+	// }
 	obtain_y_minimap(&data);
 	return (tab);
 }
