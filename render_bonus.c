@@ -57,7 +57,8 @@ void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 	}
 	x = DEFAULT_X / 2 - weapon[0].width / 2;
 	y = DEFAULT_Y - weapon[0].height;
-	print_image(m, &weapon[*frame / 10], x, y);
+	// print_image(m, &weapon[*frame / 10], x, y);//for linux
+	mlx_put_image_to_window(m->mlx, m->win, weapon[*frame / 10].img,x, y);//for mac
 	if (m->player.shot_flag == 1)
 		*frame += 1;
 	// mlx_put_image_to_window(m->mlx, m->win, weapon[0].img,x, y);

@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 13:35:31 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/12 14:00:03 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	is_overflow(char **map, t_data *data)
 		i++;
 	if (map[j][0] == 32 || map[j][0] == 10)
 		j++;
-	if (ft_strchr(map[j], 'F') || ft_strchr(map[data->map_size.y - 1 - i], 'F'))
+	if (ft_strchr(map[j], 'F') || ft_strchr(map[data->map_size.y - 1 - i], 'F') || ft_strchr(map[j], '2') || ft_strchr(map[data->map_size.y - 1 - i], '2'))
 	{
 		printf("the first or the last line\n");
 		return (-1);
@@ -76,7 +76,7 @@ int	is_overflow(char **map, t_data *data)
 	i = 0;
 	while (map[i] && i < data->map_size.y)
 	{
-		if (map[i][0] == 'F' || map[i][(int)ft_strlen(map[i]) - 2] == 'F')
+		if (map[i][0] == 'F' || map[i][(int)ft_strlen(map[i]) - 2] == 'F' || map[i][0] == '2' || map[i][(int)ft_strlen(map[i]) - 2] == '2')
 		{
 			printf("the right or the left edge\n");
 			return (-1);
