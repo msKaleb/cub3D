@@ -6,4 +6,3 @@
 -Limitar la velocidad de movimiento al framerate
 -mlx_new_image() para almacenar el mapa y después mlx_put_image_to_window()
 
--maps/sample/good/test_map.cub segfaults -------

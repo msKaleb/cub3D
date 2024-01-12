@@ -6,13 +6,13 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:32:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/11 15:43:28 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:30:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
 
-static int	darken_color(int color)
+/* static int	darken_color(int color)
 {
 	int	darker;
 	int	rgb[3];
@@ -22,7 +22,7 @@ static int	darken_color(int color)
 	rgb[2] = ((color >> 0) & 0xFF) / 2;
 	darker = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
 	return (darker);
-}
+} */
 
 static int	get_text_x_coord(t_mlx *m, int width)
 {
@@ -83,8 +83,8 @@ void	print_wall_line(t_mlx *m, t_texture *t, int x)
 		text_pos += step;
 		color = ((int *)t[index].text_addr) \
 			[t[index].text_h * t[index].text_y_coord + t[index].text_x_coord];
-		if (m->ray.side == 0)
-			color = darken_color(color);
+		/* if (m->ray.side == 0)
+			color = darken_color(color); */
 		print_pixel(m, (t_point){x, y++}, color);
 	}
 }

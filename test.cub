@@ -1,7 +1,7 @@
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO textures/wolfenstein/grey_stone.xpm
+SO textures/wolfenstein/grey_stone.xpm
+WE textures/wolfenstein/mossy.xpm
+EA textures/wolfenstein/mossy.xpm
 
 F 146,116,91
 C 135,206,235

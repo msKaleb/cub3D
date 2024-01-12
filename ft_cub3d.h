@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/11 13:19:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:57:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,10 +168,24 @@ typedef struct s_texture
 	int		text_x_coord;
 	int		text_y_coord;
 }				t_texture;
+
+typedef struct s_sprite
+{
+	void	*img;
+	void	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		bpp_div;
+	int		size_line;
+	int		endian;
+}				t_sprite;
+
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
 	t_texture	text[MAX_TEXTURES];
+	t_sprite	weapon[5]; // could be a 2d array to change weapons
 	t_data		*data;
 	t_mlx		*m;
 
@@ -187,6 +201,8 @@ typedef struct s_player
 	int			motion_ns;
 	int			motion_ew;
 	int			motion_rot;
+	int			wframe;
+	int			shot_flag;
 
 	char		dir;
 	char		**map;
