@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:06:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/13 23:51:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:21:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ void	free_map(t_player *player)
 	free(player->map);
 }
 
-t_initial_dir	get_dir(char dir)
+t_dir	get_dir(char dir)
 {
 	if (dir == 'N')
-		return ((t_initial_dir){{0, -1, 1, 0}});
+		return ((t_dir){{0, -1, 1, 0}});
 	else if (dir == 'S')
-		return ((t_initial_dir){{0, 1, -1, 0}});
+		return ((t_dir){{0, 1, -1, 0}});
 	else if (dir == 'W')
-		return ((t_initial_dir){{-1, 0, 0, -1}});
+		return ((t_dir){{-1, 0, 0, -1}});
 	else if (dir == 'E')
-		return ((t_initial_dir){{1, 0, 0, 1}});
+		return ((t_dir){{1, 0, 0, 1}});
 	else
-		return ((t_initial_dir){{0, -1, 1, 0}});
+		return ((t_dir){{0, -1, 1, 0}});
 }

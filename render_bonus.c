@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/14 00:10:33 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/14 00:11:58 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_cub3d_bonus.h"
 
 /**
@@ -73,7 +85,7 @@ void	load_weapon(t_mlx *m, t_sprite *weapon)
 	char	**gun;
 	int		i;
 
-	gun = (char*[5]){"sprites/pistol/pistol1.xpm",
+	gun = (char *[5]){"sprites/pistol/pistol1.xpm",
 		"sprites/pistol/pistol2.xpm",
 		"sprites/pistol/pistol3.xpm",
 		"sprites/pistol/pistol4.xpm",
@@ -81,8 +93,10 @@ void	load_weapon(t_mlx *m, t_sprite *weapon)
 	i = 0;
 	while (i < 5)
 	{
-		weapon[i].img = mlx_xpm_file_to_image(m->mlx, gun[i], &weapon[i].width, &weapon[i].height);
-		weapon[i].addr = mlx_get_data_addr(weapon[i].img, &weapon[i].bpp, &weapon[i].size_line, &weapon[i].endian);
+		weapon[i].img = mlx_xpm_file_to_image(m->mlx, gun[i],
+				&weapon[i].width, &weapon[i].height);
+		weapon[i].addr = mlx_get_data_addr(weapon[i].img, &weapon[i].bpp,
+				&weapon[i].size_line, &weapon[i].endian);
 		weapon[i].bpp_div = weapon[i].bpp / 8;
 		i++;
 	}

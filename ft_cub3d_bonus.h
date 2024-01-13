@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cub3d_bonus.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/14 00:23:59 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_CUB3D_BONUS_H
 # define FT_CUB3D_BONUS_H
 
@@ -87,6 +99,7 @@ typedef struct s_point
 * @param tex_path[1]: south
 * @param tex_path[2]: west
 * @param tex_path[3]: east
+* @param flag_mmap: 1 is corner, 0 is center
 */
 typedef struct s_data
 {
@@ -99,10 +112,10 @@ typedef struct s_data
 	int		ceiling_col;
 	char	dir_person;
 	char	*tex_path[4];
-	//bonus part
+
 	char	**minimap;
 	double	blocksize;
-	int		flag_mmap;//1 is corner, 0 is center
+	int		flag_mmap;
 }				t_data;
 
 /**
@@ -171,7 +184,7 @@ typedef struct s_sprite
 typedef struct s_player
 {
 	t_texture	text[MAX_TEXTURES];
-	t_sprite	weapon[5]; // could be a 2d array to change weapons
+	t_sprite	weapon[5];
 	t_data		*data;
 	t_mlx		*m;
 
@@ -194,10 +207,10 @@ typedef struct s_player
 	char		**map;
 }				t_player;
 
-typedef struct s_initial_dir
+typedef struct s_dir
 {
 	double	orientation[4];
-}				t_initial_dir;
+}				t_dir;
 
 /* minilibx structure */
 typedef struct s_mlx
@@ -247,7 +260,7 @@ void	*free_data(t_data *data);
 
 char	*get_type(t_mlx *m);
 
-t_initial_dir	get_dir(char dir);
+t_dir	get_dir(char dir);
 
 /**
  * @brief parser
@@ -283,7 +296,6 @@ void	minimap(t_mlx *m, t_data *data);
 
 // void	draw_player(t_mlx *m, t_point i, char **minimap);
 void	draw_player(t_mlx *m, t_point i, t_data *data);
-
 
 // bonus functions
 int		check_map_bonus(t_data **data, char *map_name);

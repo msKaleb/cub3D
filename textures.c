@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:32:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/12 13:16:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:16:26 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	print_wall_line(t_mlx *m, t_texture *t, int x)
 
 /**
  * @brief load the textures from the .cub file
+ * @note trim_non_ascii from 0 to MAX_TEXTURES - 1 to avoid crash, 
+ * the last texture is for the door and it is not in the array
+ * @todo use strdup in path??
   */
 void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 {
@@ -98,12 +101,12 @@ void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 	int		i;
 
 	i = -1;
-	trim_non_ascii(data->tex_path, MAX_TEXTURES - 1); // - 1 to avoid crash
+	trim_non_ascii(data->tex_path, MAX_TEXTURES - 1);
 	while (++i < MAX_TEXTURES)
 	{
 		path = data->tex_path[i];
 		if (i == 4)
-			path = "textures/door.xpm"; // use strdup?
+			path = "textures/door.xpm";
 		text[i].texture = mlx_xpm_file_to_image(m->mlx, path,
 				&text[i].text_w, &text[i].text_h);
 		if (!text[i].texture)

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/13 23:49:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:22:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ typedef struct s_sprite
 typedef struct s_player
 {
 	t_texture	text[MAX_TEXTURES];
-	t_sprite	weapon[5]; // could be a 2d array to change weapons
+	t_sprite	weapon[5];
 	t_data		*data;
 	t_mlx		*m;
 
@@ -208,10 +208,10 @@ typedef struct s_player
 	char		**map;
 }				t_player;
 
-typedef struct s_initial_dir
+typedef struct s_dir
 {
 	double	orientation[4];
-}				t_initial_dir;
+}				t_dir;
 
 /* minilibx structure */
 typedef struct s_mlx
@@ -232,6 +232,8 @@ typedef struct s_mlx
 }				t_mlx;
 
 /* Functions prototipes */
+t_dir	get_dir(char dir);
+
 int		release_motion(int key_code, t_mlx *m);
 int		set_motion(int key_code, t_mlx *m);
 int		render_frame(t_mlx *m);
@@ -257,8 +259,6 @@ void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
 void	*free_data(t_data *data);
-
-t_initial_dir	get_dir(char dir);
 
 /**
  * @brief parser

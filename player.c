@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/13 23:59:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:21:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	count_rows(char **map)
   */
 void	init_player(t_player *player, t_data *data, t_mlx *m)
 {
-	t_initial_dir	dir;
+	t_dir	dir;
 
 	dir = get_dir(player->dir);
 	player->pos_x = (double)data->pt_person.x + 0.5;

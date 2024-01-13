@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/14 00:13:45 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_cub3d_bonus.h"
 
 /**
@@ -49,7 +61,7 @@ int	release_motion_bonus(int key_code, t_mlx *m)
 	else if (key_code == XK_SPACE)
 	{
 		to_check = get_type(m);
- 		if (*to_check == '2')
+		if (*to_check == '2')
 			*to_check = 'D';
 		else if (*to_check == 'D' && current != to_check)
 			*to_check = '2';
@@ -58,17 +70,18 @@ int	release_motion_bonus(int key_code, t_mlx *m)
 }
 
 char	*get_type(t_mlx *m)
-	{
-		double	testx, testy;
-		char	*c;
+{
+	double	testx;
+	double	testy;
+	char	*c;
 
-		testx = m->player.pos_x + m->player.dir_x
-			* (MOVE_SPEED * 10);
-		testy = m->player.pos_y + m->player.dir_y
-			* (MOVE_SPEED * 10);
-		c = &m->player.map[(int)testy][(int)testx];
-		return (c);
-	}
+	testx = m->player.pos_x + m->player.dir_x
+		* (MOVE_SPEED * 10);
+	testy = m->player.pos_y + m->player.dir_y
+		* (MOVE_SPEED * 10);
+	c = &m->player.map[(int)testy][(int)testx];
+	return (c);
+}
 
 /**
  * @brief calculates the next position of the player

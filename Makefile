@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/13 23:32:00 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/14 00:27:13 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ OS		=	$(shell uname -s)
 
 NAME	=	cub3D
 
-#MAIN	=	main.c \
-
 # Common sources
 SRC_C	=	errors.c \
 			mlx_utils.c \
@@ -48,8 +46,6 @@ SRC_C	=	errors.c \
 # Mandatory sources
 SRC_M	=	main.c \
 			parser.c \
-	
-#MAIN_B	=	main_bonus.c #for now
 
 SRC_B	=	main_bonus.c \
 			parser_bonus.c \
@@ -65,8 +61,6 @@ OBJ_M	=	$(SRC_M:.c=.o)
 
 OBJ_B	=	$(SRC_B:.c=.o)
 
-#OBJ_MB	=	$(MAIN_B:.c=.o)
-
 CC		=	gcc
 
 LIBFT	=	libft/libft.a
@@ -78,8 +72,6 @@ ifeq ($(OS), Linux)
 # Linux
 	ECHO = echo -e
 	CCOBJ = $(WWW) -I/usr/include -I./minilibx_linux -O3 -c $< -o $@
-#	CCOBJ = $(WWW) -I/usr/include -Imlx_linux -O3 -c $< -o $@
-#	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 	MLXDIR = minilibx_linux/
 	MLX = $(MLXDIR)libmlx_Linux.a
@@ -142,12 +134,12 @@ bonus:		.bonus
 
 clean:
 			$(RM) $(OBJ_C) $(OBJ_B) $(OBJ_M)
-#			make clean -sC libft/
-#			make clean -sC $(MLXDIR)
+			make clean -sC libft/
+			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-#			make fclean -sC libft/
+			make fclean -sC libft/
 
 re:			fclean $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/13 23:59:16 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:09:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 {
 	(void)x;
 	(void)y;
-
 	if (button == 1)
 		m->player.shot_flag = 1;
 	return (0);
@@ -43,17 +42,13 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 	init_mlx(&m);
 	m.cur.x = DEFAULT_X / 2;
 	m.cur.y = DEFAULT_Y / 2;
-	mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
-	// mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
+	mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2);
 	mlx_mouse_hide(m.mlx, m.win);
-	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	load_weapon(&m, &m.player.weapon[0]);
-	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	raycast(&m.ray, &m.player, &m);
-	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_mouse_hook(m.win, mouse_hook, &m);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion_bonus, &m);
 	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion_bonus, &m);
@@ -99,7 +94,7 @@ int	main(int argc, char *argv[])
 	free_2dimension(m.player.map);
 	free_2dimension(data.minimap);
 	free_data(&data);
-	return(0);
+	return (0);
 }
 
 /**

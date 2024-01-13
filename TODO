@@ -1,8 +1,6 @@
 -quitar -Wno-deprecated de makefile de minilibx
--controlar relink en bonus
+-controlar relink en bonus sin archivo .bonus
 -Quitar todos los "//DELETE"
 -Check si los pasos de texturas son valiabres (existe, tiene perimso?)
 -Buscar todo malloc, calloc, strdup, etc. por todo el código
--Limitar la velocidad de movimiento al framerate
--mlx_new_image() para almacenar el mapa y después mlx_put_image_to_window()
-
+-Comprobar norma, incluyendo makefile
