@@ -1,50 +1,56 @@
 #include "ft_cub3d_bonus.h"
 
 /**
-* @brief In order to know where to put the vertex, we calculate the offset
-* using the values filled by the 'mlx_get_data_addr()' function:
-* bits per pixel, size of line, and the endian value, then we use the formula
-* '(y * size_line) + (x * (bits_per_pixel / 8))' to change the atributes
-* of a specific pixel.
- */
-// void	print_pixel(t_mlx *m, t_point p, int color)
-// {
-// 	char	*ptr;
-// 	int		offset;
+ * @brief a replace for mlx_put_image_to_window(), because
+ * it does not manage transparency in linux
+  */
+void	print_image(t_mlx *m, t_sprite *img, int x, int y)
+{
+	int	i;
+	int	j;
+	int	color;
 
-// 	if (p.x < 0 || p.y < 0)
-// 		return ;
-// 	if (p.x > DEFAULT_X || p.y > DEFAULT_Y)
-// 		return ;
-// 	offset = (p.y * m->sl) + (p.x * (m->bpp / 8));
-// 	ptr = m->addr + offset;
-// 	*(unsigned int *)ptr = mlx_get_color_value(m->mlx, color);
-// }
+	i = 0;
+	while (i < img->height)
+	{
+		j = 0;
+		while (j < img->width)
+		{
+			color = *(unsigned int *)
+				(img->addr + (j * img->size_line) + (i * img->bpp_div));
+			if (color >= 0)
+				print_pixel(m, (t_point){i + x, j + y}, color);
+			j++;
+		}
+		i++;
+	}
+}
 
 /**
- * @brief for each x coordinate, prints the corresponding line,
- * starting with the ceiling (first loop), next the portion
- * corresponding to the wall (print_wall_line()), and finally a
- * loop for the floor portion
+ * @brief render the sprite of the weapon
+ * @note MAC version
   */
-// void	print_line(t_raycast *ray, t_mlx *m, int x)
-// {
-// 	int	y;
+/* void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
+{
+	int	x;
+	int	y;
 
-// 	y = 0;
-// 	while (y < ray->line_first_px)
-// 		print_pixel(m, (t_point){x, y++}, ray->ceiling_col);
-// 	print_wall_line(m, m->player.text, x);
-// 	y += ray->line_height;
-// 	while (y < DEFAULT_Y)
-// 		print_pixel(m, (t_point){x, y++}, ray->floor_col);
-// }
+	if (*frame == 50)
+	{
+		*frame = 1;
+		m->player.shot_flag = 0;
+	}
+	x = DEFAULT_X / 2 - weapon[0].width / 2;
+	y = DEFAULT_Y - weapon[0].height;
+	mlx_put_image_to_window(m->mlx, m->win, weapon[*frame / 10].img,x, y);
+	if (m->player.shot_flag == 1)
+		*frame += 1;
+} */
 
-// char *ns = ft_itoa(m->player.motion_ns);
-// char *ew = ft_itoa(m->player.motion_ew);
-// mlx_string_put(m->mlx, m->win, 20, 20, 0x00FFFFFF, ns);
-// mlx_string_put(m->mlx, m->win, 20, 40, 0x00FFFFFF, ew);
-
+/**
+ * @brief render the sprite of the weapon
+ * @note Linux version
+  */
 void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 {
 	int	x;
@@ -57,13 +63,30 @@ void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 	}
 	x = DEFAULT_X / 2 - weapon[0].width / 2;
 	y = DEFAULT_Y - weapon[0].height;
-	// print_image(m, &weapon[*frame / 10], x, y);//for linux
-	mlx_put_image_to_window(m->mlx, m->win, weapon[*frame / 10].img,x, y);//for mac
+	print_image(m, &weapon[*frame / 10], x, y);
 	if (m->player.shot_flag == 1)
 		*frame += 1;
-	// mlx_put_image_to_window(m->mlx, m->win, weapon[0].img,x, y);
 }
 
+void	load_weapon(t_mlx *m, t_sprite *weapon)
+{
+	char	**gun;
+	int		i;
+
+	gun = (char*[5]){"sprites/pistol/pistol1.xpm",
+		"sprites/pistol/pistol2.xpm",
+		"sprites/pistol/pistol3.xpm",
+		"sprites/pistol/pistol4.xpm",
+		"sprites/pistol/pistol5.xpm"};
+	i = 0;
+	while (i < 5)
+	{
+		weapon[i].img = mlx_xpm_file_to_image(m->mlx, gun[i], &weapon[i].width, &weapon[i].height);
+		weapon[i].addr = mlx_get_data_addr(weapon[i].img, &weapon[i].bpp, &weapon[i].size_line, &weapon[i].endian);
+		weapon[i].bpp_div = weapon[i].bpp / 8;
+		i++;
+	}
+}
 
 /**
  * @brief refreshes the frame and applies character movement

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/11 13:23:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/13 23:29:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	init_mlx(t_mlx *m)
 	if (m->img == NULL)
 		exit(err_mlx(m));
 	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
+	m->cur.x = DEFAULT_X / 2;
+	m->cur.y = DEFAULT_Y / 2;
+	mlx_mouse_move(m->mlx, m->win, m->cur.x, m->cur.y);
+	mlx_mouse_hide(m->mlx, m->win);
 }
 
 /**
@@ -76,7 +80,6 @@ int	set_motion(int key_code, t_mlx *m)
   */
 int	release_motion(int key_code, t_mlx *m)
 {
-	
 	if (key_code == XK_W)
 		m->player.motion_ns = 0;
 	else if (key_code == XK_S)
@@ -89,8 +92,5 @@ int	release_motion(int key_code, t_mlx *m)
 		m->player.motion_rot = -0;
 	else if (key_code == XK_RIGHT)
 		m->player.motion_rot = 0;
-	// else if (key_code == XK_SPACE)
-	// 	if (get_type(m) == 2)
-	// 		ft_fprintf(1, "Door!\n");	
 	return (0);
 }

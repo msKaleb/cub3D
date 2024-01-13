@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/10 15:04:52 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/13 23:32:00 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC_B	=	main_bonus.c \
 			minimap_bonus.c \
 			minimap_utils_bonus.c \
 			ft_bonus.c \
+			player_bonus.c \
 
 OBJ_C	=	$(SRC_C:.c=.o)
 

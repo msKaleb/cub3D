@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/12 11:57:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/13 23:59:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,7 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 {
 	t_initial_dir	dir;
 
-	if (player->dir == 'N')
-		dir = (t_initial_dir){{0, -1, 1, 0}};
-	else if (player->dir == 'S')
-		dir = (t_initial_dir){{0, 1, -1, 0}};
-	else if (player->dir == 'W')
-		dir = (t_initial_dir){{-1, 0, 0, -1}};
-	else if (player->dir == 'E')
-		dir = (t_initial_dir){{1, 0, 0, 1}};
+	dir = get_dir(player->dir);
 	player->pos_x = (double)data->pt_person.x + 0.5;
 	player->pos_y = (double)data->pt_person.y + 0.5;
 	player->dir_x = 0 + dir.orientation[0];
@@ -87,8 +80,9 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 	player->shot_flag = 0;
 	player->width = (double)data->map_size.x;
 	player->height = (double)data->map_size.y;
-	player->data = data;
 	player->height = count_rows(player->map);
+	player->data = data;
+	m->player.dir = data->dir_person;
 	load_textures(player->text, m, data);
 }
 

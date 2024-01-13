@@ -236,15 +236,18 @@ void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_wall_line(t_mlx *m, t_texture *t, int x);
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
+void	init_raycast(t_raycast *ray, t_data *data);
 void	trim_non_ascii(char **tab, int rows);
 void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
-// void	move_player(t_mlx *m);
+void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
 void	*free_data(t_data *data);
 
 char	*get_type(t_mlx *m);
+
+t_initial_dir	get_dir(char dir);
 
 /**
  * @brief parser
@@ -288,8 +291,8 @@ int		release_motion_bonus(int key_code, t_mlx *m);
 int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
 
-void	move_player_bonus(t_mlx *m);
 void	print_image(t_mlx *m, t_sprite *img, int x, int y);
-
+void	load_weapon(t_mlx *m, t_sprite *weapon);
+void	move_player_bonus(t_mlx *m);
 
 #endif /* FT_CUB3D_H */

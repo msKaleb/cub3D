@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/13 13:23:25 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/14 00:01:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-
-void	init_raycast(t_raycast *ray, t_data *data)
-{
-	ray->cam_x = 0;
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->delta_x = 0;
-	ray->delta_y = 0;
-	ray->side_x = 0;
-	ray->side_y = 0;
-	ray->perp_wall_dist = 0;
-	ray->map_x = 0;
-	ray->map_y = 0;
-	ray->step_x = 0;
-	ray->step_y = 0;
-	ray->line_height = 0;
-	ray->is_wall = 0;
-	ray->side = 0;
-	ray->ceiling_col = data->ceiling_col;
-	ray->floor_col = data->floor_col;
-}
 
 int	main(int argc, char *argv[])
 {
@@ -50,7 +29,6 @@ int	main(int argc, char *argv[])
 	}
 	init_mlx(&m);
 	init_raycast(&m.ray, &data);
-	m.player.dir = data.dir_person;
 	init_player(&m.player, &data, &m);
 	raycast(&m.ray, &m.player, &m);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion, &m);

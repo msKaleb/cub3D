@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:06:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 10:06:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/13 23:51:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,27 @@ void	trim_non_ascii(char **tab, int rows)
 	}
 }
 
+void	init_raycast(t_raycast *ray, t_data *data)
+{
+	ray->cam_x = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->delta_x = 0;
+	ray->delta_y = 0;
+	ray->side_x = 0;
+	ray->side_y = 0;
+	ray->perp_wall_dist = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->line_height = 0;
+	ray->is_wall = 0;
+	ray->side = 0;
+	ray->ceiling_col = data->ceiling_col;
+	ray->floor_col = data->floor_col;
+}
+
 void	free_map(t_player *player)
 {
 	int	i;
@@ -58,4 +79,18 @@ void	free_map(t_player *player)
 		i++;
 	}
 	free(player->map);
+}
+
+t_initial_dir	get_dir(char dir)
+{
+	if (dir == 'N')
+		return ((t_initial_dir){{0, -1, 1, 0}});
+	else if (dir == 'S')
+		return ((t_initial_dir){{0, 1, -1, 0}});
+	else if (dir == 'W')
+		return ((t_initial_dir){{-1, 0, 0, -1}});
+	else if (dir == 'E')
+		return ((t_initial_dir){{1, 0, 0, 1}});
+	else
+		return ((t_initial_dir){{0, -1, 1, 0}});
 }
