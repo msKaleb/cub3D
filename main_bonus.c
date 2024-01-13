@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/12 13:53:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:54:17 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	main(int argc, char *argv[])
 		return (err_arg_number());//error incorrect file format 
 	m.player.map = parser_bonus(argv[1], &data);
 	if (!m.player.map)
+	{
+		free_data(&data);
 		return (printf("Failed map loading\n"), 1);
+	}
 	// for(int i = 0; m.player.map[i]; i++)
 	// {
 	// 	printf("%s", m.player.map[i]);
@@ -137,6 +140,8 @@ int	main(int argc, char *argv[])
 
 	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);
-	// free_2dimension(map);
+	free_2dimension(m.player.map);
+	free_2dimension(data.minimap);
+	free_data(&data);
 	return(0);
 }

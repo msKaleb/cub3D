@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2023/12/29 18:04:21 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/13 10:15:35 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,19 @@ void	*free_2dimension(char **strs)//function name??
 		strs[i] = NULL;
 	}
 	free(strs);
+	return (NULL);
+}
+
+void	*free_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free (data->tex_path[i]);
+		data->tex_path[i] = NULL;
+		i++;
+	}
 	return (NULL);
 }

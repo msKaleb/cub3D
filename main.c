@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 09:56:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:23:25 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int	main(int argc, char *argv[])
 		return (err_arg_number());
 	m.player.map = parser(argv[1], &data);
 	if (!m.player.map)
+	{
+		free_data(&data);
 		return (err_map());
+	}
 	init_mlx(&m);
 	init_raycast(&m.ray, &data);
 	m.player.dir = data.dir_person;
@@ -55,5 +58,7 @@ int	main(int argc, char *argv[])
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop_hook(m.mlx, &render_frame, &m);
 	mlx_loop(m.mlx);
+	free_2dimension(m.player.map);
+	free_data(&data);
 	return (0);
 }

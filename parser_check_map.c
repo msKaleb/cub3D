@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/10 16:17:56 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/13 12:51:57 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,9 @@ int	check_map(t_data **data, char *map_name)
 		if (check_paths(*data)/*  && !is_brank(line) */)
 		{
 			if (check_each_line(data, line, i) == -1)
-				return (close(fd), free (line), -1);
+			{
+				return (free (line), close(fd), -1);
+			}
 		}
 		else
 			if (obtain_path(data, line) == -1)

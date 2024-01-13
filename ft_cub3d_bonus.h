@@ -242,6 +242,7 @@ void	rotate_player(t_mlx *m);
 // void	move_player(t_mlx *m);
 void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
+void	*free_data(t_data *data);
 
 char	*get_type(t_mlx *m);
 
