@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:23:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:53:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,15 +231,16 @@ typedef struct s_mlx
 }				t_mlx;
 
 /* Functions prototipes */
+t_dir	get_dir(char dir);
 
 int		release_motion(int key_code, t_mlx *m);
 int		set_motion(int key_code, t_mlx *m);
-int		render_frame(t_mlx *m);
+int		err_mlx(t_mlx *m, char *msg);
 int		render_frame_bonus(t_mlx *m);
+int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
 int		close_mlx(t_mlx *m);
-int		err_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
 
@@ -260,7 +261,6 @@ void	*free_data(t_data *data);
 
 char	*get_type(t_mlx *m);
 
-t_dir	get_dir(char dir);
 
 /**
  * @brief parser

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:22:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:58:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,14 +236,13 @@ t_dir	get_dir(char dir);
 
 int		release_motion(int key_code, t_mlx *m);
 int		set_motion(int key_code, t_mlx *m);
+int		err_mlx(t_mlx *m, char *msg);
 int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
 int		close_mlx(t_mlx *m);
-int		err_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
-// int		get_type(t_mlx *m);
 
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);

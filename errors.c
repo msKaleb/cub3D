@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:17:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 10:05:57 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:51:09 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ int	err_file(char *file)
 	return (1);
 }
 
-int	err_mlx(t_mlx *m)
+int	err_mlx(t_mlx *m, char *msg)
 {
-	printf("%sError on minilbx%s\n", RED, RESET);
+	if (!msg)
+		printf("%sError on minilbx%s\n", RED, RESET);
+	else
+		printf("%s%s%s\n", RED, msg, RESET);
 	close_mlx(m);
 	return (1);
 }

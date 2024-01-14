@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/12 14:00:03 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/14 19:49:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int	is_overflow(char **map, t_data *data)
 	i = 0;
 	while (map[i] && i < data->map_size.y)
 	{
+		// this line throws an 'Invalid read of size 1' valgrind error,
+		// if ft_strlen(map[i]) is less than 2 (eg '\n'), tries to read at map[i][-1]
+		// couldn't we skip lines with just a '\n' character?
 		if (map[i][0] == 'F' || map[i][(int)ft_strlen(map[i]) - 2] == 'F' || map[i][0] == '2' || map[i][(int)ft_strlen(map[i]) - 2] == '2')
 		{
 			printf("the right or the left edge\n");

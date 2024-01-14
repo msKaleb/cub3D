@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:32:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:16:26 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:01:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,10 @@ void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 		text[i].texture = mlx_xpm_file_to_image(m->mlx, path,
 				&text[i].text_w, &text[i].text_h);
 		if (!text[i].texture)
-			exit(printf("Error loading texture: %s\n", path));
+			exit(err_mlx(m, "Error loading textures"));
 		text[i].text_addr = mlx_get_data_addr(text[i].texture,
 				&text[i].bpp, &text[i].size_line, &text[i].endian);
+		if (!text[i].text_addr)
+			exit(err_mlx(m, "Error getting texture address"));
 	}
 }

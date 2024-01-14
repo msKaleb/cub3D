@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 10:45:46 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:54:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,10 @@ int	close_mlx(t_mlx *m)
 /**
  * @brief initializes the mlx instance, 
  * firstly to NULL to avoid potential double frees
+ * MAC version: mlx_mouse_move(m.win, m->cur.x, m->cur.y);
   */
 void	init_mlx(t_mlx *m)
 {
-	int	i;
-	
-	i = -1;
-	while (++i < MAX_TEXTURES)
-	{
-		m->player.text[i].texture = NULL;
-		m->player.weapon[i].img = NULL;
-	}
 	m->mlx = NULL;
 	m->win = NULL;
 	m->img = NULL;
@@ -63,9 +56,10 @@ void	init_mlx(t_mlx *m)
 		"cub3D Project - nimai & msoria-j");
 	if (m->win != NULL)
 		m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
-	if (m->img == NULL)
-		exit(err_mlx(m));
-	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
+	if (m->img != NULL)
+		m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
+	if (m->addr == NULL)
+		exit(err_mlx(m, NULL));
 	m->cur.x = DEFAULT_X / 2;
 	m->cur.y = DEFAULT_Y / 2;
 	mlx_mouse_move(m->mlx, m->win, m->cur.x, m->cur.y);

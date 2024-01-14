@@ -6,39 +6,25 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:21:24 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:49:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft_cub3d_bonus.h"
 #include "ft_cub3d.h"
 
-// for debugging purposes
-// printf("x %f y %f w %f h %f\n", next_x,
-// 	next_y, player->width, player->height);
-
-// this is the check for the collisions in bonus part
-// @brief check if the coming move is out of bounds or into a wall
-/* if (player->map[(int)next_y][(int)next_x] == 'F')
+static void	init_textures(t_player *player)
 {
-	player->pos_x = next_x;
-	player->pos_y = next_y;
-} */
-
-/**
- * @brief check if the coming move is out of bounds or into a wall
-  */
-static void	validate_pos(t_player *player, double next_x, double next_y)
-{
-	if ((next_x >= 0 && next_y >= 0)
-		&& (next_x <= player->width + 1 && next_y <= player->height + 1))
+	int	i;
+	
+	i = -1;
+	while (++i < MAX_TEXTURES)
 	{
-		player->pos_x = next_x;
-		player->pos_y = next_y;
+		player->text[i].texture = NULL;
+		player->weapon[i].img = NULL;
 	}
 }
-
-int	count_rows(char **map)
+	
+/* static */ int	count_rows(char **map)
 {
 	int	i;
 	int	flag;
@@ -66,9 +52,11 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 {
 	t_dir	dir;
 
-	dir = get_dir(player->dir);
+	init_textures(&m->player);
+	player->dir = data->dir_person;
 	player->pos_x = (double)data->pt_person.x + 0.5;
 	player->pos_y = (double)data->pt_person.y + 0.5;
+	dir = get_dir(player->dir);
 	player->dir_x = 0 + dir.orientation[0];
 	player->dir_y = 0 + dir.orientation[1];
 	player->plane_x = 0.66 * dir.orientation[2];
@@ -82,22 +70,8 @@ void	init_player(t_player *player, t_data *data, t_mlx *m)
 	player->height = (double)data->map_size.y;
 	player->height = count_rows(player->map);
 	player->data = data;
-	m->player.dir = data->dir_person;
 	load_textures(player->text, m, data);
 }
-
-/* int	has_to_move(int key_code)
-{
-	long	*keys;
-	int		i;
-
-	i = -1;
-	keys = (long [6]){XK_W, XK_A, XK_S, XK_D, XK_LEFT, XK_RIGHT};
-	while (++i < 6)
-		if (key_code == keys[i])
-			return (1);
-	return (0);
-} */
 
 void	move_player(t_mlx *m)
 {
@@ -120,8 +94,14 @@ void	move_player(t_mlx *m)
 		next_y = m->player.pos_y + m->player.dir_x
 			* (MOVE_SPEED * -m->player.motion_ew / 2);
 	}
-	validate_pos(&m->player, next_x, next_y);
+	if ((next_x >= 0 && next_y >= 0)
+		&& (next_x <= m->player.width + 1 && next_y <= m->player.height + 1))
+	{
+		m->player.pos_x = next_x;
+		m->player.pos_y = next_y;
+	}
 }
+// validate_pos(&m->player, next_x, next_y);
 
 // rotation matrix:
 // [ cos(a) -sin(a) ]

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:06:36 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:21:24 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:22:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ t_dir	get_dir(char dir)
 		return ((t_dir){{-1, 0, 0, -1}});
 	else if (dir == 'E')
 		return ((t_dir){{1, 0, 0, 1}});
-	else
-		return ((t_dir){{0, -1, 1, 0}});
+	err_map();
+	return ((t_dir){{0, -1, 1, 0}});
 }
