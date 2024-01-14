@@ -52,7 +52,7 @@ void	init_mlx_bonus(t_mlx *m)
 	if (m->win != NULL)
 		m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	if (m->img == NULL)
-		exit(err_mlx(m));
+		exit(err_mlx_bonus(m));
 	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
 	m->cur.x = DEFAULT_X / 2;
 	m->cur.y = DEFAULT_Y / 2;

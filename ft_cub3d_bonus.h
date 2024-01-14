@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 17:35:14 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:54:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,8 +237,8 @@ typedef struct s_mlx
 // int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
-// int		close_mlx(t_mlx *m);
-int		err_mlx(t_mlx *m);	// bonus??
+int		close_mlx(t_mlx *m);
+// int		err_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
 
@@ -304,6 +304,7 @@ int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
 int		render_frame_bonus(t_mlx *m);
 int		close_mlx_bonus(t_mlx *m);
+int		err_mlx_bonus(t_mlx *m);
 
 void	load_textures_bonus(t_texture *text, t_mlx *m, t_data *data);
 void	init_player_bonus(t_player *player, t_data *data, t_mlx *m);

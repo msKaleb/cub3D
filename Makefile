@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/14 17:23:41 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/14 17:59:05 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,24 +30,25 @@ OS		=	$(shell uname -s)
 NAME	=	cub3D
 
 # Common sources
-SRC_C	=	errors.c \
-			flood_fill.c \
+SRC_C	=	flood_fill.c \
 			free_memory.c \
 			raycast.c \
+			errors.c \
+			render.c \
 			parser_utils.c \
 			parser_check_map.c \
 			parser_get_rgb.c \
+			mlx_utils.c \
+			textures.c \
+			player.c \
 			utils.c \
 
 # Mandatory sources
 SRC_M	=	main.c \
 			parser.c \
-			render.c \
-			player.c \
-			textures.c \
-			mlx_utils.c \
 
 SRC_B	=	main_bonus.c \
+			errors_bonus.c \
 			parser_bonus.c \
 			render_bonus.c \
 			minimap_bonus.c \
