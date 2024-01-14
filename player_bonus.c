@@ -6,68 +6,13 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:13:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:36:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d_bonus.h"
 
-/**
- * @brief set of events on key press
-  */
-int	set_motion_bonus(int key_code, t_mlx *m)
-{
-	if (key_code == XK_ESCAPE)
-		close_mlx(m);
-	if (key_code == XK_W)
-		m->player.motion_ns = 1;
-	else if (key_code == XK_S)
-		m->player.motion_ns = -1;
-	else if (key_code == XK_A)
-		m->player.motion_ew = 1;
-	else if (key_code == XK_D)
-		m->player.motion_ew = -1;
-	else if (key_code == XK_LEFT)
-		m->player.motion_rot = -1;
-	else if (key_code == XK_RIGHT)
-		m->player.motion_rot = 1;
-	else if (key_code == XK_UP)
-		m->player.shot_flag = 1;
-	render_frame_bonus(m);
-	return (0);
-}
 
-/**
- * @brief set of events on key release
-  */
-int	release_motion_bonus(int key_code, t_mlx *m)
-{
-	char	*current;
-	char	*to_check;
-
-	current = &m->player.map[(int)m->player.pos_y][(int)m->player.pos_x];
-	if (key_code == XK_W)
-		m->player.motion_ns = 0;
-	else if (key_code == XK_S)
-		m->player.motion_ns = 0;
-	else if (key_code == XK_A)
-		m->player.motion_ew = 0;
-	else if (key_code == XK_D)
-		m->player.motion_ew = 0;
-	else if (key_code == XK_LEFT)
-		m->player.motion_rot = 0;
-	else if (key_code == XK_RIGHT)
-		m->player.motion_rot = 0;
-	else if (key_code == XK_SPACE)
-	{
-		to_check = get_type(m);
-		if (*to_check == '2')
-			*to_check = 'D';
-		else if (*to_check == 'D' && current != to_check)
-			*to_check = '2';
-	}
-	return (0);
-}
 
 char	*get_type(t_mlx *m)
 {
@@ -113,6 +58,34 @@ void	move_player_bonus(t_mlx *m)
 		m->player.pos_x = next_x;
 		m->player.pos_y = next_y;
 	}
+}
+
+/**
+ * @brief initialize the struct with parameters from the map
+ * @note add .5 to the position to place it in the center of the tile
+  */
+void	init_player_bonus(t_player *player, t_data *data, t_mlx *m)
+{
+	t_dir	dir;
+
+	dir = get_dir(player->dir);
+	player->pos_x = (double)data->pt_person.x + 0.5;
+	player->pos_y = (double)data->pt_person.y + 0.5;
+	player->dir_x = 0 + dir.orientation[0];
+	player->dir_y = 0 + dir.orientation[1];
+	player->plane_x = 0.66 * dir.orientation[2];
+	player->plane_y = 0.66 * dir.orientation[3];
+	player->motion_ns = 0;
+	player->motion_ew = 0;
+	player->motion_rot = 0;
+	player->wframe = 0;
+	player->shot_flag = 0;
+	player->width = (double)data->map_size.x;
+	player->height = (double)data->map_size.y;
+	// player->height = count_rows(player->map);
+	player->data = data;
+	m->player.dir = data->dir_person;
+	load_textures_bonus(player->text, m, data);
 }
 
 /**

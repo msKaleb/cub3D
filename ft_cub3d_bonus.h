@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:23:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:35:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,29 +232,28 @@ typedef struct s_mlx
 
 /* Functions prototipes */
 
-int		release_motion(int key_code, t_mlx *m);
-int		set_motion(int key_code, t_mlx *m);
-int		render_frame(t_mlx *m);
-int		render_frame_bonus(t_mlx *m);
+// int		release_motion(int key_code, t_mlx *m);
+// int		set_motion(int key_code, t_mlx *m);
+// int		render_frame(t_mlx *m);
 int		err_arg_number(void);
 int		err_file(char *file);
-int		close_mlx(t_mlx *m);
-int		err_mlx(t_mlx *m);
+// int		close_mlx(t_mlx *m);
+int		err_mlx(t_mlx *m);	// bonus??
 int		is_space(char c);
 int		err_map(void);
 
-void	load_textures(t_texture *text, t_mlx *m, t_data *data);
-void	init_player(t_player *player, t_data *data, t_mlx *m);
+// void	load_textures(t_texture *text, t_mlx *m, t_data *data);
+// void	init_player(t_player *player, t_data *data, t_mlx *m);
 void	raycast(t_raycast *ray, t_player *player, t_mlx *m);
 void	print_wall_line(t_mlx *m, t_texture *t, int x);
 void	print_pixel(t_mlx *m, t_point p, int color);
 void	print_line(t_raycast *ray, t_mlx *m, int x);
 void	init_raycast(t_raycast *ray, t_data *data);
 void	trim_non_ascii(char **tab, int rows);
-void	free_map(t_player *player);
+// void	free_map(t_player *player);
 void	rotate_player(t_mlx *m);
-void	move_player(t_mlx *m);
-void	init_mlx(t_mlx *m);
+// void	move_player(t_mlx *m);
+// void	init_mlx(t_mlx *m);
 void	*free_2dimension(char **strs);//function name??
 void	*free_data(t_data *data);
 
@@ -298,13 +297,19 @@ void	minimap(t_mlx *m, t_data *data);
 void	draw_player(t_mlx *m, t_point i, t_data *data);
 
 // bonus functions
+int		mouse_hook(int button, int x, int y, t_mlx *m);
 int		check_map_bonus(t_data **data, char *map_name);
 int		release_motion_bonus(int key_code, t_mlx *m);
 int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
+int		render_frame_bonus(t_mlx *m);
+int		close_mlx_bonus(t_mlx *m);
 
+void	load_textures_bonus(t_texture *text, t_mlx *m, t_data *data);
+void	init_player_bonus(t_player *player, t_data *data, t_mlx *m);
 void	print_image(t_mlx *m, t_sprite *img, int x, int y);
 void	load_weapon(t_mlx *m, t_sprite *weapon);
 void	move_player_bonus(t_mlx *m);
+void	init_mlx_bonus(t_mlx *m);
 
 #endif /* FT_CUB3D_H */

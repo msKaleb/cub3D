@@ -6,20 +6,11 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 10:45:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:31:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d_bonus.h"
-
-int	mouse_hook(int button, int x, int y, t_mlx *m)
-{
-	(void)x;
-	(void)y;
-	if (button == 1)
-		m->player.shot_flag = 1;
-	return (0);
-}
 
 /**
  * @note MAC version
@@ -79,21 +70,18 @@ int	main(int argc, char *argv[])
 		free_data(&data);
 		return (err_map());
 	}
-	init_mlx(&m);
+	init_mlx_bonus(&m);
 	init_raycast(&m.ray, &data);
-	init_player(&m.player, &data, &m);
+	init_player_bonus(&m.player, &data, &m);
 	load_weapon(&m, &m.player.weapon[0]);
 	raycast(&m.ray, &m.player, &m);
 	mlx_mouse_hook(m.win, mouse_hook, &m);
 	mlx_hook(m.win, ON_KEYDOWN, X_KEYPRESS, &set_motion_bonus, &m);
 	mlx_hook(m.win, ON_KEYUP, X_KEYRELEASE, &release_motion_bonus, &m);
-	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
+	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx_bonus, &m);
 	mlx_hook(m.win, ON_MOUSEMOVE, X_POINTERMOTION, &mouse_rotation_bonus, &m);
 	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);
-	// free_2dimension(m.player.map);
-	// free_2dimension(data.minimap);
-	// free_data(&data);
 	return (0);
 }
 

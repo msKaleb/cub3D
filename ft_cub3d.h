@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:22:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:27:57 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # define DEFAULT_Y 		600.0
 # define MOVE_SPEED		0.07
 # define ROTATION_SPEED	0.03
-# define MAX_TEXTURES	5
+# define MAX_TEXTURES	4
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN			2
@@ -169,7 +169,7 @@ typedef struct s_texture
 	int		text_y_coord;
 }				t_texture;
 
-typedef struct s_sprite
+/* typedef struct s_sprite
 {
 	void	*img;
 	void	*addr;
@@ -179,13 +179,13 @@ typedef struct s_sprite
 	int		bpp_div;
 	int		size_line;
 	int		endian;
-}				t_sprite;
+}				t_sprite; */
 
 // the FOV is 2 * atan(0.66/1.0)=66°
 typedef struct s_player
 {
 	t_texture	text[MAX_TEXTURES];
-	t_sprite	weapon[5];
+	// t_sprite	weapon[5];
 	t_data		*data;
 	t_mlx		*m;
 
@@ -243,7 +243,6 @@ int		close_mlx(t_mlx *m);
 int		err_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
-// int		get_type(t_mlx *m);
 
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);
