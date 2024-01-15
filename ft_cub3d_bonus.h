@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 18:53:08 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:50:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,6 @@ void	*free_2dimension(char **strs);//function name??
 void	*free_data(t_data *data);
 
 char	*get_type(t_mlx *m);
-
 
 /**
  * @brief parser

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 10:45:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:51:46 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(m.win, ON_MOUSEMOVE, X_POINTERMOTION, &mouse_rotation_bonus, &m);
 	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);
-	// free_2dimension(m.player.map);
-	// free_2dimension(data.minimap);
-	// free_data(&data);
 	return (0);
 }
 

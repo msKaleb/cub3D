@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 19:49:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:50:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	init_textures(t_player *player)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < MAX_TEXTURES)
 	{
@@ -23,8 +23,8 @@ static void	init_textures(t_player *player)
 		player->weapon[i].img = NULL;
 	}
 }
-	
-/* static */ int	count_rows(char **map)
+
+static int	count_rows(char **map)
 {
 	int	i;
 	int	flag;
