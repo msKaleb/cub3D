@@ -84,7 +84,6 @@ int	obtain_map_minimap(char *str, char **map, t_data **data, int i[3])
 	}
 	replace_spaces(&map[i[1]]);
 	return (0);
-
 }
 
 static char	**obtain_map(t_data **data, int fd)
