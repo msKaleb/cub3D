@@ -243,6 +243,8 @@ int		err_file(char *file);
 int		close_mlx(t_mlx *m);
 int		is_space(char c);
 int		err_map(void);
+int		err_parse(char *msg);
+
 
 void	load_textures(t_texture *text, t_mlx *m, t_data *data);
 void	init_player(t_player *player, t_data *data, t_mlx *m);

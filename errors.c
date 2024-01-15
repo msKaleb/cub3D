@@ -39,3 +39,11 @@ int	err_map(void)
 	printf("%sFailed map loading%s\n", RED, RESET);
 	return (1);
 }
+
+int	err_parse(char *msg)
+{
+	printf("%sERROR: %s%s\n", RED, msg, RESET);
+	
+	// free_data(data);
+	return (-1);
+}
