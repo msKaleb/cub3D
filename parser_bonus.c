@@ -39,33 +39,28 @@ static void	init_data(t_data **data)
 static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 {
 	char	*ret;
-	size_t	i;
-	size_t	j;
+	size_t	i[2];
 
-	i = 0;
-	j = 0;
+	ft_bzero(i, 2 * sizeof(size_t));
 	ret = (char *) ft_calloc(1, (ft_strlen(str) * 2));
 	if (!ret)
+		return (err_parse("failed alloc memory"), NULL);
+	while (i[1] < (ft_strlen(str) * 2 + 1))
 	{
-		errno = ENOMEM;
-		return (NULL);
-	}
-	while (j < (ft_strlen(str) * 2 + 1))
-	{
-		if (is_brank(&str[i]))
+		if (is_brank(&str[i[0]]))
 		{
-			ret [j++] = 10;
+			ret [i[1]++] = 10;
 			break ;
 		}
-		ret[j] = str[i];
-		if (str[i] == 0 && nb_line == data->map_size.y - 1)
-			ret[j] = 10;
-		if (str[i] != 10)
-			ret[++j] = str[i];
-		i++;
-		j++;
+		ret[i[1]] = str[i[0]];
+		if (str[i[0]] == 0 && nb_line == data->map_size.y - 1)
+			ret[i[1]] = 10;
+		if (str[i[0]] != 10)
+			ret[++i[1]] = str[i[0]];
+		i[0]++;
+		i[1]++;
 	}
-	ret[j] = '\0';
+	ret[i[1]] = '\0';
 	if ((int)ft_strlen(ret) > data->map_size.x)
 		data->map_size.x = (int)ft_strlen(ret);
 	return (ret);
@@ -74,8 +69,10 @@ static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 int	obtain_map_minimap(char *str, char **map, t_data **data, int i[3])
 {
 	map[i[1]] = ft_strdup(str);
-	(*data)->minimap[i[2]] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
-	(*data)->minimap[i[2] + 1] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
+	(*data)->minimap[i[2]] = obtain_double_str(str, *data, i[0] - \
+	(*data)->pos_map);
+	(*data)->minimap[i[2] + 1] = obtain_double_str(str, *data, i[0] - \
+	(*data)->pos_map);
 	if (!map[i[1]] || !(*data)->minimap[i[2]] || !(*data)->minimap[i[2] + 1])
 	{
 		free_2dimension(map);
@@ -86,6 +83,16 @@ int	obtain_map_minimap(char *str, char **map, t_data **data, int i[3])
 	return (0);
 }
 
+int	allocate_memories(t_data **data, char ***ret)
+{
+	(*data)->minimap = (char **)ft_calloc(((*data)->map_size.y * 2) + 1, \
+	sizeof(char *));
+	*ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
+	if (!*ret || !(*data)->minimap)
+		return (free_2dimension(*ret), free_2dimension((*data)->minimap), -1);
+	return (0);
+}
+
 static char	**obtain_map(t_data **data, int fd)
 {
 	int		i[3];
@@ -93,10 +100,8 @@ static char	**obtain_map(t_data **data, int fd)
 	char	*str;
 
 	ft_bzero(i, sizeof(int) * 3);
-	(*data)->minimap = (char **)ft_calloc(((*data)->map_size.y * 2) + 1, sizeof(char *));
-	ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
-	if (!ret || !(*data)->minimap)
-		return (close (fd), free_2dimension(ret), free_2dimension((*data)->minimap));
+	if (allocate_memories(data, &ret) == -1)
+		return (close (fd), NULL);
 	str = get_next_line(fd);
 	while (str && i[1] < (*data)->map_size.y && i[2] < \
 	((*data)->map_size.y * 2))
