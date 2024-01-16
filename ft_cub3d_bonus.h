@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 12:54:52 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:10:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,7 @@ int		check_map_bonus(t_data **data, char *map_name);
 int		release_motion_bonus(int key_code, t_mlx *m);
 int		mouse_rotation_bonus(int x, int y, t_mlx *m);
 int		set_motion_bonus(int key_code, t_mlx *m);
+int		close_mlx_bonus(t_mlx *m);
 
 void	print_image(t_mlx *m, t_sprite *img, int x, int y);
 void	load_weapon(t_mlx *m, t_sprite *weapon);

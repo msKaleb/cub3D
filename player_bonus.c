@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 12:58:31 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:12:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	set_motion_bonus(int key_code, t_mlx *m)
 {
 	if (key_code == XK_ESCAPE)
-		close_mlx(m);
+		close_mlx_bonus(m);
 	if (key_code == XK_W)
 		m->player.motion_ns = 1;
 	else if (key_code == XK_S)
