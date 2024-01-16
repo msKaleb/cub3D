@@ -6,10 +6,9 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/16 14:03:15 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 14:12:35 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_cub3d_bonus.h"
 
