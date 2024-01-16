@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:50:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:54:52 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # elif __APPLE__
 #  include "minilibx_opengl/mlx.h"			// MLX for Mac
 #  define XK_ESCAPE 	0x35
-#  define XK_SPACE	 	0x31 //check it
+#  define XK_SPACE	 	0x31
 #  define XK_W 			0x0d
 #  define XK_A 			0x00
 #  define XK_S 			0x01
@@ -64,9 +64,12 @@
 # define DEFAULT_FLOOR	0x92745B
 # define DEFAULT_X 		800.0
 # define DEFAULT_Y 		600.0
-# define MOVE_SPEED		0.07
-# define ROTATION_SPEED	0.03
 # define MAX_TEXTURES	5
+
+# define MOVE_SPEED		0.18		// 0.07 (previous)
+# define ROTATION_SPEED	0.06		// 0.03 (previous)
+# define MAX_WFRAMES	25			// 50 (previous)
+# define DIV_WFRAME		5			// 10 (previous)
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN			2

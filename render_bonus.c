@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:10:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:11:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:11:32 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,32 @@ void	print_image(t_mlx *m, t_sprite *img, int x, int y)
  * @brief render the sprite of the weapon
  * @note MAC version
   */
-/* void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
+void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 {
 	int	x;
 	int	y;
+	int	sprite_number;
 
-	if (*frame == 50)
+	if (*frame == MAX_WFRAMES)
 	{
 		*frame = 1;
 		m->player.shot_flag = 0;
 	}
 	x = DEFAULT_X / 2 - weapon[0].width / 2;
 	y = DEFAULT_Y - weapon[0].height;
-	mlx_put_image_to_window(m->mlx, m->win, weapon[*frame / 10].img,x, y);
+	sprite_number = *frame / DIV_WFRAME;
+	if (sprite_number >= MAX_TEXTURES)
+		sprite_number = MAX_TEXTURES - 1;
+	mlx_put_image_to_window(m->mlx, m->win, weapon[sprite_number].img,x, y);
 	if (m->player.shot_flag == 1)
 		*frame += 1;
-} */
+}
 
 /**
  * @brief render the sprite of the weapon
  * @note Linux version
   */
-void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
+/* void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 {
 	int	x;
 	int	y;
@@ -78,7 +82,7 @@ void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 	print_image(m, &weapon[*frame / 10], x, y);
 	if (m->player.shot_flag == 1)
 		*frame += 1;
-}
+} */
 
 void	load_weapon(t_mlx *m, t_sprite *weapon)
 {

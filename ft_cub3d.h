@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:50:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:54:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@
 # define DEFAULT_FLOOR	0x92745B
 # define DEFAULT_X 		800.0
 # define DEFAULT_Y 		600.0
-# define MOVE_SPEED		0.07
-# define ROTATION_SPEED	0.03
+# define MOVE_SPEED		0.18		// 0.07 (previous)
+# define ROTATION_SPEED	0.06		// 0.03 (previous)
 # define MAX_TEXTURES	5
 
 /* Events and values for mlx_hook */

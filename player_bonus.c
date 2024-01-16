@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:13:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:58:31 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,18 @@ int	release_motion_bonus(int key_code, t_mlx *m)
 	return (0);
 }
 
+/* testx = m->player.pos_x + m->player.dir_x
+	* (MOVE_SPEED * 10);
+testy = m->player.pos_y + m->player.dir_y
+	* (MOVE_SPEED * 10); */
 char	*get_type(t_mlx *m)
 {
 	double	testx;
 	double	testy;
 	char	*c;
 
-	testx = m->player.pos_x + m->player.dir_x
-		* (MOVE_SPEED * 10);
-	testy = m->player.pos_y + m->player.dir_y
-		* (MOVE_SPEED * 10);
+	testx = m->player.pos_x + (1 * m->player.dir_x);
+	testy = m->player.pos_y + (1 * m->player.dir_y);
 	c = &m->player.map[(int)testy][(int)testx];
 	return (c);
 }
@@ -119,7 +121,7 @@ void	move_player_bonus(t_mlx *m)
  * @brief rotates the camera in y axis with the mouse
  * @note MAC version
   */
-/* int	mouse_rotation_bonus(int x, int y, t_mlx *m)
+int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 0)
 		mlx_mouse_move(m->win, DEFAULT_X, y);
@@ -134,13 +136,13 @@ void	move_player_bonus(t_mlx *m)
 	m->cur.x = x;
 	m->cur.y = y;
 	return (0);
-} */
+}
 
 /**
  * @brief rotates the camera in y axis with the mouse
  * @note Linux version
   */
-int	mouse_rotation_bonus(int x, int y, t_mlx *m)
+/* int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 10)
 		mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y);
@@ -155,4 +157,4 @@ int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 	m->cur.x = x;
 	m->cur.y = y;
 	return (0);
-}
+} */
