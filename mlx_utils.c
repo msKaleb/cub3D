@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 11:59:21 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:33:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
   */
 int	close_mlx(t_mlx *m)
 {
-	int	i;
-
-	i = -1;
-	while (++i < MAX_TEXTURES)
-	{
-		if (m->player.text[i].texture)
-			mlx_destroy_image(m->mlx, m->player.text[i].texture);
-		if (m->player.weapon[i].img)
-			mlx_destroy_image(m->mlx, m->player.weapon[i].img);
-	}
 	free_2dimension(m->player.map);
 	free_data(m->player.data);
 	if (m->mlx && m->img)

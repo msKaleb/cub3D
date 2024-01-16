@@ -8,16 +8,6 @@
   */
 int	close_mlx_bonus(t_mlx *m)
 {
-	int	i;
-
-	i = -1;
-	while (++i < MAX_TEXTURES)
-	{
-		if (m->player.text[i].texture)
-			mlx_destroy_image(m->mlx, m->player.text[i].texture);
-		if (m->player.weapon[i].img)
-			mlx_destroy_image(m->mlx, m->player.weapon[i].img);
-	}
 	free_2dimension(m->player.map);
 	free_2dimension(m->player.data->minimap);
 	free_data(m->player.data);
