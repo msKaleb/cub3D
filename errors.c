@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:17:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 13:34:06 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 14:50:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	err_arg_number(void)
 
 int	err_file(char *file)
 {
-	printf("%sCould not open the file:%s %s\n", RED, RESET, file);
+	printf("%sError\nCould not open the file:%s %s\n", RED, RESET, file);
 	return (1);
 }
 
@@ -36,12 +36,12 @@ int	err_mlx(t_mlx *m, char *msg)
 
 int	err_map(void)
 {
-	printf("%sFailed map loading%s\n", RED, RESET);
+	printf("%sError\nFailed map loading%s\n", RED, RESET);
 	return (1);
 }
 
 int	err_parse(char *msg)
 {
-	printf("%sERROR: %s%s\n", RED, msg, RESET);
+	printf("%sError\n%s%s\n", RED, msg, RESET);
 	return (-1);
 }
