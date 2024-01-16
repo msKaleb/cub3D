@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_utils_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 13:59:44 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/16 13:59:45 by msoria-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_cub3d_bonus.h"
 
 /**
  * @brief free memory and destroy the mlx window
  * @note using MAX_TEXTURES for weapon free because uses the same amount
  * of images as textures array
- * @todo free minimap, but in mandatory there is no minimap.
   */
 int	close_mlx_bonus(t_mlx *m)
 {

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/16 14:04:37 by nimai            ###   ########.fr       */
+/*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/16 14:07:03 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	main(int argc, char *argv[])
 	m.cur.x = DEFAULT_X / 2;
 	m.cur.y = DEFAULT_Y / 2;
 	mlx_mouse_move(m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // MAC version
-	// mlx_mouse_move(m.mlx, m.win, DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
+	// mlx_mouse_move(m.mlx, m.win,
+		DEFAULT_X / 2, DEFAULT_Y / 2); // Linux version
 	mlx_mouse_hide(m.mlx, m.win);
 	// printf("Line: %d / %s\n", __LINE__, __FILE__);
 	init_raycast(&m.ray, &data);
