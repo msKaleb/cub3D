@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/12 16:39:48 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 13:32:04 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,58 +31,19 @@ static void	init_data(t_data **data)
 	(*data)->map_size.y = 0;
 	(*data)->pt_person.x = 0;
 	(*data)->pt_person.y = 0;
+	(*data)->map_end = 0;
 	(*data)->ceiling_col = -1;
 	(*data)->floor_col = -1;
 	(*data)->blocksize = 3;
 }
 
-static char	*obtain_double_str(char *str, t_data *data, int nb_line)
+int	allocate_memories(t_data **data, char ***ret)
 {
-	char	*ret;
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	ret = (char *) ft_calloc(1, (ft_strlen(str) * 2));
-	if (!ret)
-	{
-		errno = ENOMEM;
-		return (NULL);
-	}
-	while (j < (ft_strlen(str) * 2 + 1))
-	{
-		if (is_brank(&str[i]))
-		{
-			ret [j++] = 10;
-			break ;
-		}
-		ret[j] = str[i];
-		if (str[i] == 0 && nb_line == data->map_size.y - 1)
-			ret[j] = 10;
-		if (str[i] != 10)
-			ret[++j] = str[i];
-		i++;
-		j++;
-	}
-	ret[j] = '\0';
-	if ((int)ft_strlen(ret) > data->map_size.x)
-		data->map_size.x = (int)ft_strlen(ret);
-	return (ret);
-}
-
-int	obtain_map_minimap(char *str, char **map, t_data **data, int i[3])
-{
-	map[i[1]] = ft_strdup(str);
-	(*data)->minimap[i[2]] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
-	(*data)->minimap[i[2] + 1] = obtain_double_str(str, *data, i[0] - (*data)->pos_map);
-	if (!map[i[1]] || !(*data)->minimap[i[2]] || !(*data)->minimap[i[2] + 1])
-	{
-		free_2dimension(map);
-		free_2dimension((*data)->minimap);
-		return (err_parse("failed obtain map"));
-	}
-	replace_spaces(&map[i[1]]);
+	(*data)->minimap = (char **)ft_calloc(((*data)->map_size.y * 2) + 1, \
+	sizeof(char *));
+	*ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
+	if (!*ret || !(*data)->minimap)
+		return (free_2dimension(*ret), free_2dimension((*data)->minimap), -1);
 	return (0);
 }
 
@@ -93,10 +54,8 @@ static char	**obtain_map(t_data **data, int fd)
 	char	*str;
 
 	ft_bzero(i, sizeof(int) * 3);
-	(*data)->minimap = (char **)ft_calloc(((*data)->map_size.y * 2) + 1, sizeof(char *));
-	ret = (char **)ft_calloc((*data)->map_size.y + 1, sizeof(char *));
-	if (!ret || !(*data)->minimap)
-		return (close (fd), free_2dimension(ret), free_2dimension((*data)->minimap));
+	if (allocate_memories(data, &ret) == -1)
+		return (close (fd), NULL);
 	str = get_next_line(fd);
 	while (str && i[1] < (*data)->map_size.y && i[2] < \
 	((*data)->map_size.y * 2))

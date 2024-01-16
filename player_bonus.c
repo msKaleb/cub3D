@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 13:12:08 by msoria-j         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/16 14:03:15 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ft_cub3d_bonus.h"
 

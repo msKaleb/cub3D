@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 12:54:50 by msoria-j         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/16 14:05:38 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
@@ -117,6 +118,7 @@ typedef struct s_data
 	int		ceiling_col;
 	char	dir_person;
 	char	*tex_path[4];
+	int		map_end;
 }				t_data;
 
 /**

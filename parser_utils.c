@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/14 19:49:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:22:18 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,3 @@ int	is_overflow(char **map, t_data *data)
 	}
 	return (1);
 }
-//is_overflow
-		// this line throws an 'Invalid read of size 1' valgrind error,
-		// if ft_strlen(map[i]) is less than 2 (eg '\n'), tries to read at map[i][-1]
-		// couldn't we skip lines with just a '\n' character?
-			//put ft_strlen < 2 before enter the check

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:17:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 18:51:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:34:06 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,5 @@ int	err_map(void)
 int	err_parse(char *msg)
 {
 	printf("%sERROR: %s%s\n", RED, msg, RESET);
-	
-	// free_data(data);
 	return (-1);
 }
