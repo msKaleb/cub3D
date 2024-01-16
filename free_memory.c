@@ -12,7 +12,7 @@
 
 #include "ft_cub3d.h"
 
-void	*free_2dimension(char **strs)//function name??
+void	*free_2dimension(char **strs)
 {
 	int	i;
 

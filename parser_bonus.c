@@ -71,7 +71,7 @@ static char	**obtain_map(t_data **data, int fd)
 		str = get_next_line(fd);
 		i[0]++;
 	}
-	return (close (fd), ret);
+	return (free (str), close (fd), ret);
 }
 
 void	obtain_y_minimap(t_data **data)

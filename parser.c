@@ -58,7 +58,7 @@ static char	**obtain_map(t_data **data, int fd)
 		str = get_next_line(fd);
 		i[0]++;
 	}
-	return (close (fd), ret);
+	return (free (str), close (fd), ret);
 }
 
 char	**parser(char *map_name, t_data *data)

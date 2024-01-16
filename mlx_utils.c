@@ -19,8 +19,6 @@
   */
 int	close_mlx(t_mlx *m)
 {
-	system("leaks cub3D");
-
 	free_2dimension(m->player.map);
 	free_data(m->player.data);
 	if (m->mlx && m->img)
@@ -28,7 +26,6 @@ int	close_mlx(t_mlx *m)
 	if (m->win)
 		mlx_destroy_window(m->mlx, m->win);
 	free(m->mlx);
-	system("leaks cub3D");
 	exit(EXIT_SUCCESS);
 }
 
@@ -37,7 +34,7 @@ int	close_mlx(t_mlx *m)
  * firstly to NULL to avoid potential double frees
  * @note MAC version
   */
-void	init_mlx(t_mlx *m)
+/*void	init_mlx(t_mlx *m)
 {
 	m->mlx = NULL;
 	m->win = NULL;
@@ -56,7 +53,7 @@ void	init_mlx(t_mlx *m)
 	m->cur.y = DEFAULT_Y / 2;
 	mlx_mouse_move(m->win, m->cur.x, m->cur.y);
 	mlx_mouse_hide(m->mlx, m->win);
-}
+}*/
 
 /**
  * @brief initializes the mlx instance, 
@@ -64,7 +61,7 @@ void	init_mlx(t_mlx *m)
  * @note Linux version
  * MAC version: mlx_mouse_move(m.win, m->cur.x, m->cur.y);
   */
-/* void	init_mlx(t_mlx *m)
+void	init_mlx(t_mlx *m)
 {
 	m->mlx = NULL;
 	m->win = NULL;
@@ -83,7 +80,7 @@ void	init_mlx(t_mlx *m)
 	m->cur.y = DEFAULT_Y / 2;
 	mlx_mouse_move(m->mlx, m->win, m->cur.x, m->cur.y);
 	mlx_mouse_hide(m->mlx, m->win);
-} */
+}
 
 /**
  * @brief set of events on key press
