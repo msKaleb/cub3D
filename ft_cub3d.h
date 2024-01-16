@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:04:12 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:50:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:44:05 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_data
 	int		ceiling_col;
 	char	dir_person;
 	char	*tex_path[4];
+	int		map_end;
 }				t_data;
 
 /**

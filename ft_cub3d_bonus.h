@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:23:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:50:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:25:43 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_data
 	char	**minimap;
 	double	blocksize;
 	int		flag_mmap;
+	int		map_end;
 }				t_data;
 
 /**
@@ -306,5 +307,8 @@ int		set_motion_bonus(int key_code, t_mlx *m);
 void	print_image(t_mlx *m, t_sprite *img, int x, int y);
 void	load_weapon(t_mlx *m, t_sprite *weapon);
 void	move_player_bonus(t_mlx *m);
+
+int		allocate_memories(t_data **data, char ***ret);
+int		obtain_map_minimap(char *str, char **map, t_data **data, int i[3]);
 
 #endif /* FT_CUB3D_H */
