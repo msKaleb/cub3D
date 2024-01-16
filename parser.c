@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/13 13:08:43 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 10:37:55 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static char	**obtain_map(t_data **data, int fd)
 		{
 			ret[i[1]] = ft_strdup(str);
 			if (!ret[i[1]])
-				return (close (fd), err_parse("failed obtain map"), free_2dimension(ret));
+				return (close (fd), err_parse("failed obtain map"), \
+				free_2dimension(ret));
 			replace_spaces(&ret[i[1]]);
 			i[1]++;
 		}
@@ -56,8 +57,7 @@ static char	**obtain_map(t_data **data, int fd)
 		str = get_next_line(fd);
 		i[0]++;
 	}
-	close (fd);
-	return (ret);
+	return (close (fd), ret);
 }
 
 char	**parser(char *map_name, t_data *data)

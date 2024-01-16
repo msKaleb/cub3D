@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:49:13 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:02:16 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	close_mlx(t_mlx *m)
  * @brief initializes the mlx instance, 
  * firstly to NULL to avoid potential double frees
  * MAC version: mlx_mouse_move(m.win, m->cur.x, m->cur.y);
+ * Linux: mlx_mouse_move(m->mlx, m->win, m->cur.x, m->cur.y);
   */
 void	init_mlx(t_mlx *m)
 {
@@ -62,7 +63,7 @@ void	init_mlx(t_mlx *m)
 		exit(err_mlx(m, NULL));
 	m->cur.x = DEFAULT_X / 2;
 	m->cur.y = DEFAULT_Y / 2;
-	mlx_mouse_move(m->mlx, m->win, m->cur.x, m->cur.y);
+	mlx_mouse_move(m->win, m->cur.x, m->cur.y);
 	mlx_mouse_hide(m->mlx, m->win);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:05:04 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/12 16:39:48 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 10:33:29 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static char	*obtain_double_str(char *str, t_data *data, int nb_line)
 		return (err_parse("failed alloc memory"), NULL);
 	while (i[1] < (ft_strlen(str) * 2 + 1))
 	{
+		ret[i[1]] = str[i[0]];
 		if (is_brank(&str[i[0]]))
 		{
 			ret [i[1]++] = 10;
 			break ;
 		}
-		ret[i[1]] = str[i[0]];
 		if (str[i[0]] == 0 && nb_line == data->map_size.y - 1)
 			ret[i[1]] = 10;
 		if (str[i[0]] != 10)
@@ -162,6 +162,19 @@ char	**parser_bonus(char *map_name, t_data *data)
 	tab = obtain_map(&data, fd);
 	if (!tab || !*tab)
 		return (free_2dimension(data->minimap), free_2dimension(tab));
+//DELETE
+	printf("\n\nPRINT minimap! \n\n");
+	
+	for (int i = 0; data->minimap[i]; i++)
+	{
+		printf("%s", data->minimap[i]);
+	}
+	printf("\n\nPRINT original map! \n\n");
+	
+	for (int i = 0; tab[i]; i++)
+	{
+		printf("%s", tab[i]);
+	}
 	flood_fill(tab, data->map_size, data->pt_person);
 	if (is_overflow(tab, data) == -1)
 		return (err_parse("map is not closed"), free_2dimension(tab));

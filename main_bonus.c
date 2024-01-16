@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 12:23:06 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:51:46 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:02:30 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 /**
  * @note MAC version
   */
-/* int	main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_mlx		m;
@@ -61,12 +61,12 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 	free_2dimension(data.minimap);
 	free_data(&data);
 	return(0);
-} */
+}
 
 /**
  * @note Linux version
   */
-int	main(int argc, char *argv[])
+/* int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_mlx		m;
@@ -92,7 +92,7 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(m.mlx, &render_frame_bonus, &m);
 	mlx_loop(m.mlx);
 	return (0);
-}
+} */
 
 /**
  * @note previous version

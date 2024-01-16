@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:13:44 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 00:13:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:01:33 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	move_player_bonus(t_mlx *m)
  * @brief rotates the camera in y axis with the mouse
  * @note MAC version
   */
-/* int	mouse_rotation_bonus(int x, int y, t_mlx *m)
+int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 0)
 		mlx_mouse_move(m->win, DEFAULT_X, y);
@@ -134,13 +134,13 @@ void	move_player_bonus(t_mlx *m)
 	m->cur.x = x;
 	m->cur.y = y;
 	return (0);
-} */
+}
 
 /**
  * @brief rotates the camera in y axis with the mouse
  * @note Linux version
   */
-int	mouse_rotation_bonus(int x, int y, t_mlx *m)
+/* int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 10)
 		mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y);
@@ -155,4 +155,4 @@ int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 	m->cur.x = x;
 	m->cur.y = y;
 	return (0);
-}
+} */
