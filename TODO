@@ -1,6 +1,4 @@
 -quitar -Wno-deprecated de makefile de minilibx
 -controlar relink en bonus sin archivo .bonus
 -Quitar todos los "//DELETE"
--Check si los pasos de texturas son valiabres (existe, tiene perimso?)
--Buscar todo malloc, calloc, strdup, etc. por todo el código
 -Comprobar norma, incluyendo makefile

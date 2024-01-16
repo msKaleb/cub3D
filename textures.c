@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:32:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/14 19:01:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:50:43 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	print_wall_line(t_mlx *m, t_texture *t, int x)
  * @brief load the textures from the .cub file
  * @note trim_non_ascii from 0 to MAX_TEXTURES - 1 to avoid crash, 
  * the last texture is for the door and it is not in the array
- * @todo use strdup in path??
   */
 void	load_textures(t_texture *text, t_mlx *m, t_data *data)
 {

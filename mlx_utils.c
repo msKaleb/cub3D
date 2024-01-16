@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 13:33:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:41:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
  * @brief free memory and destroy the mlx window
  * @note using MAX_TEXTURES for weapon free because uses the same amount
  * of images as textures array
- * @todo free minimap, but in mandatory there is no minimap.
   */
 int	close_mlx(t_mlx *m)
 {
