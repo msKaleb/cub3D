@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 14:12:17 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 17:52:49 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
   */
 int	close_mlx(t_mlx *m)
 {
+	system("leaks cub3D");
+
 	free_2dimension(m->player.map);
 	free_data(m->player.data);
 	if (m->mlx && m->img)
@@ -26,6 +28,7 @@ int	close_mlx(t_mlx *m)
 	if (m->win)
 		mlx_destroy_window(m->mlx, m->win);
 	free(m->mlx);
+	system("leaks cub3D");
 	exit(EXIT_SUCCESS);
 }
 
