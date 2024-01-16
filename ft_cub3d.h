@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/16 14:05:38 by nimai            ###   ########.fr       */
+/*   Created: 2024/01/16 14:19:53 by msoria-j          #+#    #+#             */
+/*   Updated: 2024/01/16 14:19:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
