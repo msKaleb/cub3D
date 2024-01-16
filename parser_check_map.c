@@ -6,7 +6,7 @@
 /*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:15:59 by nimai             #+#    #+#             */
-/*   Updated: 2024/01/13 12:51:57 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/16 14:39:54 by nimai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ int	obtain_path(t_data **data, char *line)
 
 static int	check_each_line(t_data **data, char *line, int i)
 {
+	if (line[0] == 10)
+		return (0);
+	if ((*data)->map_end == 1)
+		return (err_parse("detected another line after newline"));
 	if (!(*data)->pos_map)
 		(*data)->pos_map = i;
 	if (count_cols(data, line) == -1)
@@ -97,16 +101,18 @@ int	check_map(t_data **data, char *map_name)
 	int		fd;
 	int		i;
 
-	i = 0;
+	i = -1;
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 		return (err_file(map_name), -1);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && ++i > -1)
 	{
 		if (check_paths(*data))
 		{
-			if (check_each_line(data, line, i) == -1)
+			if (line[0] == 10 && (*data)->pos_map)
+				(*data)->map_end = 1;
+			else if (check_each_line(data, line, i) == -1)
 				return (free (line), close(fd), -1);
 		}
 		else
@@ -114,7 +120,6 @@ int	check_map(t_data **data, char *map_name)
 				return (close(fd), free (line), -1);
 		free(line);
 		line = get_next_line(fd);
-		i++;
 	}
 	return (close(fd), 0);
 }
