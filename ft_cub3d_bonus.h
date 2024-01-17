@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub3d_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:20:11 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 14:20:14 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:07:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #  define XK_DOWN		0xff54
 #  define XK_LEFT		0xff51
 #  define XK_RIGHT		0xff53
+#  define IS_LINUX		1
 # elif __APPLE__
 #  include "minilibx_opengl/mlx.h"			// MLX for Mac
 #  define XK_ESCAPE 	0x35
@@ -51,6 +52,7 @@
 #  define XK_DOWN		0x7d
 #  define XK_LEFT		0x7b
 #  define XK_RIGHT		0x7c
+#  define IS_LINUX		0
 # endif /* OS Check */
 
 /* Not defined in my distro */

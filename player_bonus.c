@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 14:19:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:02:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ void	move_player_bonus(t_mlx *m)
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 0)
-		mlx_mouse_move(m->win, DEFAULT_X, y);
+		mlx_mouse_move(m->mlx, m->win, DEFAULT_X, y);
 	else if (x > DEFAULT_X)
-		mlx_mouse_move(m->win, 0, y);
+		mlx_mouse_move(m->mlx, m->win, 0, y);
 	if (m->cur.x > x + 2)
 		m->player.motion_rot = -1;
 	else if (m->cur.x < x - 2)

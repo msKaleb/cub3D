@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:10:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 14:00:13 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:08:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 	sprite_number = *frame / DIV_WFRAME;
 	if (sprite_number >= MAX_TEXTURES)
 		sprite_number = MAX_TEXTURES - 1;
-	mlx_put_image_to_window(m->mlx, m->win, weapon[sprite_number].img, x, y);
+	if (IS_LINUX)
+		print_image(m, &weapon[*frame / 10], x, y);
+	else
+		mlx_put_image_to_window(m->mlx, m->win, weapon[sprite_number].img, x, y);
 	if (m->player.shot_flag == 1)
 		*frame += 1;
 }
