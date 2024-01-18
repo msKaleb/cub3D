@@ -1,4 +1,0 @@
--quitar -Wno-deprecated de makefile de minilibx
--controlar relink en bonus sin archivo .bonus
--Quitar todos los "//DELETE"
--Comprobar norma, incluyendo makefile

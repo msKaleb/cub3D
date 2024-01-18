@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:20:11 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/17 12:07:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:06:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@
 # define DEFAULT_Y 		600.0
 # define MAX_TEXTURES	5
 
-# define MOVE_SPEED		0.18		// 0.07 (previous)
-# define ROTATION_SPEED	0.06		// 0.03 (previous)
-# define MAX_WFRAMES	25			// 50 (previous)
-# define DIV_WFRAME		5			// 10 (previous)
+# define MOVE_SPEED		0.07
+# define ROTATION_SPEED	0.03
+# define MAX_WFRAMES	50
+# define DIV_WFRAME		10
 
 /* Events and values for mlx_hook */
 # define ON_KEYDOWN			2

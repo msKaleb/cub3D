@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimai <nimai@student.42urduliz.com>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/16 17:52:49 by nimai            ###   ########.fr       */
+/*   Updated: 2024/01/18 17:09:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /**
  * @brief free memory and destroy the mlx window
- * @note using MAX_TEXTURES for weapon free because uses the same amount
- * of images as textures array
+ * @note using MAX_TEXTURES for weapon free() because it uses 
+ * the same amount of images as textures array
   */
 int	close_mlx(t_mlx *m)
 {
@@ -32,34 +32,6 @@ int	close_mlx(t_mlx *m)
 /**
  * @brief initializes the mlx instance, 
  * firstly to NULL to avoid potential double frees
- * @note MAC version
-  */
-/*void	init_mlx(t_mlx *m)
-{
-	m->mlx = NULL;
-	m->win = NULL;
-	m->img = NULL;
-	m->mlx = mlx_init();
-	if (m->mlx != NULL)
-		m->win = mlx_new_window(m->mlx, DEFAULT_X, DEFAULT_Y, \
-		"cub3D Project - nimai & msoria-j");
-	if (m->win != NULL)
-		m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
-	if (m->img != NULL)
-		m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
-	if (m->addr == NULL)
-		exit(err_mlx(m, NULL));
-	m->cur.x = DEFAULT_X / 2;
-	m->cur.y = DEFAULT_Y / 2;
-	mlx_mouse_move(m->win, m->cur.x, m->cur.y);
-	mlx_mouse_hide(m->mlx, m->win);
-}*/
-
-/**
- * @brief initializes the mlx instance, 
- * firstly to NULL to avoid potential double frees
- * @note Linux version
- * MAC version: mlx_mouse_move(m.win, m->cur.x, m->cur.y);
   */
 void	init_mlx(t_mlx *m)
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2024/01/16 13:10:12 by msoria-j         ###   ########.fr        #
+#    Updated: 2024/01/18 17:04:14 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,7 +134,7 @@ bonus:		.bonus
 			@rm -rf $(OBJ_M)
 
 clean:
-			$(RM) $(OBJ_C) $(OBJ_B) $(OBJ_M)
+			$(RM) $(OBJ_C) $(OBJ_B) $(OBJ_M) .bonus
 			make clean -sC libft/
 			make clean -sC $(MLXDIR)
 			

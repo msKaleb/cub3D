@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:59:45 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/15 23:50:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:14:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	move_player(t_mlx *m)
 		m->player.pos_y = next_y;
 	}
 }
-// validate_pos(&m->player, next_x, next_y);
 
 // rotation matrix:
 // [ cos(a) -sin(a) ]

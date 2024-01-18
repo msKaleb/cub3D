@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 00:10:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/17 12:08:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:09:45 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	print_image(t_mlx *m, t_sprite *img, int x, int y)
 
 /**
  * @brief render the sprite of the weapon
- * @note MAC version
   */
 void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 {
@@ -65,27 +64,6 @@ void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
 	if (m->player.shot_flag == 1)
 		*frame += 1;
 }
-
-/**
- * @brief render the sprite of the weapon
- * @note Linux version
-  */
-/* void	render_weapon(t_mlx *m, t_sprite *weapon, int *frame)
-{
-	int	x;
-	int	y;
-
-	if (*frame == 50)
-	{
-		*frame = 1;
-		m->player.shot_flag = 0;
-	}
-	x = DEFAULT_X / 2 - weapon[0].width / 2;
-	y = DEFAULT_Y - weapon[0].height;
-	print_image(m, &weapon[*frame / 10], x, y);
-	if (m->player.shot_flag == 1)
-		*frame += 1;
-} */
 
 void	load_weapon(t_mlx *m, t_sprite *weapon)
 {

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:19:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/17 12:02:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:11:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ int	release_motion_bonus(int key_code, t_mlx *m)
 	return (0);
 }
 
-/* testx = m->player.pos_x + m->player.dir_x
-	* (MOVE_SPEED * 10);
-testy = m->player.pos_y + m->player.dir_y
-	* (MOVE_SPEED * 10); */
 char	*get_type(t_mlx *m)
 {
 	double	testx;
@@ -119,30 +115,8 @@ void	move_player_bonus(t_mlx *m)
 
 /**
  * @brief rotates the camera in y axis with the mouse
- * @note MAC version
   */
 int	mouse_rotation_bonus(int x, int y, t_mlx *m)
-{
-	if (x < 0)
-		mlx_mouse_move(m->mlx, m->win, DEFAULT_X, y);
-	else if (x > DEFAULT_X)
-		mlx_mouse_move(m->mlx, m->win, 0, y);
-	if (m->cur.x > x + 2)
-		m->player.motion_rot = -1;
-	else if (m->cur.x < x - 2)
-		m->player.motion_rot = 1;
-	else
-		m->player.motion_rot = 0;
-	m->cur.x = x;
-	m->cur.y = y;
-	return (0);
-}
-
-/**
- * @brief rotates the camera in y axis with the mouse
- * @note Linux version
-  */
-/* int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 {
 	if (x < 10)
 		mlx_mouse_move(m->mlx, m->win, DEFAULT_X - 11, y);
@@ -157,4 +131,4 @@ int	mouse_rotation_bonus(int x, int y, t_mlx *m)
 	m->cur.x = x;
 	m->cur.y = y;
 	return (0);
-} */
+}

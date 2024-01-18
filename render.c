@@ -6,12 +6,11 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:52:48 by msoria-j          #+#    #+#             */
-/*   Updated: 2024/01/09 20:30:10 by msoria-j         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:15:11 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cub3d.h"
-// #include "ft_cub3d_bonus.h"
 
 /**
 * @brief In order to know where to put the vertex, we calculate the offset
@@ -57,10 +56,6 @@ void	print_line(t_raycast *ray, t_mlx *m, int x)
 		print_pixel(m, (t_point){x, y++}, ray->floor_col);
 }
 
-// char *ns = ft_itoa(m->player.motion_ns);
-// char *ew = ft_itoa(m->player.motion_ew);
-// mlx_string_put(m->mlx, m->win, 20, 20, 0x00FFFFFF, ns);
-// mlx_string_put(m->mlx, m->win, 20, 40, 0x00FFFFFF, ew);
 /**
  * @brief refreshes the frame and applies character movement
   */
